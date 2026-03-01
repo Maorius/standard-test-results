@@ -76,16 +76,17 @@ const PricingSection = () => {
 
             <p className="text-3xl font-black text-primary mb-6">{plan.price}</p>
 
-            <Button
-              variant={plan.recommended ? "gold" : "goldOutline"}
-              size="lg"
-              className="w-full"
-              onClick={scrollToForm}
-            >
-              {plan.cta}
-            </Button>
           </div>
         ))}
+      </div>
+
+      <div className="text-center mt-10">
+        <Button variant="gold" size="xl" onClick={scrollToForm}>
+          בדיקת התאמה בחינם
+        </Button>
+        <p className="text-muted-foreground text-sm mt-3">
+          המסלול נקבע בשיחה קצרה לפי מטרה, ניסיון ולו״ז.
+        </p>
       </div>
     </SectionWrapper>
   );

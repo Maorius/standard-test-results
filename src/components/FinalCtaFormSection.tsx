@@ -102,6 +102,16 @@ const FinalCtaFormSection = () => {
           </div>
 
           <div>
+            <label className="block text-sm font-medium text-foreground mb-1.5">לאיזה מסלול אתה נוטה?</label>
+            <select required className={selectClass} defaultValue="">
+              <option value="" disabled>בחר...</option>
+              <option value="core">CORE (3 חודשים)</option>
+              <option value="elite">ELITE (6 חודשים)</option>
+              <option value="unsure">לא יודע, תכוון אותי</option>
+            </select>
+          </div>
+
+          <div>
             <label className="block text-sm font-medium text-foreground mb-1.5">מה הכי תוקע אותך היום?</label>
             <textarea rows={2} placeholder="כתוב בקצרה..." className={inputClass} />
           </div>
