@@ -9,11 +9,7 @@ const plans = [
     name: "CORE",
     duration: "3 חודשים",
     tagline: "להיכנס לקצב ולהפסיק להיעלם.",
-    features: [
-      "אונליין 3 חודשים",
-      "חודש ראשון 1:1 פרונטלי",
-      "תזונה + אימונים + שיחה שבועית + זמינות",
-    ],
+    features: ["אונליין 3 חודשים", "חודש ראשון 1:1 פרונטלי", "תזונה + אימונים + שיחה שבועית + זמינות"],
     price: "1,970 ₪",
     cta: "בדיקת התאמה למסלול CORE",
     recommended: false,
@@ -37,9 +33,7 @@ const plans = [
 const PricingSection = () => {
   return (
     <SectionWrapper className="border-t border-border">
-      <h2 className="text-2xl md:text-4xl font-black text-center mb-12">
-        המסלול שמתאים למטרה שלך
-      </h2>
+      <h2 className="text-2xl md:text-4xl font-black text-center mb-12">המסלול שמתאים למטרה שלך</h2>
 
       <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
         {plans.map((plan) => (
@@ -49,7 +43,7 @@ const PricingSection = () => {
               "relative rounded-xl p-6 md:p-8 border transition-colors",
               plan.recommended
                 ? "border-primary bg-card shadow-[0_0_40px_hsl(45,100%,50%,0.08)]"
-                : "border-border bg-card"
+                : "border-border bg-card",
             )}
           >
             {plan.recommended && (
@@ -60,8 +54,7 @@ const PricingSection = () => {
             )}
 
             <h3 className="text-xl font-black mb-1">
-              {plan.name}{" "}
-              <span className="text-muted-foreground font-normal text-base">({plan.duration})</span>
+              {plan.name} <span className="text-muted-foreground font-normal text-base">({plan.duration})</span>
             </h3>
             <p className="text-muted-foreground mb-6">{plan.tagline}</p>
 
@@ -75,18 +68,15 @@ const PricingSection = () => {
             </ul>
 
             <p className="text-3xl font-black text-primary mb-6">{plan.price}</p>
-
           </div>
         ))}
       </div>
 
       <div className="text-center mt-10">
         <Button variant="gold" size="xl" onClick={scrollToForm}>
-          בדיקת התאמה בחינם
+          אני רוצה להפסיק להתחיל מחדש
         </Button>
-        <p className="text-muted-foreground text-sm mt-3">
-          המסלול נקבע בשיחה קצרה לפי מטרה, ניסיון ולו״ז.
-        </p>
+        <p className="text-muted-foreground text-sm mt-3">המסלול נקבע בשיחה קצרה לפי המטרה שלך.</p>
       </div>
     </SectionWrapper>
   );
