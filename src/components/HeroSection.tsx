@@ -59,7 +59,7 @@ const HeroSection = () => {
             </a>
           </div>
 
-          <p className="text-muted-foreground text-sm mt-4">5 דקות. בלי חפירות. אם זה לא מתאים, אני אגיד.</p>
+          <p className="text-muted-foreground text-sm mt-4">בדיקה קצרה. שיחה. ואז עובדים נכון.</p>
         </div>
       </div>
     </section>
