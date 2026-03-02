@@ -74,9 +74,13 @@ const FinalCtaFormSection = () => {
           <div>
             <label className="block text-sm font-medium text-foreground mb-1.5">היעד שלי</label>
             <select required className={selectClass} defaultValue="">
-              <option value="" disabled>בחר...</option>
+              <option value="" disabled>
+                בחר...
+              </option>
               {goalOptions.map((o) => (
-                <option key={o.value} value={o.value}>{o.label}</option>
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
               ))}
             </select>
           </div>
@@ -84,9 +88,13 @@ const FinalCtaFormSection = () => {
           <div>
             <label className="block text-sm font-medium text-foreground mb-1.5">ניסיון קודם</label>
             <select required className={selectClass} defaultValue="">
-              <option value="" disabled>בחר...</option>
+              <option value="" disabled>
+                בחר...
+              </option>
               {experienceOptions.map((o) => (
-                <option key={o.value} value={o.value}>{o.label}</option>
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
               ))}
             </select>
           </div>
@@ -94,9 +102,13 @@ const FinalCtaFormSection = () => {
           <div>
             <label className="block text-sm font-medium text-foreground mb-1.5">איך הכי נוח לך?</label>
             <select required className={selectClass} defaultValue="">
-              <option value="" disabled>בחר...</option>
+              <option value="" disabled>
+                בחר...
+              </option>
               {formatOptions.map((o) => (
-                <option key={o.value} value={o.value}>{o.label}</option>
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
               ))}
             </select>
           </div>
@@ -104,7 +116,9 @@ const FinalCtaFormSection = () => {
           <div>
             <label className="block text-sm font-medium text-foreground mb-1.5">לאיזה מסלול אתה נוטה?</label>
             <select required className={selectClass} defaultValue="">
-              <option value="" disabled>בחר...</option>
+              <option value="" disabled>
+                בחר...
+              </option>
               <option value="core">CORE (3 חודשים)</option>
               <option value="elite">ELITE (6 חודשים)</option>
               <option value="unsure">לא יודע, תכוון אותי</option>
@@ -117,12 +131,10 @@ const FinalCtaFormSection = () => {
           </div>
 
           <Button variant="gold" size="xl" type="submit" className="w-full">
-            שלח בדיקה ותאם שיחה
+            אני רוצה להפסיק להתחיל מחדש
           </Button>
 
-          <p className="text-center text-muted-foreground text-xs">
-            לא שולחים ספאם. רק תיאום שיחה.
-          </p>
+          <p className="text-center text-muted-foreground text-xs">שלב ראשון לתהליך אמיתי.</p>
         </form>
       )}
 
