@@ -34,8 +34,8 @@ const HeroSection = () => {
 
           <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-xl">
             ליווי כושר ותזונה בשילוב אימון מנטלי (NLP), כדי להפוך
-            <span className="text-foreground font-medium"> "אני יודע" </span>
-            ל<span className="text-foreground font-medium">"אני עושה"</span>.
+            <span className="text-foreground font-medium"> "אני יודע" </span>ל
+            <span className="text-foreground font-medium">"אני עושה"</span>.
           </p>
 
           <ul className="space-y-3 mb-10">
@@ -49,7 +49,7 @@ const HeroSection = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 items-start">
             <Button variant="gold" size="xl" onClick={scrollToForm}>
-              בדיקת התאמה בחינם
+              אני רוצה להפסיק להתחיל מחדש
             </Button>
             <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
               <Button variant="ghost" size="lg" className="gap-2 text-muted-foreground">
@@ -59,9 +59,7 @@ const HeroSection = () => {
             </a>
           </div>
 
-          <p className="text-muted-foreground text-sm mt-4">
-            5 דקות. בלי חפירות. אם זה לא מתאים, אני אגיד.
-          </p>
+          <p className="text-muted-foreground text-sm mt-4">5 דקות. בלי חפירות. אם זה לא מתאים, אני אגיד.</p>
         </div>
       </div>
     </section>
