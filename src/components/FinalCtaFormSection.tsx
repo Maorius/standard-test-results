@@ -63,7 +63,7 @@ const FinalCtaFormSection = () => {
 
           <div>
             <label className="block text-sm font-medium text-foreground mb-1.5">טלפון</label>
-            <input type="tel" required placeholder="050-0000000" className={inputClass} dir="ltr" />
+            <input type="tel" required placeholder="050-0000000" className={inputClass} dir="rtl" />
           </div>
 
           <div>
