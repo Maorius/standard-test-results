@@ -43,7 +43,7 @@ const ThreeEnginesSection = () => {
 
       <div className="text-center">
         <Button variant="goldOutline" size="lg" onClick={scrollToForm}>
-          בדיקת התאמה בחינם
+          אני רוצה להפסיק להתחיל מחדש
         </Button>
       </div>
     </SectionWrapper>

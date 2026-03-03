@@ -16,9 +16,7 @@ const DeliverablesSection = () => {
   return (
     <SectionWrapper className="border-t border-border">
       <h2 className="text-2xl md:text-4xl font-black mb-4">המערכת שמייצרת תוצאה</h2>
-      <p className="text-muted-foreground text-lg mb-10">
-        לא "מוטיבציה". תוכנית, מעקב, ותיקונים בזמן אמת.
-      </p>
+      <p className="text-muted-foreground text-lg mb-10">לא "מוטיבציה". תוכנית, מעקב, ותיקונים בזמן אמת.</p>
 
       <ul className="space-y-4 max-w-2xl mb-10">
         {items.map((item) => (
@@ -30,7 +28,7 @@ const DeliverablesSection = () => {
       </ul>
 
       <Button variant="goldOutline" size="lg" onClick={scrollToForm}>
-        בדיקת התאמה בחינם
+        אני רוצה להפסיק להתחיל מחדש
       </Button>
     </SectionWrapper>
   );

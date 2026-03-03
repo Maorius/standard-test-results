@@ -19,9 +19,7 @@ const notFit = [
 const FitSection = () => {
   return (
     <SectionWrapper>
-      <h2 className="text-2xl md:text-4xl font-black text-center mb-12">
-        לפני שאתה ממלא טופס, בוא נדייק
-      </h2>
+      <h2 className="text-2xl md:text-4xl font-black text-center mb-12">לפני שאתה ממלא טופס, בוא נדייק</h2>
 
       <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-10">
         <div className="bg-card border border-border rounded-xl p-6">
@@ -55,7 +53,7 @@ const FitSection = () => {
 
       <div className="text-center">
         <Button variant="goldOutline" size="lg" onClick={scrollToForm}>
-          בדיקת התאמה בחינם
+          אני רוצה להפסיק להתחיל מחדש
         </Button>
       </div>
     </SectionWrapper>

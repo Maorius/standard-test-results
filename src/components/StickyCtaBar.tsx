@@ -19,9 +19,7 @@ const StickyCtaBar = () => {
     <div
       className={cn(
         "fixed top-0 inset-x-0 z-50 transition-all duration-300",
-        scrolled
-          ? "bg-background/90 backdrop-blur-md border-b border-border shadow-lg"
-          : "bg-transparent"
+        scrolled ? "bg-background/90 backdrop-blur-md border-b border-border shadow-lg" : "bg-transparent",
       )}
     >
       <div className="container mx-auto max-w-5xl flex items-center justify-between py-3 px-5">
@@ -35,7 +33,7 @@ const StickyCtaBar = () => {
             </Button>
           </a>
           <Button variant="gold" size="sm" onClick={scrollToForm}>
-            בדיקת התאמה בחינם
+            אני רוצה להפסיק להתחיל מחדש
           </Button>
         </div>
       </div>
