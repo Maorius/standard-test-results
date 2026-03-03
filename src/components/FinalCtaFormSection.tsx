@@ -86,20 +86,6 @@ const FinalCtaFormSection = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-foreground mb-1.5">ניסיון קודם</label>
-            <select required className={selectClass} defaultValue="">
-              <option value="" disabled>
-                בחר...
-              </option>
-              {experienceOptions.map((o) => (
-                <option key={o.value} value={o.value}>
-                  {o.label}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
             <label className="block text-sm font-medium text-foreground mb-1.5">איך הכי נוח לך?</label>
             <select required className={selectClass} defaultValue="">
               <option value="" disabled>
