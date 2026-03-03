@@ -67,11 +67,6 @@ const FinalCtaFormSection = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-foreground mb-1.5">גיל</label>
-            <input type="number" required placeholder="25" min={16} max={99} className={inputClass} dir="ltr" />
-          </div>
-
-          <div>
             <label className="block text-sm font-medium text-foreground mb-1.5">היעד שלי</label>
             <select required className={selectClass} defaultValue="">
               <option value="" disabled>
