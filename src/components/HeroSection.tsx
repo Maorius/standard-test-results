@@ -33,8 +33,8 @@ const HeroSection = () => {
           </h1>
 
           <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-xl">
-            ליווי כושר ותזונה בשילוב אימון מנטלי (NLP), כדי להפוך
-            <span className="text-foreground font-medium"> הבעיה היא </span>לבצע את זה גם
+            כי לדעת מה לעשות זה לא הבעיה.
+            <span className="text-foreground font-medium"> הבעיה היא </span> לבצע את זה גם
             <span className="text-foreground font-medium">כשאין חשק</span>.
           </p>
 
