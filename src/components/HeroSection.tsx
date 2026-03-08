@@ -34,8 +34,8 @@ const HeroSection = () => {
 
           <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-xl">
             ליווי כושר ותזונה בשילוב אימון מנטלי (NLP), כדי להפוך
-            <span className="text-foreground font-medium"> "אני יודע" </span>ל
-            <span className="text-foreground font-medium">"אני עושה"</span>.
+            <span className="text-foreground font-medium"> הבעיה היא </span>לבצע את זה גם
+            <span className="text-foreground font-medium">כשאין חשק</span>.
           </p>
 
           <ul className="space-y-3 mb-10">
