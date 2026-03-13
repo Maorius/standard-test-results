@@ -20,34 +20,43 @@ const INTERVAL = 4000;
 
 const CuriosityHookSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const hasStartedRef = useRef(false);
+
   const [started, setStarted] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   const [index, setIndex] = useState(0);
   const [done, setDone] = useState(false);
   const [showFirst, setShowFirst] = useState(false);
 
-  // Trigger once when section is ~40% visible
+  // Start once around 40% visibility, keep tracking focus at 50%+
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        const ratio = entry.intersectionRatio;
+
+        if (!hasStartedRef.current && entry.isIntersecting && ratio >= 0.4) {
+          hasStartedRef.current = true;
           setStarted(true);
-          observer.disconnect();
         }
+
+        setIsFocused(entry.isIntersecting && ratio >= 0.5);
       },
-      { threshold: 0.4 }
+      { threshold: [0, 0.35, 0.4, 0.5, 0.75, 1] }
     );
+
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
-  // 400ms delay before showing first text
+  // 400ms delay before first text, only on first focused entry
   useEffect(() => {
-    if (!started) return;
+    if (!started || showFirst || !isFocused) return;
     const t = setTimeout(() => setShowFirst(true), 400);
     return () => clearTimeout(t);
-  }, [started]);
+  }, [started, showFirst, isFocused]);
 
   const advance = useCallback(() => {
     setIndex((prev) => {
@@ -59,12 +68,12 @@ const CuriosityHookSection = () => {
     });
   }, []);
 
-  // Start interval only after first text is shown
+  // Advance only while section is focused; pause/resume without reset
   useEffect(() => {
-    if (!showFirst || done) return;
+    if (!showFirst || done || !isFocused) return;
     const id = setInterval(advance, INTERVAL);
     return () => clearInterval(id);
-  }, [showFirst, done, advance]);
+  }, [showFirst, done, isFocused, advance]);
 
   return (
     <section
