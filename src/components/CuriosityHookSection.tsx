@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { scrollToForm } from "@/lib/landing-utils";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const TEXTS = [
@@ -19,8 +19,35 @@ const TEXTS = [
 const INTERVAL = 4000;
 
 const CuriosityHookSection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [started, setStarted] = useState(false);
   const [index, setIndex] = useState(0);
   const [done, setDone] = useState(false);
+  const [showFirst, setShowFirst] = useState(false);
+
+  // Trigger once when section is ~40% visible
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStarted(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.4 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // 400ms delay before showing first text
+  useEffect(() => {
+    if (!started) return;
+    const t = setTimeout(() => setShowFirst(true), 400);
+    return () => clearTimeout(t);
+  }, [started]);
 
   const advance = useCallback(() => {
     setIndex((prev) => {
@@ -32,14 +59,18 @@ const CuriosityHookSection = () => {
     });
   }, []);
 
+  // Start interval only after first text is shown
   useEffect(() => {
-    if (done) return;
+    if (!showFirst || done) return;
     const id = setInterval(advance, INTERVAL);
     return () => clearInterval(id);
-  }, [done, advance]);
+  }, [showFirst, done, advance]);
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative h-screen flex items-center justify-center overflow-hidden"
+    >
       {/* Background Video */}
       <video
         autoPlay
@@ -54,44 +85,46 @@ const CuriosityHookSection = () => {
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/60" />
 
-      {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 w-full max-w-3xl">
-        <div className="min-h-[120px] sm:min-h-[160px] flex items-center justify-center">
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={index}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-              className={`font-black leading-snug whitespace-pre-line ${TEXTS[index].size} ${
-                TEXTS[index].highlight ? "text-primary" : "text-foreground"
-              }`}
-            >
-              {TEXTS[index].text}
-            </motion.p>
+      {/* Content — hidden until triggered */}
+      {showFirst && (
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 w-full max-w-3xl">
+          <div className="min-h-[120px] sm:min-h-[160px] flex items-center justify-center">
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={index}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+                className={`font-black leading-snug whitespace-pre-line ${TEXTS[index].size} ${
+                  TEXTS[index].highlight ? "text-primary" : "text-foreground"
+                }`}
+              >
+                {TEXTS[index].text}
+              </motion.p>
+            </AnimatePresence>
+          </div>
+
+          {/* CTA — appears after last text */}
+          <AnimatePresence>
+            {done && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                className="mt-12 flex flex-col items-center gap-3"
+              >
+                <Button variant="gold" size="xl" onClick={scrollToForm}>
+                  אני רוצה להפסיק להתחיל מחדש
+                </Button>
+                <p className="text-muted-foreground text-sm">
+                  שלב ראשון לתהליך אמיתי.
+                </p>
+              </motion.div>
+            )}
           </AnimatePresence>
         </div>
-
-        {/* CTA — appears after last text */}
-        <AnimatePresence>
-          {done && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="mt-12 flex flex-col items-center gap-3"
-            >
-              <Button variant="gold" size="xl" onClick={scrollToForm}>
-                אני רוצה להפסיק להתחיל מחדש
-              </Button>
-              <p className="text-muted-foreground text-sm">
-                שלב ראשון לתהליך אמיתי.
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+      )}
     </section>
   );
 };
