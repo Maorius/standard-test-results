@@ -1,40 +1,55 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
-export type QuizResult = "baseline_consistency" | "lack_of_stability" | "stuck_in_loop" | null;
+export type QuizResult =
+  | "consistency"
+  | "no_results"
+  | "getting_started"
+  | "information_overload"
+  | "nutrition_breaks_it"
+  | null;
 
 interface QuizState {
-  quizScore: number;
+  quizChoice: number | null;
+  quizLabel: string;
   quizResult: QuizResult;
-  quizAnswers: string[];
   hasInteracted: boolean;
-  setQuizData: (score: number, result: QuizResult, answers: string[]) => void;
+  setQuizData: (choice: number, label: string, result: QuizResult) => void;
+  clearQuiz: () => void;
 }
 
 const QuizContext = createContext<QuizState>({
-  quizScore: 0,
+  quizChoice: null,
+  quizLabel: "",
   quizResult: null,
-  quizAnswers: [],
   hasInteracted: false,
   setQuizData: () => {},
+  clearQuiz: () => {},
 });
 
 export const useQuiz = () => useContext(QuizContext);
 
 export const QuizProvider = ({ children }: { children: ReactNode }) => {
-  const [quizScore, setQuizScore] = useState(0);
+  const [quizChoice, setQuizChoice] = useState<number | null>(null);
+  const [quizLabel, setQuizLabel] = useState("");
   const [quizResult, setQuizResult] = useState<QuizResult>(null);
-  const [quizAnswers, setQuizAnswers] = useState<string[]>([]);
   const [hasInteracted, setHasInteracted] = useState(false);
 
-  const setQuizData = (score: number, result: QuizResult, answers: string[]) => {
-    setQuizScore(score);
+  const setQuizData = (choice: number, label: string, result: QuizResult) => {
+    setQuizChoice(choice);
+    setQuizLabel(label);
     setQuizResult(result);
-    setQuizAnswers(answers);
     setHasInteracted(true);
   };
 
+  const clearQuiz = () => {
+    setQuizChoice(null);
+    setQuizLabel("");
+    setQuizResult(null);
+    setHasInteracted(false);
+  };
+
   return (
-    <QuizContext.Provider value={{ quizScore, quizResult, quizAnswers, hasInteracted, setQuizData }}>
+    <QuizContext.Provider value={{ quizChoice, quizLabel, quizResult, hasInteracted, setQuizData, clearQuiz }}>
       {children}
     </QuizContext.Provider>
   );

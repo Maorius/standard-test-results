@@ -1,4 +1,3 @@
-import { useState, useEffect, useMemo } from "react";
 import SectionWrapper from "@/components/SectionWrapper";
 import { Button } from "@/components/ui/button";
 import { scrollToForm } from "@/lib/landing-utils";
@@ -6,156 +5,166 @@ import { cn } from "@/lib/utils";
 import { useQuiz, QuizResult } from "@/context/QuizContext";
 import { motion, AnimatePresence } from "framer-motion";
 
-const checkboxItems = [
-  "אני מתחיל חזק ואז אחרי שבוע משהו מתפרק.",
-  "אני יודע מה צריך לעשות אבל משום מה זה לא מחזיק לאורך זמן.",
-  "יש ימים שיש לי דרייב ויש ימים שאני פשוט לא מצליח להזיז את עצמי.",
-  "אני יודע לתת עצות מצוינות לאחרים… פחות טוב ליישם אותן על עצמי.",
-  "יש לי שבוע שאני על זה ואז שבוע שאני נעלם לגמרי.",
-];
-
-interface ResultContent {
+interface Option {
+  label: string;
+  resultKey: QuizResult;
   title: string;
   text: string[];
-  transition: string;
   cta: string;
 }
 
-const resultMap: Record<string, ResultContent> = {
-  baseline_consistency: {
-    title: "יש לך בסיס. עכשיו צריך לגרום לו להחזיק.",
-    text: ["אתה לא באמת תקוע.", "אבל גם התחלה טובה לא שווה הרבה אם היא נשברת מהר."],
-    transition: "הבעיה היא לא להתחיל אלא להישאר בתנועה.",
+const options: Option[] = [
+  {
+    label: "אני לא מצליח להישאר עקבי לאורך זמן",
+    resultKey: "consistency",
+    title: "הבעיה שלך היא לא ידע. היא עקביות.",
+    text: [
+      "אתה יודע מה צריך לעשות.",
+      "אבל משהו נשבר באמצע הדרך.",
+      "בלי מערכת שמחזיקה אותך — זה תמיד חוזר לאותה נקודה.",
+    ],
     cta: "אני רוצה לבנות עקביות",
   },
-  lack_of_stability: {
-    title: "הבעיה שלך היא לא ידע. היא יציבות.",
-    text: ["אתה יודע מה צריך לעשות.", "אבל באמצע הדרך משהו נשבר ושם אתה נופל שוב."],
-    transition: "זה בדיוק השלב שבו צריך מערכת, לא עוד ניסיון.",
-    cta: "אני רוצה להפסיק להתחיל מחדש",
+  {
+    label: "אני מתאמן אבל לא רואה שינוי אמיתי",
+    resultKey: "no_results",
+    title: "הבעיה היא לא המאמץ — אלא הכיוון.",
+    text: [
+      "אתה כבר מתאמן.",
+      "אבל בלי תוכנית מדויקת קשה לראות שינוי אמיתי.",
+    ],
+    cta: "אני רוצה לראות תוצאות אמיתיות",
   },
-  stuck_in_loop: {
-    title: "אתה לא צריך עוד מוטיבציה. אתה צריך משהו שיחזיק אותך ביום חלש.",
-    text: ["אתה כבר לא בבעיה של רצון.", "אתה בבעיה של לופ שחוזר על עצמו."],
-    transition: "וכאן ליווי אמיתי מפסיק להיות “nice to have” והופך להיות מה שמשנה את התמונה.",
-    cta: "אני רוצה לצאת מהלופ הזה כבר",
+  {
+    label: 'אני כל הזמן אומר שאני אתחיל… אבל זה לא באמת קורה',
+    resultKey: "getting_started",
+    title: "הבעיה היא לא כושר. היא התחלה.",
+    text: [
+      "כשאין מסגרת שמכניסה אותך לתהליך —",
+      "ההתחלה נדחית שוב ושוב.",
+    ],
+    cta: "אני רוצה להתחיל כמו שצריך",
   },
-};
-
-function getQuizResult(count: number): QuizResult {
-  if (count <= 1) return "baseline_consistency";
-  if (count <= 3) return "lack_of_stability";
-  return "stuck_in_loop";
-}
+  {
+    label: "יש יותר מדי מידע ואני כבר לא יודע מה נכון לעשות",
+    resultKey: "information_overload",
+    title: "הבעיה היא לא רצון — אלא עומס מידע.",
+    text: [
+      "יותר מדי שיטות.",
+      "יותר מדי עצות.",
+      "בסוף נשארים במקום.",
+    ],
+    cta: "אני רוצה תוכנית ברורה",
+  },
+  {
+    label: "גם כשאני מתאמן התזונה שלי שוברת את זה",
+    resultKey: "nutrition_breaks_it",
+    title: "האימונים עובדים. התזונה שוברת את זה.",
+    text: [
+      "בלי תזונה שמתאימה לך באמת —",
+      "קשה לראות שינוי בגוף.",
+    ],
+    cta: "אני רוצה לסדר את התזונה",
+  },
+];
 
 const StandardTestSection = () => {
-  const [checked, setChecked] = useState<boolean[]>(new Array(5).fill(false));
-  const { setQuizData } = useQuiz();
+  const { quizChoice, setQuizData, clearQuiz } = useQuiz();
 
-  const checkedCount = checked.filter(Boolean).length;
-  const hasChecked = checkedCount > 0;
-  const resultKey = getQuizResult(checkedCount);
-  const result = resultKey ? resultMap[resultKey] : null;
+  const selected = quizChoice !== null ? options[quizChoice - 1] : null;
 
-  const selectedAnswers = useMemo(() => checkboxItems.filter((_, i) => checked[i]), [checked]);
+  const handleSelect = (index: number) => {
+    const opt = options[index];
+    setQuizData(index + 1, opt.label, opt.resultKey);
+  };
 
-  useEffect(() => {
-    if (hasChecked && resultKey) {
-      setQuizData(checkedCount, resultKey, selectedAnswers);
-    }
-  }, [checkedCount, resultKey, selectedAnswers, hasChecked, setQuizData]);
-
-  const toggle = (i: number) => {
-    setChecked((prev) => prev.map((v, idx) => (idx === i ? !v : v)));
+  const handleReset = () => {
+    clearQuiz();
   };
 
   return (
     <SectionWrapper>
       <div className="text-center mb-10">
         <h2 className="text-2xl md:text-4xl font-black mb-3">
-          מבחן הסטנדרט האישי שלך <span className="text-muted-foreground font-normal text-lg">(30 שניות)</span>
+          בדרך כלל יש סיבה אחת שחוזרת שוב ושוב.
         </h2>
         <p className="text-muted-foreground text-lg">
-          תסמן מה נכון לגביך.
-          <br />
-          זה לא שיפוט — זה אבחון.
+          בחר את מה שהכי מתאר אותך כרגע.
         </p>
       </div>
 
-      <div className="grid gap-3 max-w-2xl mx-auto mb-8">
-        {checkboxItems.map((item, i) => (
-          <button
-            key={i}
-            onClick={() => toggle(i)}
-            className={cn(
-              "w-full text-right p-4 rounded-lg border transition-all duration-200 flex items-center gap-4",
-              checked[i] ? "border-primary bg-primary/10" : "border-border bg-card hover:border-muted-foreground/30",
-            )}
-          >
-            <div
-              className={cn(
-                "w-5 h-5 rounded border-2 shrink-0 flex items-center justify-center transition-colors",
-                checked[i] ? "bg-primary border-primary" : "border-muted-foreground/40",
-              )}
+      <div className="max-w-2xl mx-auto">
+        <AnimatePresence mode="wait">
+          {selected === null ? (
+            <motion.div
+              key="options"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              className="grid gap-3"
             >
-              {checked[i] && (
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                  <path
-                    d="M2 6L5 9L10 3"
-                    stroke="hsl(0,0%,7%)"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              )}
-            </div>
-            <span className="text-foreground">{item}</span>
-          </button>
-        ))}
-      </div>
-
-      <AnimatePresence mode="wait">
-        {hasChecked && result && (
-          <motion.div
-            key={resultKey}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.45, ease: "easeOut" }}
-            className="max-w-2xl mx-auto rounded-xl p-6 md:p-8 gold-border bg-card relative overflow-hidden"
-          >
-            {/* Diagnosis accent */}
-            <div className="flex items-center gap-2 mb-4">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="shrink-0">
-                <circle cx="10" cy="10" r="9" stroke="hsl(var(--primary))" strokeWidth="1.5" />
-                <path d="M10 6v5" stroke="hsl(var(--primary))" strokeWidth="1.5" strokeLinecap="round" />
-                <circle cx="10" cy="14" r="1" fill="hsl(var(--primary))" />
-              </svg>
-              <span className="text-primary text-sm font-semibold tracking-wide">אבחון אישי</span>
-            </div>
-
-            <h3 className="text-primary font-bold text-lg md:text-xl mb-3 leading-snug">{result.title}</h3>
-
-            <div className="space-y-1 mb-4">
-              {result.text.map((line, i) => (
-                <p key={i} className="text-foreground leading-relaxed">
-                  {line}
-                </p>
+              {options.map((opt, i) => (
+                <button
+                  key={i}
+                  onClick={() => handleSelect(i)}
+                  className={cn(
+                    "w-full text-right p-4 rounded-lg border transition-all duration-200",
+                    "border-border bg-card hover:border-primary/50 hover:bg-primary/5",
+                    "flex items-center gap-4 group cursor-pointer"
+                  )}
+                >
+                  <div className="w-5 h-5 rounded-full border-2 border-muted-foreground/40 shrink-0 group-hover:border-primary transition-colors" />
+                  <span className="text-foreground">{opt.label}</span>
+                </button>
               ))}
-            </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="result"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.45, ease: "easeOut" }}
+            >
+              <div className="rounded-xl p-6 md:p-8 gold-border bg-card relative overflow-hidden">
+                <div className="flex items-center gap-2 mb-4">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="shrink-0">
+                    <circle cx="10" cy="10" r="9" stroke="hsl(var(--primary))" strokeWidth="1.5" />
+                    <path d="M10 6v5" stroke="hsl(var(--primary))" strokeWidth="1.5" strokeLinecap="round" />
+                    <circle cx="10" cy="14" r="1" fill="hsl(var(--primary))" />
+                  </svg>
+                  <span className="text-primary text-sm font-semibold tracking-wide">אבחון אישי</span>
+                </div>
 
-            <p className="text-primary text-sm font-semibold mb-6">{result.transition}</p>
+                <h3 className="text-primary font-bold text-lg md:text-xl mb-3 leading-snug">
+                  {selected.title}
+                </h3>
 
-            <div className="flex flex-col sm:flex-row items-center gap-3">
-              <Button variant="gold" size="lg" onClick={scrollToForm}>
-                {result.cta}
-              </Button>
-              <span className="text-muted-foreground text-sm">שלב ראשון לתהליך אמיתי.</span>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                <div className="space-y-1 mb-4">
+                  {selected.text.map((line, i) => (
+                    <p key={i} className="text-foreground leading-relaxed">{line}</p>
+                  ))}
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-center gap-3">
+                  <Button variant="gold" size="lg" onClick={scrollToForm}>
+                    {selected.cta}
+                  </Button>
+                  <span className="text-muted-foreground text-sm">שלב ראשון לתהליך אמיתי.</span>
+                </div>
+              </div>
+
+              <button
+                onClick={handleReset}
+                className="mt-4 mx-auto block text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                ← חזור ובחר תשובה אחרת
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </SectionWrapper>
   );
 };
