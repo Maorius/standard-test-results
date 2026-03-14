@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SectionWrapper from "@/components/SectionWrapper";
 import { Button } from "@/components/ui/button";
+import { useQuiz } from "@/context/QuizContext";
 
 const goalOptions = [
   { value: "weight-loss", label: "ירידה במשקל" },
@@ -9,17 +10,17 @@ const goalOptions = [
   { value: "general-fitness", label: "כושר כללי" },
 ];
 
-const experienceOptions = [
-  { value: "beginner", label: "מתחיל" },
-  { value: "returning", label: "חוזר" },
-  { value: "regular", label: "מתאמן קבוע" },
-];
-
 const formatOptions = [
   { value: "online", label: "אונליין" },
   { value: "frontal", label: "פרונטלי" },
   { value: "hybrid", label: "היברידי" },
 ];
+
+const bridgeMessages: Record<string, string> = {
+  baseline_consistency: "נראה שיש לך בסיס. עכשיו צריך לגרום לזה להחזיק.",
+  lack_of_stability: "נראה שאתה נופל בעיקר על עקביות. בוא נתחיל משם.",
+  stuck_in_loop: "סימנת כמה דפוסים שחוזרים אצלך. עכשיו נבדוק מה באמת מתאים לך.",
+};
 
 const selectClass =
   "w-full bg-secondary border border-border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-ring appearance-none";
@@ -28,11 +29,14 @@ const inputClass =
 
 const FinalCtaFormSection = () => {
   const [submitted, setSubmitted] = useState(false);
+  const { quizScore, quizResult, quizAnswers, hasInteracted } = useQuiz();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
   };
+
+  const bridgeMessage = quizResult ? bridgeMessages[quizResult] : null;
 
   return (
     <SectionWrapper id="lead-form-section">
@@ -51,72 +55,78 @@ const FinalCtaFormSection = () => {
           <p className="text-muted-foreground">אחזור אליך בהקדם לתיאום שיחה קצרה.</p>
         </div>
       ) : (
-        <form
-          id="lead-form"
-          onSubmit={handleSubmit}
-          className="max-w-lg mx-auto bg-card border border-border rounded-xl p-6 md:p-8 space-y-5"
-        >
-          <div>
-            <label className="block text-sm font-medium text-foreground mb-1.5">שם מלא</label>
-            <input type="text" required placeholder="השם שלך" className={inputClass} />
-          </div>
+        <>
+          {hasInteracted && bridgeMessage && (
+            <div className="max-w-lg mx-auto mb-4 text-center">
+              <p className="text-primary/90 text-sm font-medium">{bridgeMessage}</p>
+            </div>
+          )}
+          <form
+            id="lead-form"
+            onSubmit={handleSubmit}
+            className="max-w-lg mx-auto bg-card border border-border rounded-xl p-6 md:p-8 space-y-5"
+          >
+            {/* Hidden quiz fields */}
+            {hasInteracted && (
+              <>
+                <input type="hidden" name="quiz_score" value={quizScore} />
+                <input type="hidden" name="quiz_result" value={quizResult || ""} />
+                <input type="hidden" name="quiz_answers" value={quizAnswers.join(" | ")} />
+              </>
+            )}
 
-          <div>
-            <label className="block text-sm font-medium text-foreground mb-1.5">טלפון</label>
-            <input type="tel" required placeholder="050-0000000" className={inputClass} dir="rtl" />
-          </div>
+            <div>
+              <label className="block text-sm font-medium text-foreground mb-1.5">שם מלא</label>
+              <input type="text" required placeholder="השם שלך" className={inputClass} />
+            </div>
 
-          <div>
-            <label className="block text-sm font-medium text-foreground mb-1.5">היעד שלי</label>
-            <select required className={selectClass} defaultValue="">
-              <option value="" disabled>
-                בחר...
-              </option>
-              {goalOptions.map((o) => (
-                <option key={o.value} value={o.value}>
-                  {o.label}
-                </option>
-              ))}
-            </select>
-          </div>
+            <div>
+              <label className="block text-sm font-medium text-foreground mb-1.5">טלפון</label>
+              <input type="tel" required placeholder="050-0000000" className={inputClass} dir="rtl" />
+            </div>
 
-          <div>
-            <label className="block text-sm font-medium text-foreground mb-1.5">איך הכי נוח לך?</label>
-            <select required className={selectClass} defaultValue="">
-              <option value="" disabled>
-                בחר...
-              </option>
-              {formatOptions.map((o) => (
-                <option key={o.value} value={o.value}>
-                  {o.label}
-                </option>
-              ))}
-            </select>
-          </div>
+            <div>
+              <label className="block text-sm font-medium text-foreground mb-1.5">היעד שלי</label>
+              <select required className={selectClass} defaultValue="">
+                <option value="" disabled>בחר...</option>
+                {goalOptions.map((o) => (
+                  <option key={o.value} value={o.value}>{o.label}</option>
+                ))}
+              </select>
+            </div>
 
-          <div>
-            <label className="block text-sm font-medium text-foreground mb-1.5">לאיזה מסלול אתה נוטה?</label>
-            <select required className={selectClass} defaultValue="">
-              <option value="" disabled>
-                בחר...
-              </option>
-              <option value="core">CORE (3 חודשים)</option>
-              <option value="elite">ELITE (6 חודשים)</option>
-              <option value="unsure">לא יודע, תכוון אותי</option>
-            </select>
-          </div>
+            <div>
+              <label className="block text-sm font-medium text-foreground mb-1.5">איך הכי נוח לך?</label>
+              <select required className={selectClass} defaultValue="">
+                <option value="" disabled>בחר...</option>
+                {formatOptions.map((o) => (
+                  <option key={o.value} value={o.value}>{o.label}</option>
+                ))}
+              </select>
+            </div>
 
-          <div>
-            <label className="block text-sm font-medium text-foreground mb-1.5">מה הכי תוקע אותך היום?</label>
-            <textarea rows={2} placeholder="כתוב בקצרה..." className={inputClass} />
-          </div>
+            <div>
+              <label className="block text-sm font-medium text-foreground mb-1.5">לאיזה מסלול אתה נוטה?</label>
+              <select required className={selectClass} defaultValue="">
+                <option value="" disabled>בחר...</option>
+                <option value="core">CORE (3 חודשים)</option>
+                <option value="elite">ELITE (6 חודשים)</option>
+                <option value="unsure">לא יודע, תכוון אותי</option>
+              </select>
+            </div>
 
-          <Button variant="gold" size="xl" type="submit" className="w-full">
-            אני רוצה להפסיק להתחיל מחדש
-          </Button>
+            <div>
+              <label className="block text-sm font-medium text-foreground mb-1.5">מה הכי תוקע אותך היום?</label>
+              <textarea rows={2} placeholder="כתוב בקצרה..." className={inputClass} />
+            </div>
 
-          <p className="text-center text-muted-foreground text-xs">שלב ראשון לתהליך אמיתי.</p>
-        </form>
+            <Button variant="gold" size="xl" type="submit" className="w-full">
+              אני רוצה להפסיק להתחיל מחדש
+            </Button>
+
+            <p className="text-center text-muted-foreground text-xs">שלב ראשון לתהליך אמיתי.</p>
+          </form>
+        </>
       )}
 
       {/* Bio section at footer */}
