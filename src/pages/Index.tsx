@@ -10,30 +10,33 @@ import PricingSection from "@/components/PricingSection";
 import FitSection from "@/components/FitSection";
 import FAQSection from "@/components/FAQSection";
 import FinalCtaFormSection from "@/components/FinalCtaFormSection";
+import { QuizProvider } from "@/context/QuizContext";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground" dir="rtl">
-      <StickyCtaBar />
-      <HeroSection />
-      <CuriosityHookSection />
-      <StandardTestSection />
-      <PainSection />
-      <ThreeEnginesSection />
-      <DeliverablesSection />
-      <ProtocolSection />
-      <PricingSection />
-      <FitSection />
-      <FAQSection />
-      <FinalCtaFormSection />
+    <QuizProvider>
+      <div className="min-h-screen bg-background text-foreground" dir="rtl">
+        <StickyCtaBar />
+        <HeroSection />
+        <CuriosityHookSection />
+        <StandardTestSection />
+        <PainSection />
+        <ThreeEnginesSection />
+        <DeliverablesSection />
+        <ProtocolSection />
+        <PricingSection />
+        <FitSection />
+        <FAQSection />
+        <FinalCtaFormSection />
 
-      {/* Footer */}
-      <footer className="border-t border-border py-8 text-center">
-        <p className="text-muted-foreground text-sm">
-          © {new Date().getFullYear()} מתן ברוך. כל הזכויות שמורות.
-        </p>
-      </footer>
-    </div>
+        {/* Footer */}
+        <footer className="border-t border-border py-8 text-center">
+          <p className="text-muted-foreground text-sm">
+            © {new Date().getFullYear()} מתן ברוך. כל הזכויות שמורות.
+          </p>
+        </footer>
+      </div>
+    </QuizProvider>
   );
 };
 
