@@ -24,7 +24,7 @@ const StandardTestSection = () => {
     <SectionWrapper>
       <div className="text-center mb-10">
         <h2 className="text-2xl md:text-4xl font-black mb-3">
-          מבחן הסטנדרט <span className="text-muted-foreground font-normal text-lg">(30 שניות)</span>
+          מבחן הסטנדרט האישי שלך <span className="text-muted-foreground font-normal text-lg">(30 שניות)</span>
         </h2>
         <p className="text-muted-foreground text-lg">תסמן מה נכון לגביך. זה לא שיפוט. זה אבחון.</p>
       </div>
