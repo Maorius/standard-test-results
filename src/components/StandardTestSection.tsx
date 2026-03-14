@@ -18,54 +18,40 @@ const options: Option[] = [
     label: "אני לא מצליח להישאר עקבי לאורך זמן",
     resultKey: "consistency",
     title: "הבעיה שלך היא לא חוסר כוח רצון.",
-    text: [
-      "הבעיה היא שבנית הכול על כוח רצון.",
-      "כל עוד התהליך נשען על חשק",
-      "הוא יישבר ברגע שהחיים ייכנסו באמצע.",
-    ],
+    subtitle: "הבעיה היא שבנית הכול על כוח רצון.",
+    text: ["כל עוד התהליך נשען על חשק", "הוא יישבר ברגע שהחיים ייכנסו באמצע."],
     cta: "אני רוצה לבנות משהו שמחזיק",
   },
   {
     label: "אני מתאמן אבל לא רואה שינוי אמיתי",
     resultKey: "no_results",
     title: "הבעיה היא לא שאתה לא עובד קשה.",
-    "הבעיה היא שעד עכשיו כנראה עבדת בלי דיוק.",
-    text: [
-      "וגוף לא משתנה לפי כמה ניסית",
-      "אלא לפי כמה נכון בנית את הדרך.",
-    ],
+    subtitle: "הבעיה היא שעד עכשיו כנראה עבדת בלי דיוק.",
+    text: ["וגוף לא משתנה לפי כמה ניסית", "אלא לפי כמה נכון בנית את הדרך."],
     cta: "אני רוצה לראות שינוי אמיתי",
   },
   {
-    label: 'אני כל הזמן אומר שאני אתחיל… אבל זה לא באמת קורה',
+    label: "אני כל הזמן אומר שאני אתחיל… אבל זה לא באמת קורה",
     resultKey: "getting_started",
-    title: "הבעיה היא לא שאתה “לא בנוי לזה”.",
-    "הבעיה היא שאתה עדיין מחכה לרגע המושלם להתחיל.",
-    text: [
-      "והרגע הזה כמעט אף פעם לא מגיע.",
-    ],
+    title: 'הבעיה היא לא שאתה "לא בנוי לזה".',
+    subtitle: "הבעיה היא שאתה עדיין מחכה לרגע המושלם להתחיל.",
+    text: ["והרגע הזה כמעט אף פעם לא מגיע."],
     cta: "אני רוצה להתחיל כמו שצריך",
   },
   {
     label: "יש יותר מדי מידע ואני כבר לא יודע מה נכון לעשות",
     resultKey: "information_overload",
     title: "הבעיה שלך היא לא חוסר ידע.",
-    "הבעיה שלך היא עודף ידע בלי כיוון.",
-    text: [
-      "יותר מדי עצות יוצרות אשליה של התקדמות.",
-      "אבל בפועל משאירות אותך במקום.",
-    ],
+    subtitle: "הבעיה שלך היא עודף ידע בלי כיוון.",
+    text: ["יותר מדי עצות יוצרות אשליה של התקדמות.", "אבל בפועל משאירות אותך במקום."],
     cta: "אני רוצה תוכנית אידיאלית",
   },
   {
     label: "גם כשאני מתאמן התזונה שלי שוברת את זה",
     resultKey: "nutrition_breaks_it",
     title: "הבעיה היא לא שאתה לא מתאמץ.",
-    "הבעיה היא שהגוף לא מקבל גיבוי מחוץ לאימון.",
-    text: [
-      "אי אפשר לבנות תוצאה יציבה",
-      "כשהתזונה כל פעם מושכת לכיוון אחר.",
-    ],
+    subtitle: "הבעיה היא שהגוף לא מקבל גיבוי מחוץ לאימון.",
+    text: ["אי אפשר לבנות תוצאה יציבה", "כשהתזונה כל פעם מושכת לכיוון אחר."],
     cta: "אני רוצה לסדר את התזונה",
   },
 ];
@@ -87,12 +73,8 @@ const StandardTestSection = () => {
   return (
     <SectionWrapper>
       <div className="text-center mb-10">
-        <h2 className="text-2xl md:text-4xl font-black mb-3">
-          בדרך כלל יש סיבה אחת שחוזרת שוב ושוב.
-        </h2>
-        <p className="text-muted-foreground text-lg">
-          בחר את מה שהכי מתאר אותך כרגע.
-        </p>
+        <h2 className="text-2xl md:text-4xl font-black mb-3">בדרך כלל יש סיבה אחת שחוזרת שוב ושוב.</h2>
+        <p className="text-muted-foreground text-lg">בחר את מה שהכי מתאר אותך כרגע.</p>
       </div>
 
       <div className="max-w-2xl mx-auto">
@@ -113,7 +95,7 @@ const StandardTestSection = () => {
                   className={cn(
                     "w-full text-right p-4 rounded-lg border transition-all duration-200",
                     "border-border bg-card hover:border-primary/50 hover:bg-primary/5",
-                    "flex items-center gap-4 group cursor-pointer"
+                    "flex items-center gap-4 group cursor-pointer",
                   )}
                 >
                   <div className="w-5 h-5 rounded-full border-2 border-muted-foreground/40 shrink-0 group-hover:border-primary transition-colors" />
@@ -139,13 +121,13 @@ const StandardTestSection = () => {
                   <span className="text-primary text-sm font-semibold tracking-wide">אבחון אישי</span>
                 </div>
 
-                <h3 className="text-primary font-bold text-lg md:text-xl mb-3 leading-snug">
-                  {selected.title}
-                </h3>
+                <h3 className="text-primary font-bold text-lg md:text-xl mb-3 leading-snug">{selected.title}</h3>
 
                 <div className="space-y-1 mb-4">
                   {selected.text.map((line, i) => (
-                    <p key={i} className="text-foreground leading-relaxed">{line}</p>
+                    <p key={i} className="text-foreground leading-relaxed">
+                      {line}
+                    </p>
                   ))}
                 </div>
 
