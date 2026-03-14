@@ -23,34 +23,22 @@ interface ResultContent {
 
 const resultMap: Record<string, ResultContent> = {
   baseline_consistency: {
-    title: "יש לך בסיס. עכשיו צריך להפוך אותו לעקביות.",
-    text: [
-      "אתה לא באמת תקוע.",
-      "אבל בלי מערכת ברורה גם התחלה טובה נשחקת עם הזמן.",
-    ],
-    transition: "המטרה היא לא להתחיל — אלא להחזיק.",
+    title: "יש לך בסיס. עכשיו צריך לגרום לו להחזיק.",
+    text: ["אתה לא באמת תקוע.", "אבל גם התחלה טובה לא שווה הרבה אם היא נשברת מהר."],
+    transition: "הבעיה היא לא להתחיל אלא להישאר בתנועה.",
     cta: "אני רוצה לבנות עקביות",
   },
   lack_of_stability: {
-    title: "אתה לא חסר ידע. אתה חסר יציבות.",
-    text: [
-      "אתה יודע מה צריך לעשות.",
-      "אבל משהו נשבר באמצע הדרך.",
-      "זה לא קורה פעם אחת.",
-      "זה חוזר שוב ושוב.",
-    ],
-    transition: "וזה בדיוק הרגע שבו צריך מערכת — לא עוד ניסיון.",
+    title: "הבעיה שלך היא לא ידע. היא יציבות.",
+    text: ["אתה יודע מה צריך לעשות.", "אבל באמצע הדרך משהו נשבר ושם אתה נופל שוב."],
+    transition: "זה בדיוק השלב שבו צריך מערכת, לא עוד ניסיון.",
     cta: "אני רוצה להפסיק להתחיל מחדש",
   },
   stuck_in_loop: {
-    title: "אתה לא צריך עוד מוטיבציה. אתה צריך מערכת שמחזיקה אותך.",
-    text: [
-      "אתה כבר ניסית.",
-      "הבעיה היא לא רצון — אלא מה קורה ביום שאין כוח.",
-      "בלי מערכת שמחזיקה אותך, גם התחלה חזקה נשברת.",
-    ],
-    transition: "וכאן בדיוק ליווי אמיתי משנה את התמונה.",
-    cta: "אני רוצה לצאת מהלופ הזה",
+    title: "אתה לא צריך עוד מוטיבציה. אתה צריך משהו שיחזיק אותך ביום חלש.",
+    text: ["אתה כבר לא בבעיה של רצון.", "אתה בבעיה של לופ שחוזר על עצמו."],
+    transition: "וכאן ליווי אמיתי מפסיק להיות “nice to have” והופך להיות מה שמשנה את התמונה.",
+    cta: "אני רוצה לצאת מהלופ הזה כבר",
   },
 };
 
@@ -69,10 +57,7 @@ const StandardTestSection = () => {
   const resultKey = getQuizResult(checkedCount);
   const result = resultKey ? resultMap[resultKey] : null;
 
-  const selectedAnswers = useMemo(
-    () => checkboxItems.filter((_, i) => checked[i]),
-    [checked]
-  );
+  const selectedAnswers = useMemo(() => checkboxItems.filter((_, i) => checked[i]), [checked]);
 
   useEffect(() => {
     if (hasChecked && resultKey) {
@@ -88,8 +73,7 @@ const StandardTestSection = () => {
     <SectionWrapper>
       <div className="text-center mb-10">
         <h2 className="text-2xl md:text-4xl font-black mb-3">
-          מבחן הסטנדרט האישי שלך{" "}
-          <span className="text-muted-foreground font-normal text-lg">(30 שניות)</span>
+          מבחן הסטנדרט האישי שלך <span className="text-muted-foreground font-normal text-lg">(30 שניות)</span>
         </h2>
         <p className="text-muted-foreground text-lg">
           תסמן מה נכון לגביך.
@@ -105,15 +89,13 @@ const StandardTestSection = () => {
             onClick={() => toggle(i)}
             className={cn(
               "w-full text-right p-4 rounded-lg border transition-all duration-200 flex items-center gap-4",
-              checked[i]
-                ? "border-primary bg-primary/10"
-                : "border-border bg-card hover:border-muted-foreground/30"
+              checked[i] ? "border-primary bg-primary/10" : "border-border bg-card hover:border-muted-foreground/30",
             )}
           >
             <div
               className={cn(
                 "w-5 h-5 rounded border-2 shrink-0 flex items-center justify-center transition-colors",
-                checked[i] ? "bg-primary border-primary" : "border-muted-foreground/40"
+                checked[i] ? "bg-primary border-primary" : "border-muted-foreground/40",
               )}
             >
               {checked[i] && (
@@ -153,9 +135,7 @@ const StandardTestSection = () => {
               <span className="text-primary text-sm font-semibold tracking-wide">אבחון אישי</span>
             </div>
 
-            <h3 className="text-primary font-bold text-lg md:text-xl mb-3 leading-snug">
-              {result.title}
-            </h3>
+            <h3 className="text-primary font-bold text-lg md:text-xl mb-3 leading-snug">{result.title}</h3>
 
             <div className="space-y-1 mb-4">
               {result.text.map((line, i) => (
