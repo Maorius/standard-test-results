@@ -17,9 +17,11 @@ const formatOptions = [
 ];
 
 const bridgeMessages: Record<string, string> = {
-  baseline_consistency: "נראה שיש לך בסיס. עכשיו צריך לגרום לזה להחזיק.",
-  lack_of_stability: "נראה שאתה נופל בעיקר על עקביות. בוא נתחיל משם.",
-  stuck_in_loop: "סימנת כמה דפוסים שחוזרים אצלך. עכשיו נבדוק מה באמת מתאים לך.",
+  consistency: "נראה שהעקביות היא האתגר המרכזי שלך. בוא נבנה מערכת שמחזיקה.",
+  no_results: "אתה כבר מתאמן — עכשיו צריך לכוון את זה נכון.",
+  getting_started: "ההתחלה היא הצעד הכי קשה. בוא נעשה אותו ביחד.",
+  information_overload: "יותר מדי מידע? בוא נפשט את זה לתוכנית אחת ברורה.",
+  nutrition_breaks_it: "האימונים במקום — עכשיו צריך לסדר את התזונה.",
 };
 
 const selectClass =
@@ -29,7 +31,7 @@ const inputClass =
 
 const FinalCtaFormSection = () => {
   const [submitted, setSubmitted] = useState(false);
-  const { quizScore, quizResult, quizAnswers, hasInteracted } = useQuiz();
+  const { quizChoice, quizLabel, quizResult, hasInteracted } = useQuiz();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -66,12 +68,12 @@ const FinalCtaFormSection = () => {
             onSubmit={handleSubmit}
             className="max-w-lg mx-auto bg-card border border-border rounded-xl p-6 md:p-8 space-y-5"
           >
-            {/* Hidden quiz fields */}
             {hasInteracted && (
               <>
-                <input type="hidden" name="quiz_score" value={quizScore} />
+                <input type="hidden" name="quiz_type" value="single_choice_diagnosis" />
+                <input type="hidden" name="quiz_choice" value={quizChoice ?? ""} />
+                <input type="hidden" name="quiz_label" value={quizLabel} />
                 <input type="hidden" name="quiz_result" value={quizResult || ""} />
-                <input type="hidden" name="quiz_answers" value={quizAnswers.join(" | ")} />
               </>
             )}
 
@@ -129,7 +131,6 @@ const FinalCtaFormSection = () => {
         </>
       )}
 
-      {/* Bio section at footer */}
       <div className="mt-16 flex flex-col md:flex-row items-center gap-8 max-w-2xl mx-auto">
         <img
           src="/images/matan-bio.jpg"
