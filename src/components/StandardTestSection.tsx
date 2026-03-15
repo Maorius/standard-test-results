@@ -72,7 +72,7 @@ const StandardTestSection = () => {
         <p className="text-muted-foreground text-lg">במה אתה תקוע היום?</p>
       </div>
 
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-3xl mx-auto">
         <AnimatePresence mode="wait">
           {selected === null ? (
             <motion.div
@@ -101,13 +101,26 @@ const StandardTestSection = () => {
           ) : (
             <motion.div
               key="result"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.45, ease: "easeOut" }}
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.96 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col items-center"
             >
-              <div className="rounded-xl p-6 md:p-8 gold-border bg-card relative overflow-hidden">
-                <div className="flex items-center gap-2 mb-4">
+              <div
+                className={cn(
+                  "w-full max-w-[780px] mx-auto text-center",
+                  "rounded-2xl p-8 md:p-12 lg:p-14",
+                  "bg-[hsl(0_0%_8%)] border border-primary/40",
+                  "shadow-[0_0_60px_-15px_hsl(var(--primary)/0.15)]",
+                  "backdrop-blur-sm",
+                  "relative overflow-hidden",
+                )}
+              >
+                {/* Subtle top accent line */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-[2px] bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
+
+                <div className="flex items-center justify-center gap-2 mb-6">
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="shrink-0">
                     <circle cx="10" cy="10" r="9" stroke="hsl(var(--primary))" strokeWidth="1.5" />
                     <path d="M10 6v5" stroke="hsl(var(--primary))" strokeWidth="1.5" strokeLinecap="round" />
@@ -116,27 +129,29 @@ const StandardTestSection = () => {
                   <span className="text-primary text-sm font-semibold tracking-wide">אבחון אישי</span>
                 </div>
 
-                <h3 className="text-primary font-bold text-lg md:text-xl mb-3 leading-snug">{selected.title}</h3>
+                <h3 className="text-primary font-black text-xl md:text-2xl lg:text-3xl mb-5 leading-snug">
+                  {selected.title}
+                </h3>
 
-                <div className="space-y-1 mb-4">
+                <div className="space-y-1 mb-8">
                   {selected.text.map((line, i) => (
-                    <p key={i} className="text-foreground leading-relaxed">
+                    <p key={i} className="text-muted-foreground text-base md:text-lg leading-relaxed">
                       {line}
                     </p>
                   ))}
                 </div>
 
-                <div className="flex flex-col sm:flex-row items-center gap-3">
-                  <Button variant="gold" size="lg" onClick={scrollToForm}>
+                <div className="flex flex-col items-center gap-3">
+                  <Button variant="gold" size="xl" className="w-full max-w-xs" onClick={scrollToForm}>
                     {selected.cta}
                   </Button>
-                  <span className="text-muted-foreground text-sm">שלב ראשון לתהליך אמיתי.</span>
+                  <span className="text-muted-foreground text-xs">שלב ראשון לתהליך אמיתי.</span>
                 </div>
               </div>
 
               <button
                 onClick={handleReset}
-                className="mt-4 mx-auto block text-sm text-muted-foreground hover:text-primary transition-colors"
+                className="mt-6 text-xs text-muted-foreground/60 hover:text-primary/80 transition-colors"
               >
                 ← חזור ובחר תשובה אחרת
               </button>
