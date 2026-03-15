@@ -69,7 +69,7 @@ const StandardTestSection = () => {
     <SectionWrapper>
       <div className="text-center mb-10">
         <h2 className="text-2xl md:text-4xl font-black mb-3">בדרך כלל יש סיבה אחת שחוזרת שוב ושוב.</h2>
-        <p className="text-muted-foreground text-lg">בחר את מה שהכי מתאר אותך כרגע.</p>
+        <p className="text-muted-foreground text-lg">במה אתה תקוע היום?</p>
       </div>
 
       <div className="max-w-2xl mx-auto">
