@@ -36,15 +36,12 @@ const PricingSection = () => {
       {/* Headline */}
       {/* Headline */}
       <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-center mb-6">
-        שני מסלולים. אותה שיטה.{" "}
-        <span className="text-gold-gradient">עומק אחר.</span>
+        שני מסלולים. אותה שיטה. <span className="text-gold-gradient">עומק אחר.</span>
       </h2>
 
       {/* Framing */}
       <div className="text-center max-w-2xl mx-auto mb-14 md:mb-16 space-y-1">
-        <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
-          אתה לא בוחר &lsquo;חבילה&rsquo;.
-        </p>
+        <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">אתה לא בוחר &lsquo;חבילה&rsquo;.</p>
         <p className="text-foreground text-lg md:text-xl font-semibold leading-relaxed">
           אתה בוחר איך להיכנס לתהליך — וכמה חזק להחזיק אותו.
         </p>
@@ -72,9 +69,7 @@ const PricingSection = () => {
             {/* Plan title */}
             <h3 className="text-2xl md:text-3xl font-black mb-2">
               {plan.name}{" "}
-              <span className="text-muted-foreground font-normal text-lg md:text-xl">
-                ({plan.duration})
-              </span>
+              <span className="text-muted-foreground font-normal text-lg md:text-xl">({plan.duration})</span>
             </h3>
 
             {/* Tagline */}
@@ -113,7 +108,7 @@ const PricingSection = () => {
 
       {/* Bottom framing line */}
       <p className="text-center text-muted-foreground/80 text-base md:text-lg mt-8 max-w-lg mx-auto leading-relaxed">
-        המסלול נקבע בשיחה קצרה לפי המטרה שלך —
+        המסלול נקבע בשיחה קצרה לפי המטרה שלך
         <br />
         לא לפי מה שנראה &lsquo;יותר יקר&rsquo;.
       </p>
