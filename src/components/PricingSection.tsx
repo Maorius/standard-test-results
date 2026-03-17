@@ -34,7 +34,7 @@ const PricingSection = () => {
   return (
     <SectionWrapper className="border-t border-border">
       {/* Headline */}
-      <h2 className="text-3xl md:text-5xl font-black text-center mb-4">שני מסלולים. אותה שיטה. עומק אחר.</h2>
+      <h2 className="text-3xl md:text-5xl font-black text-center mb-4">מסלול שמתאים למטרה שלך</h2>
 
       {/* Framing line */}
       <p className="text-center text-muted-foreground text-base md:text-lg max-w-xl mx-auto mb-12 leading-relaxed">
