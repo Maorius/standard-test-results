@@ -12,7 +12,6 @@ const trustBullets = [
 
 const BioSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const portraitRef = useRef<HTMLDivElement>(null);
   const childhoodRef = useRef<HTMLDivElement>(null);
   const glowupRef = useRef<HTMLDivElement>(null);
 
@@ -51,41 +50,60 @@ const BioSection = () => {
   return (
     <section ref={sectionRef} className="relative overflow-hidden px-5 py-20 md:px-8 md:py-28 lg:px-16 lg:py-36">
       <div className="container mx-auto max-w-5xl">
-        {/* ===== PORTRAIT CIRCLE ===== */}
+
+        {/* ===== 1. BIO TITLE – FIRST IN HIERARCHY ===== */}
         <div
-          ref={portraitRef}
           className={cn(
-            "flex flex-col items-center mb-14 md:mb-20 transition-all duration-1000",
+            "text-center mb-12 md:mb-16 transition-all duration-700",
+            sectionVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-8"
+          )}
+        >
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight">
+            אני לא מלמד משהו{" "}
+            <span className="text-gold-gradient">שלא חייתי בעצמי.</span>
+          </h2>
+        </div>
+
+        {/* ===== 2. PORTRAIT CIRCLE ===== */}
+        <div
+          className={cn(
+            "flex flex-col items-center mb-14 md:mb-20 transition-all duration-1000 delay-200",
             sectionVisible
               ? "opacity-100 scale-100"
               : "opacity-0 scale-95"
           )}
         >
-          {/* Circle frame with portrait breaking out */}
+          {/* Circle frame with portrait emerging through it */}
           <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 mb-10 md:mb-12">
-            {/* Glow ring */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 via-transparent to-primary/10 blur-xl scale-110" />
-            {/* Border ring */}
-            <div className="absolute inset-0 rounded-full border-2 border-primary/30 shadow-[0_0_40px_hsl(45,100%,50%,0.12)]" />
-            {/* Inner subtle shadow overlay */}
-            <div className="absolute inset-0 rounded-full shadow-[inset_0_-20px_40px_rgba(0,0,0,0.4)]" />
-            {/* Portrait image – overflows circle upward */}
-            <div className="absolute inset-0 rounded-full overflow-visible flex items-end justify-center">
+            {/* Glow ring – behind everything */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 via-transparent to-primary/10 blur-xl scale-110 z-0" />
+
+            {/* Portrait image – middle layer, clipped to circle */}
+            <div className="absolute inset-[-8%] z-10 flex items-end justify-center">
               <img
                 src="/images/matan-bio.png"
                 alt="מתן ברוך"
                 className={cn(
-                  "w-[130%] max-w-none object-cover object-top -translate-y-[18%] transition-all duration-1000 delay-200",
+                  "w-full h-full max-w-none object-cover object-[center_20%] transition-all duration-1000 delay-300",
                   sectionVisible
-                    ? "opacity-100 translate-x-0"
-                    : "opacity-0 translate-y-4"
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-6"
                 )}
-                style={{ clipPath: "ellipse(48% 62% at 50% 52%)" }}
+                style={{
+                  clipPath: "ellipse(46% 50% at 50% 50%)",
+                }}
               />
             </div>
+
+            {/* Border ring – front layer, on top of portrait */}
+            <div className="absolute inset-0 rounded-full border-2 border-primary/30 shadow-[0_0_40px_hsl(45,100%,50%,0.12)] z-20 pointer-events-none" />
+            {/* Inner shadow overlay – front layer */}
+            <div className="absolute inset-0 rounded-full shadow-[inset_0_-20px_40px_rgba(0,0,0,0.4)] z-20 pointer-events-none" />
           </div>
 
-          {/* Trust bullets */}
+          {/* ===== 3. TRUST BULLETS ===== */}
           <div className="flex flex-col items-center gap-3 md:gap-4">
             {trustBullets.map((bullet, i) => (
               <div
@@ -96,7 +114,7 @@ const BioSection = () => {
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-4"
                 )}
-                style={{ transitionDelay: `${600 + i * 150}ms` }}
+                style={{ transitionDelay: `${800 + i * 150}ms` }}
               >
                 <div className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/15 flex items-center justify-center">
                   <Check className="w-3 h-3 text-primary" />
@@ -109,22 +127,7 @@ const BioSection = () => {
           </div>
         </div>
 
-        {/* ===== BIO TITLE ===== */}
-        <div
-          className={cn(
-            "text-center mb-12 md:mb-16 transition-all duration-700 delay-500",
-            sectionVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-8"
-          )}
-        >
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight">
-            אני לא מלמד משהו{" "}
-            <span className="text-gold-gradient">שלא חייתי בעצמי.</span>
-          </h2>
-        </div>
-
-        {/* ===== BIO BODY ===== */}
+        {/* ===== 4. BIO BODY ===== */}
         <div className="max-w-3xl mx-auto">
           {/* Paragraph 1 – intro */}
           <div className="mb-8 md:mb-10 text-center md:text-right">
@@ -148,11 +151,11 @@ const BioSection = () => {
                   : "opacity-0 md:translate-x-8"
               )}
             >
-              <div className="relative w-52 h-64 md:w-64 md:h-80 lg:w-72 lg:h-[22rem] rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.5)] border border-border/50">
+              <div className="relative w-56 h-72 md:w-64 md:h-80 lg:w-72 lg:h-[22rem] rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.5)] border border-border/50">
                 <img
                   src="/images/matan-childhood.jpg"
                   alt="מתן בילדותו"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-center scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
               </div>
@@ -191,11 +194,11 @@ const BioSection = () => {
                   : "opacity-0 md:-translate-x-8"
               )}
             >
-              <div className="relative w-52 h-64 md:w-64 md:h-80 lg:w-72 lg:h-[22rem] rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.5)] border border-border/50">
+              <div className="relative w-56 h-72 md:w-64 md:h-80 lg:w-72 lg:h-[22rem] rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.5)] border border-border/50">
                 <img
                   src="/images/matan-glowup.jpg"
                   alt="מתן היום"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-center scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
               </div>
@@ -229,7 +232,7 @@ const BioSection = () => {
             <div className="clear-both" />
           </div>
 
-          {/* ===== CLOSING LINE ===== */}
+          {/* ===== 5. CLOSING LINE ===== */}
           <div className="text-center mt-14 md:mt-20 mb-10 md:mb-14">
             <p className="text-foreground text-lg md:text-2xl lg:text-3xl font-bold leading-snug max-w-2xl mx-auto">
               כי בסוף זה לא רק לרדת במשקל או להתחטב —
