@@ -30,14 +30,14 @@ const PainSection = () => {
       <div className="absolute inset-x-0 bottom-0 h-1/3 backdrop-blur-[2px]" />
 
       {/* Content */}
-      <div className="relative z-10 py-24 md:py-36 lg:py-44 px-6">
+      <div className="relative z-10 py-16 md:py-24 lg:py-32 px-6">
         <div className="container mx-auto max-w-5xl">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black mb-14 md:mb-20 text-foreground leading-tight">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black mb-10 md:mb-14 text-foreground leading-tight">
               זה כבר מזמן לא רק עניין של כושר.
             </h2>
 
-            <div className="max-w-3xl mx-auto mb-20 md:mb-24 space-y-3 md:space-y-4">
+            <div className="max-w-3xl mx-auto mb-14 md:mb-18 space-y-2 md:space-y-3">
               {[
                 "כל פעם שאתה אומר לעצמך",
                 "'ממחר אני חוזר לזה'",
@@ -55,11 +55,11 @@ const PainSection = () => {
                 "להבטיח לעצמך — ואז להאמין לזה קצת פחות.",
               ].map((line, i) =>
                 line === "" ? (
-                  <div key={i} className="h-4 md:h-6" />
+                  <div key={i} className="h-3 md:h-4" />
                 ) : (
                   <p
                     key={i}
-                    className="text-muted-foreground text-xl md:text-2xl lg:text-3xl leading-relaxed"
+                    className="text-muted-foreground text-lg md:text-xl lg:text-2xl leading-relaxed"
                   >
                     {line}
                   </p>
@@ -67,17 +67,17 @@ const PainSection = () => {
               )}
             </div>
 
-            <p className="text-primary font-black text-2xl md:text-4xl lg:text-5xl leading-snug mb-16 md:mb-20 max-w-3xl mx-auto">
+            <p className="text-primary font-black text-xl md:text-3xl lg:text-4xl leading-snug mb-10 md:mb-14 max-w-3xl mx-auto">
               ובדיוק בגלל זה הבעיה היא לא עוד מוטיבציה —
               <br />
               אלא משהו שיחזיק גם כשהיא נעלמת.
             </p>
 
-            <div className="flex flex-col items-center gap-3">
-              <Button variant="gold" size="xl" className="text-lg md:text-xl px-10 py-5 md:px-14 md:py-6" onClick={scrollToForm}>
+            <div className="flex flex-col items-center gap-2">
+              <Button variant="gold" size="lg" className="text-base md:text-lg px-8 py-4 md:px-12 md:py-5" onClick={scrollToForm}>
                 אני רוצה להפסיק להתחיל מחדש
               </Button>
-              <span className="text-muted-foreground text-sm md:text-base">
+              <span className="text-muted-foreground text-xs md:text-sm">
                 שלב ראשון לתהליך אמיתי.
               </span>
             </div>
