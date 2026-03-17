@@ -1,4 +1,3 @@
-import StickyCtaBar from "@/components/StickyCtaBar";
 import HeroSection from "@/components/HeroSection";
 import CuriosityHookSection from "@/components/CuriosityHookSection";
 import StandardTestSection from "@/components/StandardTestSection";
@@ -18,7 +17,7 @@ const Index = () => {
   return (
     <QuizProvider>
       <div className="min-h-screen bg-background text-foreground" dir="rtl">
-        <StickyCtaBar />
+        
         <HeroSection />
         <CuriosityHookSection />
         <StandardTestSection />
