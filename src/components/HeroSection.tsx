@@ -55,7 +55,7 @@ const HeroSection = () => {
             <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
               <Button variant="ghost" size="lg" className="gap-2 text-muted-foreground">
                 <MessageCircle className="h-5 w-5" />
-                מעדיף וואטסאפ? דבר איתי עכשיו
+                יש לך שאלה? דבר איתי עכשיו
               </Button>
             </a>
           </div>
