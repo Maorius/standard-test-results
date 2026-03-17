@@ -410,12 +410,12 @@ const DeliverablesSection = () => {
 
       {/* Header */}
       <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-center mb-4 md:mb-5 leading-tight">
-        מרגע שנכנסת — זה מה שקורה.
+        מרגע שנכנסת זה מה שקורה.
       </h2>
       <p className="text-muted-foreground text-lg md:text-xl lg:text-2xl text-center max-w-3xl mx-auto mb-6 md:mb-8 leading-relaxed">
         לא עוד ניסיון שמתפרק אחרי שבוע.
         <br />
-        אלא מערכת עבודה שנבנית סביבך — ומחזיקה אותך בתוכה.
+        אלא מערכת עבודה שנבנית סביבך ומחזיקה אותך בתוכה.
       </p>
 
       {/* Overline */}
