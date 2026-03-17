@@ -333,7 +333,7 @@ const BioSection = () => {
           >
             אני רוצה להפסיק להתחיל מחדש
           </Button>
-          <span className="text-muted-foreground text-xs md:text-sm">שלב ראשון לתהליך אמיתי.</span>
+          <span className="text-muted-foreground text-xs md:text-sm">שיחת איפיון 5-10 דק • ללא התחייבות</span>
         </div>
       </div>
     </section>
