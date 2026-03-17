@@ -4,6 +4,7 @@ import CuriosityHookSection from "@/components/CuriosityHookSection";
 import StandardTestSection from "@/components/StandardTestSection";
 import PainSection from "@/components/PainSection";
 import BioSection from "@/components/BioSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import ThreeEnginesSection from "@/components/ThreeEnginesSection";
 import DeliverablesSection from "@/components/DeliverablesSection";
 import ProtocolSection from "@/components/ProtocolSection";
