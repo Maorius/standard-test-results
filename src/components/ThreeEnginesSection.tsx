@@ -23,14 +23,14 @@ const engines = [
 
 const ThreeEnginesSection = () => {
   return (
-    <SectionWrapper className="py-16 md:py-24 lg:py-32">
+    <SectionWrapper className="py-12 md:py-18 lg:py-24">
       {/* Title */}
-      <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-center mb-8 md:mb-12 leading-tight">
+      <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-center mb-6 md:mb-8 leading-tight">
         שלושה דברים חייבים לעבוד יחד.
       </h2>
 
       {/* Intro text */}
-      <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16 space-y-2 md:space-y-3">
+      <div className="max-w-3xl mx-auto text-center mb-8 md:mb-12 space-y-1.5 md:space-y-2">
         {[
           "לא מספיק להתאמן.",
           "לא מספיק לאכול טוב.",
@@ -40,11 +40,11 @@ const ThreeEnginesSection = () => {
           "הגוף, ההרגלים והראש צריכים לעבוד יחד.",
         ].map((line, i) =>
           line === "" ? (
-            <div key={i} className="h-2 md:h-3" />
+            <div key={i} className="h-1.5 md:h-2" />
           ) : (
             <p
               key={i}
-              className="text-muted-foreground text-xl md:text-2xl lg:text-3xl leading-relaxed"
+              className="text-muted-foreground text-lg md:text-xl lg:text-2xl leading-relaxed"
             >
               {line}
             </p>
@@ -53,15 +53,15 @@ const ThreeEnginesSection = () => {
       </div>
 
       {/* Cards */}
-      <div className="grid md:grid-cols-3 gap-5 md:gap-6 mb-12 md:mb-16 max-w-5xl mx-auto">
+      <div className="grid md:grid-cols-3 gap-4 md:gap-5 mb-8 md:mb-12 max-w-5xl mx-auto">
         {engines.map((e) => (
           <div
             key={e.title}
-            className="bg-card border border-border/60 rounded-2xl p-6 md:p-8 hover:border-primary/30 transition-all duration-300 hover:shadow-[0_0_20px_hsl(45,100%,50%,0.06)]"
+            className="bg-card border border-border/60 rounded-2xl p-5 md:p-7 hover:border-primary/30 transition-all duration-300 hover:shadow-[0_0_20px_hsl(45,100%,50%,0.06)]"
           >
-            <e.icon className="h-9 w-9 md:h-11 md:w-11 text-primary mb-4" />
-            <h3 className="text-2xl md:text-3xl font-bold mb-3 text-foreground">{e.title}</h3>
-            <p className="text-muted-foreground text-lg md:text-xl leading-relaxed whitespace-pre-line">
+            <e.icon className="h-8 w-8 md:h-10 md:w-10 text-primary mb-3" />
+            <h3 className="text-xl md:text-2xl font-bold mb-2 text-foreground">{e.title}</h3>
+            <p className="text-muted-foreground text-base md:text-lg leading-relaxed whitespace-pre-line">
               {e.desc}
             </p>
           </div>
@@ -69,23 +69,23 @@ const ThreeEnginesSection = () => {
       </div>
 
       {/* Closing line */}
-      <p className="text-primary font-black text-2xl md:text-4xl lg:text-5xl leading-snug text-center mb-10 md:mb-14 max-w-3xl mx-auto">
+      <p className="text-primary font-black text-xl md:text-3xl lg:text-4xl leading-snug text-center mb-8 md:mb-10 max-w-3xl mx-auto">
         כשהשלושה האלה עובדים יחד —
         <br />
         התוצאה כבר לא תלויה רק ביום טוב.
       </p>
 
       {/* CTA */}
-      <div className="flex flex-col items-center gap-3">
+      <div className="flex flex-col items-center gap-2">
         <Button
           variant="gold"
-          size="xl"
-          className="text-lg md:text-xl px-10 py-5 md:px-14 md:py-6"
+          size="lg"
+          className="text-base md:text-lg px-8 py-4 md:px-12 md:py-5"
           onClick={scrollToForm}
         >
           אני רוצה להפסיק להתחיל מחדש
         </Button>
-        <span className="text-muted-foreground text-sm md:text-base">
+        <span className="text-muted-foreground text-xs md:text-sm">
           שלב ראשון לתהליך אמיתי.
         </span>
       </div>
