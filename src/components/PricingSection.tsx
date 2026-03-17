@@ -56,7 +56,7 @@ const PricingSection = () => {
           <div
             key={plan.name}
             className={cn(
-              "relative rounded-xl p-7 md:p-10 border transition-all duration-300",
+              "relative rounded-xl p-7 md:p-10 border transition-all duration-300 flex flex-col",
               plan.recommended
                 ? "border-primary bg-card shadow-[0_0_40px_hsl(45,100%,50%,0.1)]"
                 : "border-border bg-card",
@@ -89,7 +89,7 @@ const PricingSection = () => {
             <div className="h-px bg-border mb-6" />
 
             {/* Features */}
-            <ul className="space-y-4 mb-8">
+            <ul className="space-y-4 mb-8 flex-grow">
               {plan.features.map((f) => (
                 <li key={f} className="flex items-start gap-3">
                   <Check className="h-5 w-5 text-primary mt-0.5 shrink-0" />
@@ -99,7 +99,7 @@ const PricingSection = () => {
             </ul>
 
             {/* Price */}
-            <p className="text-4xl md:text-5xl font-black text-primary">{plan.price}</p>
+            <p className="text-4xl md:text-5xl font-black text-primary mt-auto">{plan.price}</p>
           </div>
         ))}
       </div>
