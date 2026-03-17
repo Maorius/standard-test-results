@@ -191,30 +191,35 @@ const BioSection = () => {
 
           {/* ===== Paragraph 3 – Shift + Glowup image =====
            *
-           * Layout strategy:
-           *   all breakpoints → flex-col stacked:
-           *     image spans the full block width for maximum prominence,
-           *     caption underneath, then the text block below.
+           * Layout strategy — Option A:
+           *   mobile      → flex-col: image, then all 4 paragraphs below
+           *   desktop     → grid [wider-image | first 2 paragraphs],
+           *                 then last 2 paragraphs span full width below the grid
+           *
+           * Image column is pinned to w-80 lg:w-96 so it commands real presence.
+           * Only the first 2 shorter paragraphs sit beside it; the longer
+           * personal-reflection paragraphs reflow below at full width.
            *)
            */}
           <div className="mb-10 md:mb-14">
-            <div className="flex flex-col gap-8">
-              {/* Image – full block width, natural proportions */}
+            {/* Top row: image + first 2 paragraphs */}
+            <div className="flex flex-col md:grid md:grid-cols-[20rem_1fr] lg:grid-cols-[24rem_1fr] md:gap-10 md:items-start mb-0 md:mb-8">
+              {/* Image */}
               <div
                 ref={glowupRef}
                 className={cn(
-                  "flex flex-col items-center transition-all duration-700",
-                  glowupVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6",
+                  "flex flex-col items-center mb-6 md:mb-0 transition-all duration-700",
+                  glowupVisible ? "opacity-100 translate-x-0" : "opacity-0 md:-translate-x-8",
                 )}
               >
-                <div className="relative w-full rounded-2xl overflow-hidden shadow-[0_16px_56px_rgba(0,0,0,0.55)] border border-border/50">
+                <div className="relative w-64 md:w-full rounded-xl overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.5)] border border-border/50">
                   <img src="/images/matan-glowup.jpg" alt="מתן היום" className="w-full h-auto block" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent pointer-events-none" />
                 </div>
                 <p className="text-muted-foreground text-sm mt-3 italic">"השינוי לא קרה ביום — הוא נבנה בתהליך."</p>
               </div>
 
-              {/* Text – sits below the image */}
+              {/* First 2 paragraphs — sit beside the image on desktop */}
               <div className="text-muted-foreground text-base md:text-lg lg:text-xl leading-relaxed space-y-5">
                 <p>
                   השינוי האמיתי התחיל כשהבנתי ש
@@ -225,17 +230,21 @@ const BioSection = () => {
                   <br />
                   צריך דרך שאפשר להחזיק — בגוף, בהרגלים, ובראש.
                 </p>
-                <p>
-                  היום אני כבר לא אותו ילד.
-                  <br />
-                  אני חזק יותר, בטוח יותר, ואוהב את איך שאני נראה — בלי לוותר על החיים עצמם.
-                </p>
-                <p>
-                  והיום אני עוזר לגברים לעשות את אותו מעבר:
-                  <br />
-                  להרגיש טוב יותר בגוף שלהם, להפסיק לחיות במבוכה, ולבנות נוכחות שהם מרגישים ראויים לה.
-                </p>
               </div>
+            </div>
+
+            {/* Bottom 2 paragraphs — full width, below the image+text pair */}
+            <div className="text-muted-foreground text-base md:text-lg lg:text-xl leading-relaxed space-y-5 mt-6 md:mt-0">
+              <p>
+                היום אני כבר לא אותו ילד.
+                <br />
+                אני חזק יותר, בטוח יותר, ואוהב את איך שאני נראה — בלי לוותר על החיים עצמם.
+              </p>
+              <p>
+                והיום אני עוזר לגברים לעשות את אותו מעבר:
+                <br />
+                להרגיש טוב יותר בגוף שלהם, להפסיק לחיות במבוכה, ולבנות נוכחות שהם מרגישים ראויים לה.
+              </p>
             </div>
           </div>
 
