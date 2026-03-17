@@ -42,29 +42,29 @@ const FinalCtaFormSection = () => {
 
   return (
     <SectionWrapper id="lead-form-section">
-      <div className="max-w-2xl mx-auto text-center mb-10">
-        <h2 className="text-2xl md:text-4xl font-black mb-4">
+      <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
+        <h2 className="text-3xl md:text-5xl lg:text-6xl font-black mb-5 md:mb-6 leading-tight">
           מספיק לחיות על <span className="text-gold-gradient">"מחר"</span>.
         </h2>
-        <p className="text-muted-foreground text-lg">מכאן זה כבר עובר ממחשבה לפעולה.</p>
+        <p className="text-muted-foreground text-lg md:text-2xl">מכאן זה כבר עובר ממחשבה לפעולה.</p>
       </div>
 
       {submitted ? (
-        <div className="max-w-lg mx-auto text-center bg-card border border-primary/30 rounded-xl p-8">
-          <h3 className="text-2xl font-bold text-primary mb-3">הטופס נשלח בהצלחה!</h3>
-          <p className="text-muted-foreground">אחזור אליך בהקדם לתיאום שיחה קצרה.</p>
+        <div className="max-w-xl mx-auto text-center bg-card border border-primary/30 rounded-xl p-10">
+          <h3 className="text-2xl md:text-3xl font-bold text-primary mb-3">הטופס נשלח בהצלחה!</h3>
+          <p className="text-muted-foreground text-base md:text-lg">אחזור אליך בהקדם לתיאום שיחה קצרה.</p>
         </div>
       ) : (
         <>
           {hasInteracted && bridgeMessage && (
-            <div className="max-w-lg mx-auto mb-4 text-center">
-              <p className="text-primary/90 text-sm font-medium">{bridgeMessage}</p>
+            <div className="max-w-xl mx-auto mb-6 text-center">
+              <p className="text-primary/90 text-base font-medium">{bridgeMessage}</p>
             </div>
           )}
           <form
             id="lead-form"
             onSubmit={handleSubmit}
-            className="max-w-lg mx-auto bg-card border border-border rounded-xl p-6 md:p-8 space-y-5"
+            className="max-w-xl mx-auto bg-card border border-border rounded-xl p-7 md:p-10 space-y-6"
           >
             {hasInteracted && (
               <>
@@ -76,25 +76,25 @@ const FinalCtaFormSection = () => {
             )}
 
             <div>
-              <label className="block text-sm font-medium text-foreground mb-1.5">שם מלא</label>
-              <input type="text" required placeholder="השם שלך" className={inputClass} />
+              <label className="block text-base md:text-lg font-semibold text-foreground mb-2">שם מלא</label>
+              <input type="text" required placeholder="השם שלך" className={inputClass + " text-base md:text-lg py-3.5"} />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-foreground mb-1.5">טלפון</label>
-              <input type="tel" required placeholder="050-0000000" className={inputClass} dir="rtl" />
+              <label className="block text-base md:text-lg font-semibold text-foreground mb-2">טלפון</label>
+              <input type="tel" required placeholder="050-0000000" className={inputClass + " text-base md:text-lg py-3.5"} dir="rtl" />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-foreground mb-1.5">מה הכי עוצר אותך כרגע?</label>
-              <textarea rows={2} placeholder="כתוב בקצרה..." className={inputClass} />
+              <label className="block text-base md:text-lg font-semibold text-foreground mb-2">מה הכי עוצר אותך כרגע?</label>
+              <textarea rows={2} placeholder="כתוב בקצרה..." className={inputClass + " text-base md:text-lg py-3.5"} />
             </div>
 
-            <Button variant="gold" size="xl" type="submit" className="w-full">
+            <Button variant="gold" size="xl" type="submit" className="w-full mt-2">
               אני רוצה להפסיק להתחיל מחדש
             </Button>
 
-            <p className="text-center text-muted-foreground text-xs">שלב ראשון לתהליך אמיתי.</p>
+            <p className="text-center text-muted-foreground text-sm">שלב ראשון לתהליך אמיתי.</p>
           </form>
         </>
       )}
