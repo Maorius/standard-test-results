@@ -46,9 +46,7 @@ const FinalCtaFormSection = () => {
         <h2 className="text-2xl md:text-4xl font-black mb-4">
           מספיק לחיות על <span className="text-gold-gradient">"מחר"</span>.
         </h2>
-        <p className="text-muted-foreground text-lg">
-          מלא בדיקת התאמה. אם זה מתאים, אני חוזר אליך לתיאום שיחה קצרה ומתחילים.
-        </p>
+        <p className="text-muted-foreground text-lg">מכאן זה כבר עובר ממחשבה לפעולה.</p>
       </div>
 
       {submitted ? (
