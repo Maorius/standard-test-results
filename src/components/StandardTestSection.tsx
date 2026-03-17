@@ -145,7 +145,7 @@ const StandardTestSection = () => {
                   <Button variant="gold" size="xl" className="w-full max-w-xs" onClick={scrollToForm}>
                     {selected.cta}
                   </Button>
-                  <span className="text-muted-foreground text-xs">שלב ראשון לתהליך אמיתי.</span>
+                  <span className="text-muted-foreground text-xs">שיחת איפיון 5-10 דק • ללא התחייבות</span>
                 </div>
               </div>
 

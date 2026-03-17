@@ -112,7 +112,7 @@ const FinalCtaFormSection = () => {
               אני רוצה להפסיק להתחיל מחדש
             </Button>
 
-            <p className="text-center text-muted-foreground text-sm">שלב ראשון לתהליך אמיתי.</p>
+            <p className="text-center text-muted-foreground text-sm">שיחת איפיון 5-10 דק • ללא התחייבות</p>
           </form>
         </>
       )}

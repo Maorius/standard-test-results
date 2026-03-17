@@ -44,7 +44,7 @@ const CuriosityHookSection = () => {
 
         setIsFocused(entry.isIntersecting && ratio >= 0.5);
       },
-      { threshold: [0, 0.35, 0.4, 0.5, 0.75, 1] }
+      { threshold: [0, 0.35, 0.4, 0.5, 0.75, 1] },
     );
 
     observer.observe(el);
@@ -76,18 +76,9 @@ const CuriosityHookSection = () => {
   }, [showFirst, done, isFocused, advance]);
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative h-screen flex items-center justify-center overflow-hidden"
-    >
+    <section ref={sectionRef} className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      >
+      <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover">
         <source src="/videos/section2-bg.mp4" type="video/mp4" />
       </video>
 
@@ -126,9 +117,7 @@ const CuriosityHookSection = () => {
                 <Button variant="gold" size="xl" onClick={scrollToForm}>
                   אני רוצה להפסיק להתחיל מחדש
                 </Button>
-                <p className="text-muted-foreground text-sm">
-                  שלב ראשון לתהליך אמיתי.
-                </p>
+                <p className="text-muted-foreground text-sm">שיחת איפיון 5-10 דק • ללא התחייבות</p>
               </motion.div>
             )}
           </AnimatePresence>
