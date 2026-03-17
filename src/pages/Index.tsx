@@ -23,7 +23,7 @@ const Index = () => {
         <PainSection />
         <ThreeEnginesSection />
         <DeliverablesSection />
-        <ProtocolSection />
+        {/* <ProtocolSection /> */}
         <PricingSection />
         <FitSection />
         <FAQSection />
@@ -31,9 +31,7 @@ const Index = () => {
 
         {/* Footer */}
         <footer className="border-t border-border py-8 text-center">
-          <p className="text-muted-foreground text-sm">
-            © {new Date().getFullYear()} מתן ברוך. כל הזכויות שמורות.
-          </p>
+          <p className="text-muted-foreground text-sm">© {new Date().getFullYear()} מתן ברוך. כל הזכויות שמורות.</p>
         </footer>
       </div>
     </QuizProvider>
