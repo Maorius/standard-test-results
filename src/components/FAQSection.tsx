@@ -5,24 +5,28 @@ import { cn } from "@/lib/utils";
 
 const faqs = [
   {
-    q: "מה זה NLP בליווי?",
-    a: "כלים פרקטיים להתמדה: מצבי רוח, טריגרים והרגלים. לא טיפול ולא קסמים.",
+    q: "מה זה בכלל NLP בתוך תהליך כזה?",
+    a: "זה לא טיפול ולא 'קסם'.\nזו עבודה פרקטית על מה שבדרך כלל מפיל אותך באמצע:\nמצבי רוח, טריגרים, דחיינות והרגלים.",
   },
   {
     q: "אם אין לי מוטיבציה זה יעבוד?",
-    a: "מוטיבציה לא תנאי. בונים מערכת ואז התוצאות יוצרות מומנטום.",
+    a: "כן. מוטיבציה היא לא תנאי להתחלה.\nהמטרה כאן היא לבנות מערכת שמחזיקה גם בימים שאין כוח —\nואז המומנטום מגיע מהתהליך, לא מהחשק.",
   },
   {
-    q: "אני כבר מבין כושר, למה זה יהיה אחרת?",
-    a: "כי כאן יש מעקב ותיקונים בזמן אמת. לא נשארים לבד.",
+    q: "אני כבר מבין כושר. למה שהפעם זה יהיה אחרת?",
+    a: "כי ידע לבד לא מחזיק תהליך.\nכאן יש התאמה, מעקב, תיקונים בזמן אמת,\nומישהו שלא נותן לך להיעלם כשהדבר מתחיל להישבר.",
   },
   {
     q: "כמה זמן זה דורש?",
-    a: "מותאם ללוז. המטרה עקביות ריאלית, לא קיצון.",
+    a: "זה נבנה סביב החיים שלך.\nהמטרה היא לא להעמיס עליך,\nאלא לייצר עקביות ריאלית שאתה באמת יכול להחזיק לאורך זמן.",
   },
   {
-    q: "אונליין או פרונטלי?",
-    a: "היברידי. מתחילים עם 1:1 פרונטלי לבסיס וטכניקה.",
+    q: "זה אונליין או פרונטלי?",
+    a: "זה ליווי היברידי.\nיש אונליין, מעקב וזמינות לאורך הדרך,\nובנוסף מתחילים עם 1:1 פרונטלי\nכדי לבנות בסיס נכון, טכניקה טובה, וכניסה חכמה לתהליך.",
+  },
+  {
+    q: "איך אני יודע איזה מסלול מתאים לי?",
+    a: "לא צריך להחליט לבד.\nמשאירים פרטים, עושים שיחה קצרה,\nורואים מה נכון לך לפי המטרה, הקצב,\nורמת הליווי שאתה באמת צריך.",
   },
 ];
 
@@ -31,20 +35,24 @@ const FAQSection = () => {
 
   return (
     <SectionWrapper className="border-t border-border">
-      <h2 className="text-2xl md:text-4xl font-black text-center mb-12">שאלות נפוצות</h2>
+      <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-center mb-14 md:mb-16 leading-tight max-w-4xl mx-auto">
+        השאלות שבדרך כלל עוצרות אנשים
+        <br />
+        <span className="text-gold-gradient">רגע לפני שהם מתחילים.</span>
+      </h2>
 
-      <div className="max-w-2xl mx-auto space-y-3">
+      <div className="max-w-3xl mx-auto space-y-4">
         {faqs.map((faq, i) => (
           <button
             key={i}
             onClick={() => setOpen(open === i ? null : i)}
-            className="w-full text-right bg-card border border-border rounded-lg p-5 transition-colors hover:border-muted-foreground/30"
+            className="w-full text-right bg-card border border-border rounded-xl p-6 md:p-7 transition-colors hover:border-primary/30"
           >
             <div className="flex items-center justify-between gap-4">
-              <span className="font-bold text-foreground">{faq.q}</span>
+              <span className="font-bold text-lg md:text-xl text-foreground leading-relaxed">{faq.q}</span>
               <ChevronDown
                 className={cn(
-                  "h-5 w-5 text-muted-foreground shrink-0 transition-transform duration-200",
+                  "h-5 w-5 text-muted-foreground shrink-0 transition-transform duration-300",
                   open === i && "rotate-180"
                 )}
               />
@@ -52,10 +60,12 @@ const FAQSection = () => {
             <div
               className={cn(
                 "overflow-hidden transition-all duration-300",
-                open === i ? "max-h-40 mt-3" : "max-h-0"
+                open === i ? "max-h-60 mt-4" : "max-h-0"
               )}
             >
-              <p className="text-muted-foreground">{faq.a}</p>
+              <p className="text-muted-foreground text-base md:text-lg leading-relaxed whitespace-pre-line">
+                {faq.a}
+              </p>
             </div>
           </button>
         ))}
