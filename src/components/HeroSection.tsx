@@ -34,9 +34,9 @@ const HeroSection = () => {
           </h1>
 
           <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-xl">
-            כי לדעת מה לעשות זה לא הבעיה.
-            <span className="text-foreground font-medium"> הבעיה היא </span> לבצע את זה גם
-            <span className="text-foreground font-medium"> כשאין חשק </span>.
+            הבעיה היא לא לדעת מה נכון.
+            <span className="text-foreground font-medium"> הבעיה היא </span> להחזיק את זה מספיק זמן כדי שהגוף שלך
+            <span className="text-foreground font-medium"> באמת ישתנה. </span>.
           </p>
 
           <ul className="space-y-3 mb-10">
