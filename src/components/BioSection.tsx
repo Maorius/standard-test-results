@@ -49,7 +49,7 @@ const BioSection = () => {
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden px-5 py-20 md:px-8 md:py-28 lg:px-16 lg:py-36">
-      <div className="container mx-auto max-w-5xl">
+      <div className="container mx-auto max-w-6xl">
 
         {/* ===== 1. BIO TITLE – FIRST IN HIERARCHY ===== */}
         <div
@@ -76,31 +76,37 @@ const BioSection = () => {
           )}
         >
           {/* Circle frame with portrait emerging through it */}
-          <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 mb-10 md:mb-12">
+          <div className="relative w-72 h-72 md:w-[22rem] md:h-[22rem] lg:w-[26rem] lg:h-[26rem] mb-10 md:mb-12">
             {/* Glow ring – behind everything */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 via-transparent to-primary/10 blur-xl scale-110 z-0" />
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 via-transparent to-primary/10 blur-2xl scale-125 z-0" />
 
-            {/* Portrait image – middle layer, clipped to circle */}
-            <div className="absolute inset-[-8%] z-10 flex items-end justify-center">
+            {/* Portrait image – fills and slightly overflows the circle */}
+            <div className="absolute inset-0 z-10 overflow-visible flex items-center justify-center">
               <img
                 src="/images/matan-bio.png"
                 alt="מתן ברוך"
                 className={cn(
-                  "w-full h-full max-w-none object-cover object-[center_20%] transition-all duration-1000 delay-300",
+                  "absolute w-[115%] max-w-none object-contain transition-all duration-1000 delay-300",
                   sectionVisible
                     ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-6"
+                    : "opacity-0 translate-y-4"
                 )}
                 style={{
-                  clipPath: "ellipse(46% 50% at 50% 50%)",
+                  bottom: "-6%",
+                  left: "50%",
+                  transform: sectionVisible
+                    ? "translateX(-50%) translateY(0)"
+                    : "translateX(-50%) translateY(16px)",
+                  maskImage: "linear-gradient(to top, transparent 0%, black 12%, black 100%)",
+                  WebkitMaskImage: "linear-gradient(to top, transparent 0%, black 12%, black 100%)",
                 }}
               />
             </div>
 
             {/* Border ring – front layer, on top of portrait */}
-            <div className="absolute inset-0 rounded-full border-2 border-primary/30 shadow-[0_0_40px_hsl(45,100%,50%,0.12)] z-20 pointer-events-none" />
-            {/* Inner shadow overlay – front layer */}
-            <div className="absolute inset-0 rounded-full shadow-[inset_0_-20px_40px_rgba(0,0,0,0.4)] z-20 pointer-events-none" />
+            <div className="absolute inset-0 rounded-full border-2 border-primary/30 shadow-[0_0_60px_hsl(45,100%,50%,0.10)] z-20 pointer-events-none" />
+            {/* Inner shadow overlay – front layer, anchors the portrait at the bottom */}
+            <div className="absolute inset-0 rounded-full shadow-[inset_0_-30px_50px_rgba(0,0,0,0.5)] z-20 pointer-events-none" />
           </div>
 
           {/* ===== 3. TRUST BULLETS ===== */}
@@ -128,7 +134,7 @@ const BioSection = () => {
         </div>
 
         {/* ===== 4. BIO BODY ===== */}
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           {/* Paragraph 1 – intro */}
           <div className="mb-8 md:mb-10 text-center md:text-right">
             <p className="text-foreground text-lg md:text-xl lg:text-2xl leading-relaxed font-bold mb-1">
@@ -145,17 +151,17 @@ const BioSection = () => {
             <div
               ref={childhoodRef}
               className={cn(
-                "md:float-right md:mr-0 md:ml-8 mb-6 md:mb-4 flex flex-col items-center transition-all duration-900",
+                "md:float-right md:mr-0 md:ml-10 mb-6 md:mb-4 flex flex-col items-center transition-all duration-900",
                 childhoodVisible
                   ? "opacity-100 md:translate-x-0"
                   : "opacity-0 md:translate-x-8"
               )}
             >
-              <div className="relative w-56 h-72 md:w-64 md:h-80 lg:w-72 lg:h-[22rem] rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.5)] border border-border/50">
+              <div className="relative w-64 h-80 md:w-80 md:h-[26rem] lg:w-[22rem] lg:h-[30rem] rounded-xl overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.5)] border border-border/50">
                 <img
                   src="/images/matan-childhood.jpg"
                   alt="מתן בילדותו"
-                  className="w-full h-full object-cover object-center scale-105"
+                  className="w-full h-full object-cover object-center scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
               </div>
@@ -188,17 +194,17 @@ const BioSection = () => {
             <div
               ref={glowupRef}
               className={cn(
-                "md:float-left md:ml-0 md:mr-8 mb-6 md:mb-4 flex flex-col items-center transition-all duration-900",
+                "md:float-left md:ml-0 md:mr-10 mb-6 md:mb-4 flex flex-col items-center transition-all duration-900",
                 glowupVisible
                   ? "opacity-100 md:translate-x-0"
                   : "opacity-0 md:-translate-x-8"
               )}
             >
-              <div className="relative w-56 h-72 md:w-64 md:h-80 lg:w-72 lg:h-[22rem] rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.5)] border border-border/50">
+              <div className="relative w-64 h-80 md:w-80 md:h-[26rem] lg:w-[22rem] lg:h-[30rem] rounded-xl overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.5)] border border-border/50">
                 <img
                   src="/images/matan-glowup.jpg"
                   alt="מתן היום"
-                  className="w-full h-full object-cover object-center scale-105"
+                  className="w-full h-full object-cover object-center scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
               </div>
