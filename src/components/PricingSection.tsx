@@ -36,7 +36,7 @@ const PricingSection = () => {
       {/* Headline */}
       {/* Headline */}
       <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-center mb-6">
-        שני מסלולים. אותה שיטה. <span className="text-gold-gradient">עומק אחר.</span>
+        מסלול שמתאים <span className="text-gold-gradient">למטרה שלך.</span>
       </h2>
 
       {/* Framing */}
@@ -108,9 +108,9 @@ const PricingSection = () => {
 
       {/* Bottom framing line */}
       <p className="text-center text-muted-foreground/80 text-base md:text-lg mt-8 max-w-lg mx-auto leading-relaxed">
-        המסלול נקבע בשיחה קצרה לפי המטרה שלך
+        את המסלול בוחרים יחד
         <br />
-        לא לפי מה שנראה &lsquo;יותר יקר&rsquo;.
+        אחרי שמבינים מה באמת נכון לך.
       </p>
     </SectionWrapper>
   );
