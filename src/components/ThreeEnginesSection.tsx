@@ -7,7 +7,7 @@ const engines = [
   {
     icon: Brain,
     title: "אימון מנטלי לביצוע",
-    desc: "אם הראש נופל — גם התהליך נופל.\nכאן עובדים גם על הרגעים שבהם הכי קל להישבר.",
+    desc: "אם הראש נופל גם התהליך נופל.\nכאן עובדים גם על הרגעים שבהם הכי קל להישבר.",
   },
   {
     icon: Apple,
@@ -17,7 +17,7 @@ const engines = [
   {
     icon: Dumbbell,
     title: "אימונים מותאמים",
-    desc: "תוכנית מדויקת לרמה שלך,\nשמתקדמת יחד איתך — ולא נשארת תקועה במקום.",
+    desc: "תוכנית מדויקת לרמה שלך,\nשמתקדמת יחד איתך ולא נשארת תקועה במקום.",
   },
 ];
 
@@ -36,19 +36,16 @@ const ThreeEnginesSection = () => {
           "לא מספיק לאכול טוב.",
           "ולא מספיק לרצות.",
           "",
-          "כדי שזה יחזיק —",
+          "כדי שזה יחזיק",
           "הגוף, ההרגלים והראש צריכים לעבוד יחד.",
         ].map((line, i) =>
           line === "" ? (
             <div key={i} className="h-1.5 md:h-2" />
           ) : (
-            <p
-              key={i}
-              className="text-muted-foreground text-lg md:text-xl lg:text-2xl leading-relaxed"
-            >
+            <p key={i} className="text-muted-foreground text-lg md:text-xl lg:text-2xl leading-relaxed">
               {line}
             </p>
-          )
+          ),
         )}
       </div>
 
@@ -61,16 +58,14 @@ const ThreeEnginesSection = () => {
           >
             <e.icon className="h-8 w-8 md:h-10 md:w-10 text-primary mb-3" />
             <h3 className="text-xl md:text-2xl font-bold mb-2 text-foreground">{e.title}</h3>
-            <p className="text-muted-foreground text-base md:text-lg leading-relaxed whitespace-pre-line">
-              {e.desc}
-            </p>
+            <p className="text-muted-foreground text-base md:text-lg leading-relaxed whitespace-pre-line">{e.desc}</p>
           </div>
         ))}
       </div>
 
       {/* Closing line */}
       <p className="text-primary font-black text-xl md:text-3xl lg:text-4xl leading-snug text-center mb-8 md:mb-10 max-w-3xl mx-auto">
-        כשהשלושה האלה עובדים יחד —
+        כשהשלושה האלה עובדים יחד
         <br />
         התוצאה כבר לא תלויה רק ביום טוב.
       </p>
@@ -85,9 +80,7 @@ const ThreeEnginesSection = () => {
         >
           אני רוצה להפסיק להתחיל מחדש
         </Button>
-        <span className="text-muted-foreground text-xs md:text-sm">
-          שלב ראשון לתהליך אמיתי.
-        </span>
+        <span className="text-muted-foreground text-xs md:text-sm">שלב ראשון לתהליך אמיתי.</span>
       </div>
     </SectionWrapper>
   );
