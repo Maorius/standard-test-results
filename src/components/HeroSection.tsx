@@ -26,7 +26,6 @@ const HeroSection = () => {
 
       <div className="container mx-auto max-w-5xl relative z-10 px-5 py-16 md:py-24">
         <div className="max-w-2xl">
-          <h6>למי שנמאס לו להתחיל מחדש</h6>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-6">
             הגוף שלך עדיין לא נראה
             <br />
