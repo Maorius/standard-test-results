@@ -192,29 +192,30 @@ const BioSection = () => {
           {/* ===== Paragraph 3 – Shift + Glowup image =====
            *
            * Layout strategy:
-           *   mobile  → flex-col: image first, text below
-           *   desktop → CSS grid [auto 1fr]: image in left column, text in right column
+           *   all breakpoints → flex-col stacked:
+           *     image spans the full block width for maximum prominence,
+           *     caption underneath, then the text block below.
            *)
            */}
           <div className="mb-10 md:mb-14">
-            <div className="flex flex-col md:grid md:grid-cols-[auto_1fr] md:gap-10 md:items-start">
-              {/* Image – DOM-first for mobile */}
+            <div className="flex flex-col gap-8">
+              {/* Image – full block width, natural proportions */}
               <div
                 ref={glowupRef}
                 className={cn(
-                  "order-1 flex flex-col items-center mb-6 md:mb-0 transition-all duration-700",
-                  glowupVisible ? "opacity-100 translate-x-0" : "opacity-0 md:-translate-x-8",
+                  "flex flex-col items-center transition-all duration-700",
+                  glowupVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6",
                 )}
               >
-                <div className="relative w-56 md:w-64 lg:w-72 rounded-xl overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.5)] border border-border/50">
+                <div className="relative w-full rounded-2xl overflow-hidden shadow-[0_16px_56px_rgba(0,0,0,0.55)] border border-border/50">
                   <img src="/images/matan-glowup.jpg" alt="מתן היום" className="w-full h-auto block" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent pointer-events-none" />
                 </div>
                 <p className="text-muted-foreground text-sm mt-3 italic">"השינוי לא קרה ביום — הוא נבנה בתהליך."</p>
               </div>
 
-              {/* Text */}
-              <div className="order-2 text-muted-foreground text-base md:text-lg lg:text-xl leading-relaxed space-y-5">
+              {/* Text – sits below the image */}
+              <div className="text-muted-foreground text-base md:text-lg lg:text-xl leading-relaxed space-y-5">
                 <p>
                   השינוי האמיתי התחיל כשהבנתי ש
                   <span className="text-foreground font-semibold">לא צריך לחיות על קיצון כדי להשתנות.</span>
