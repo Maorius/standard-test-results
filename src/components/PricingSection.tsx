@@ -103,7 +103,7 @@ const PricingSection = () => {
       <p className="text-center text-muted-foreground text-sm mt-6 max-w-md mx-auto leading-relaxed">
         את המסלול בוחרים יחד
         <br />
-        אחרי שמבינים מה &lsquo;באמת נכון לך.&rsquo;.
+        אחרי שמבינים מה באמת נכון לך.
       </p>
     </SectionWrapper>
   );
