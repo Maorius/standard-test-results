@@ -17,7 +17,7 @@ const modules = [
   {
     num: "03",
     title: "תזונה מותאמת",
-    desc: "לא תפריט שמתפרק אחרי שבוע —\nאלא דרך אכילה שאתה באמת יכול לחיות איתה.",
+    desc: "לא תפריט שמתפרק אחרי שבוע \nאלא דרך אכילה שאתה באמת יכול לחיות איתה.",
   },
   {
     num: "04",
@@ -46,33 +46,25 @@ const FlowArrow = ({ active }: { active: boolean }) => (
         background: active
           ? "linear-gradient(270deg, hsl(45 100% 50% / 0.9), hsl(45 100% 45% / 0.5))"
           : "hsl(0 0% 25% / 0.5)",
-        boxShadow: active
-          ? "0 0 18px hsl(45 100% 50% / 0.5), 0 0 6px hsl(45 100% 50% / 0.3)"
-          : "none",
+        boxShadow: active ? "0 0 18px hsl(45 100% 50% / 0.5), 0 0 6px hsl(45 100% 50% / 0.3)" : "none",
       }}
     />
     {/* Arrowhead */}
     <div
       className="absolute right-[-2px] top-1/2 -translate-y-1/2 w-0 h-0 border-t-[7px] border-t-transparent border-b-[7px] border-b-transparent border-l-[10px] rotate-180 transition-all duration-300"
       style={{
-        borderLeftColor: active
-          ? "hsl(45 100% 50% / 0.95)"
-          : "hsl(0 0% 30% / 0.5)",
-        filter: active
-          ? "drop-shadow(0 0 8px hsl(45 100% 50% / 0.6))"
-          : "none",
+        borderLeftColor: active ? "hsl(45 100% 50% / 0.95)" : "hsl(0 0% 30% / 0.5)",
+        filter: active ? "drop-shadow(0 0 8px hsl(45 100% 50% / 0.6))" : "none",
       }}
     />
     {/* Traveling beam */}
     {active && (
-      <div
-        className="absolute inset-0 overflow-hidden"
-        style={{ direction: "ltr" }}
-      >
+      <div className="absolute inset-0 overflow-hidden" style={{ direction: "ltr" }}>
         <div
           className="absolute top-1/2 -translate-y-1/2 w-8 h-[6px] rounded-full"
           style={{
-            background: "linear-gradient(90deg, transparent, hsl(45 100% 65% / 0.95), hsl(45 100% 50% / 0.7), transparent)",
+            background:
+              "linear-gradient(90deg, transparent, hsl(45 100% 65% / 0.95), hsl(45 100% 50% / 0.7), transparent)",
             filter: "blur(1px)",
             animation: "arrowBeamRTL 1.2s ease-in-out infinite",
           }}
@@ -94,21 +86,15 @@ const RowConnector = ({ active }: { active: boolean }) => (
           background: active
             ? "linear-gradient(180deg, hsl(45 100% 50% / 0.85), hsl(45 100% 45% / 0.4))"
             : "hsl(0 0% 25% / 0.4)",
-          boxShadow: active
-            ? "0 0 16px hsl(45 100% 50% / 0.45), 0 0 6px hsl(45 100% 50% / 0.25)"
-            : "none",
+          boxShadow: active ? "0 0 16px hsl(45 100% 50% / 0.45), 0 0 6px hsl(45 100% 50% / 0.25)" : "none",
         }}
       />
       {/* Arrowhead */}
       <div
         className="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[10px] transition-all duration-400"
         style={{
-          borderTopColor: active
-            ? "hsl(45 100% 50% / 0.9)"
-            : "hsl(0 0% 30% / 0.4)",
-          filter: active
-            ? "drop-shadow(0 0 8px hsl(45 100% 50% / 0.5))"
-            : "none",
+          borderTopColor: active ? "hsl(45 100% 50% / 0.9)" : "hsl(0 0% 30% / 0.4)",
+          filter: active ? "drop-shadow(0 0 8px hsl(45 100% 50% / 0.5))" : "none",
         }}
       />
       {/* Traveling beam vertical */}
@@ -173,7 +159,8 @@ const ModuleCard = ({
         <div
           className="absolute inset-0"
           style={{
-            background: "conic-gradient(from var(--border-angle, 0deg), transparent 0%, hsl(45 100% 50% / 0.9) 15%, hsl(45 100% 60% / 1) 25%, transparent 40%, transparent 60%, hsl(45 100% 50% / 0.6) 75%, transparent 90%)",
+            background:
+              "conic-gradient(from var(--border-angle, 0deg), transparent 0%, hsl(45 100% 50% / 0.9) 15%, hsl(45 100% 60% / 1) 25%, transparent 40%, transparent 60%, hsl(45 100% 50% / 0.6) 75%, transparent 90%)",
             animation: isActive ? "borderTrace 1.5s linear infinite" : "none",
             filter: "blur(0.5px)",
           }}
@@ -182,7 +169,8 @@ const ModuleCard = ({
         <div
           className="absolute inset-0"
           style={{
-            background: "conic-gradient(from var(--border-angle, 0deg), transparent 0%, hsl(45 100% 50% / 0.3) 15%, transparent 35%, transparent 65%, hsl(45 100% 50% / 0.2) 80%, transparent 95%)",
+            background:
+              "conic-gradient(from var(--border-angle, 0deg), transparent 0%, hsl(45 100% 50% / 0.3) 15%, transparent 35%, transparent 65%, hsl(45 100% 50% / 0.2) 80%, transparent 95%)",
             animation: isActive ? "borderTrace 1.5s linear infinite" : "none",
             filter: "blur(6px)",
           }}
@@ -236,9 +224,7 @@ const ModuleCard = ({
               : isInFlow
                 ? "hsl(45 100% 50% / 0.65)"
                 : "hsl(45 100% 50% / 0.4)",
-            boxShadow: isActive
-              ? "0 0 16px hsl(45 100% 50% / 0.5), 0 0 4px hsl(45 100% 50% / 0.3)"
-              : "none",
+            boxShadow: isActive ? "0 0 16px hsl(45 100% 50% / 0.5), 0 0 4px hsl(45 100% 50% / 0.3)" : "none",
           }}
         />
 
@@ -256,12 +242,8 @@ const ModuleCard = ({
           STEP {m.num}
         </span>
 
-        <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">
-          {m.title}
-        </h3>
-        <p className="text-muted-foreground text-base md:text-lg leading-relaxed whitespace-pre-line">
-          {m.desc}
-        </p>
+        <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">{m.title}</h3>
+        <p className="text-muted-foreground text-base md:text-lg leading-relaxed whitespace-pre-line">{m.desc}</p>
       </div>
     </div>
   );
@@ -289,9 +271,7 @@ const MobileModuleCard = ({
       onClick={onTap}
       style={{
         opacity: isVisible ? 1 : 0,
-        transform: isVisible
-          ? isTapped ? "scale(1.02)" : "translateY(0)"
-          : "translateY(20px) scale(0.97)",
+        transform: isVisible ? (isTapped ? "scale(1.02)" : "translateY(0)") : "translateY(20px) scale(0.97)",
         transition: `opacity 0.5s ease-out ${delay}ms, transform 0.5s ease-out ${delay}ms`,
       }}
     >
@@ -303,7 +283,8 @@ const MobileModuleCard = ({
         <div
           className="absolute inset-0"
           style={{
-            background: "conic-gradient(from var(--border-angle, 0deg), transparent 0%, hsl(45 100% 50% / 0.8) 15%, hsl(45 100% 60% / 0.9) 25%, transparent 40%, transparent 65%, hsl(45 100% 50% / 0.5) 80%, transparent 95%)",
+            background:
+              "conic-gradient(from var(--border-angle, 0deg), transparent 0%, hsl(45 100% 50% / 0.8) 15%, hsl(45 100% 60% / 0.9) 25%, transparent 40%, transparent 65%, hsl(45 100% 50% / 0.5) 80%, transparent 95%)",
             animation: isTapped ? "borderTrace 1.5s linear infinite" : "none",
             filter: "blur(0.5px)",
           }}
@@ -313,12 +294,8 @@ const MobileModuleCard = ({
       <div
         className="relative rounded-2xl p-5 transition-all duration-400"
         style={{
-          background: isTapped
-            ? "hsl(0 0% 13% / 0.98)"
-            : "hsl(0 0% 11% / 0.8)",
-          border: isTapped
-            ? "2px solid hsl(45 100% 50% / 0.6)"
-            : "1px solid hsl(0 0% 22% / 0.5)",
+          background: isTapped ? "hsl(0 0% 13% / 0.98)" : "hsl(0 0% 11% / 0.8)",
+          border: isTapped ? "2px solid hsl(45 100% 50% / 0.6)" : "1px solid hsl(0 0% 22% / 0.5)",
           borderRadius: "1rem",
           boxShadow: isTapped
             ? "0 0 40px hsl(45 100% 50% / 0.15), 0 6px 24px hsl(0 0% 0% / 0.3)"
@@ -376,7 +353,7 @@ const DeliverablesSection = () => {
           observer.disconnect();
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.15 },
     );
     if (gridRef.current) observer.observe(gridRef.current);
     return () => observer.disconnect();
@@ -395,8 +372,7 @@ const DeliverablesSection = () => {
 
   const isInFlow = (index: number) => hoveredIndex !== null && index >= hoveredIndex;
   const isActive = (index: number) => hoveredIndex === index;
-  const isArrowActive = (afterIndex: number) =>
-    hoveredIndex !== null && afterIndex >= hoveredIndex;
+  const isArrowActive = (afterIndex: number) => hoveredIndex !== null && afterIndex >= hoveredIndex;
 
   const row1 = modules.slice(0, 3);
   const row2 = modules.slice(3, 6);
@@ -463,9 +439,7 @@ const DeliverablesSection = () => {
                 onHover={() => handleCardHover(i)}
                 onLeave={handleCardLeave}
               />
-              {i < 2 && (
-                <FlowArrow active={isArrowActive(i)} />
-              )}
+              {i < 2 && <FlowArrow active={isArrowActive(i)} />}
             </div>
           ))}
 
@@ -484,9 +458,7 @@ const DeliverablesSection = () => {
                 onHover={() => handleCardHover(i + 3)}
                 onLeave={handleCardLeave}
               />
-              {i < 2 && (
-                <FlowArrow active={isArrowActive(i + 3)} />
-              )}
+              {i < 2 && <FlowArrow active={isArrowActive(i + 3)} />}
             </div>
           ))}
         </div>
@@ -510,21 +482,19 @@ const DeliverablesSection = () => {
                     style={{
                       width: "4px",
                       height: "1.5rem",
-                      background: (mobileTapped === i || mobileAutoFlow)
-                        ? "linear-gradient(180deg, hsl(45 100% 50% / 0.6), hsl(45 100% 50% / 0.15))"
-                        : "hsl(0 0% 25% / 0.4)",
-                      boxShadow: (mobileTapped === i || mobileAutoFlow)
-                        ? "0 0 12px hsl(45 100% 50% / 0.3)"
-                        : "none",
+                      background:
+                        mobileTapped === i || mobileAutoFlow
+                          ? "linear-gradient(180deg, hsl(45 100% 50% / 0.6), hsl(45 100% 50% / 0.15))"
+                          : "hsl(0 0% 25% / 0.4)",
+                      boxShadow: mobileTapped === i || mobileAutoFlow ? "0 0 12px hsl(45 100% 50% / 0.3)" : "none",
                     }}
                   >
                     {/* Arrow tip */}
                     <div
                       className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-t-[7px] transition-all duration-500"
                       style={{
-                        borderTopColor: (mobileTapped === i || mobileAutoFlow)
-                          ? "hsl(45 100% 50% / 0.6)"
-                          : "hsl(0 0% 30% / 0.3)",
+                        borderTopColor:
+                          mobileTapped === i || mobileAutoFlow ? "hsl(45 100% 50% / 0.6)" : "hsl(0 0% 30% / 0.3)",
                       }}
                     />
                   </div>
@@ -545,20 +515,14 @@ const DeliverablesSection = () => {
               background: ctaGlow
                 ? "linear-gradient(180deg, hsl(45 100% 50% / 0.85), hsl(45 100% 45% / 0.3))"
                 : "hsl(0 0% 25% / 0.3)",
-              boxShadow: ctaGlow
-                ? "0 0 18px hsl(45 100% 50% / 0.4), 0 0 6px hsl(45 100% 50% / 0.2)"
-                : "none",
+              boxShadow: ctaGlow ? "0 0 18px hsl(45 100% 50% / 0.4), 0 0 6px hsl(45 100% 50% / 0.2)" : "none",
             }}
           />
           <div
             className="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[10px] transition-all duration-500"
             style={{
-              borderTopColor: ctaGlow
-                ? "hsl(45 100% 50% / 0.9)"
-                : "hsl(0 0% 30% / 0.3)",
-              filter: ctaGlow
-                ? "drop-shadow(0 0 10px hsl(45 100% 50% / 0.5))"
-                : "none",
+              borderTopColor: ctaGlow ? "hsl(45 100% 50% / 0.9)" : "hsl(0 0% 30% / 0.3)",
+              filter: ctaGlow ? "drop-shadow(0 0 10px hsl(45 100% 50% / 0.5))" : "none",
             }}
           />
           {/* Traveling beam */}
@@ -591,18 +555,14 @@ const DeliverablesSection = () => {
           size="lg"
           className="text-base md:text-lg px-8 py-4 md:px-12 md:py-5 transition-all duration-500"
           style={{
-            boxShadow: ctaGlow
-              ? "0 0 40px hsl(45 100% 50% / 0.3), 0 0 80px hsl(45 100% 50% / 0.12)"
-              : undefined,
+            boxShadow: ctaGlow ? "0 0 40px hsl(45 100% 50% / 0.3), 0 0 80px hsl(45 100% 50% / 0.12)" : undefined,
             animation: ctaGlow ? "ctaPulse 2s ease-in-out infinite" : "none",
           }}
           onClick={scrollToForm}
         >
           אני רוצה להפסיק להתחיל מחדש
         </Button>
-        <span className="text-muted-foreground text-xs md:text-sm">
-          שלב ראשון לתהליך אמיתי.
-        </span>
+        <span className="text-muted-foreground text-xs md:text-sm">שלב ראשון לתהליך אמיתי.</span>
       </div>
     </SectionWrapper>
   );
