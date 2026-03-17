@@ -65,7 +65,7 @@ const FitSection = () => {
       {/* CTA */}
       <div className="text-center">
         <Button variant="goldOutline" size="lg" onClick={scrollToForm}>
-          אני רוצה להפסיק להתחיל מחדש
+          מגיע לי להעלות שלב בחיים
         </Button>
       </div>
     </SectionWrapper>
