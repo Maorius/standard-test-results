@@ -22,6 +22,7 @@ const Index = () => {
         <CuriosityHookSection />
         <StandardTestSection />
         <PainSection />
+        <BioSection />
         <ThreeEnginesSection />
         <DeliverablesSection />
         {/* <ProtocolSection /> */}
