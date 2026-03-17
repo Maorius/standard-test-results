@@ -111,20 +111,6 @@ const FinalCtaFormSection = () => {
           </form>
         </>
       )}
-
-      {/* <div className="mt-16 flex flex-col md:flex-row items-center gap-8 max-w-2xl mx-auto">
-        <img
-          src="/images/matan-bio.jpg"
-          alt="מתן ברוך"
-          className="w-32 h-32 rounded-full object-cover border-2 border-primary/30"
-        />
-        <div>
-          <h3 className="text-xl font-bold mb-2">מתן ברוך</h3>
-          <p className="text-muted-foreground leading-relaxed">
-            מאמן כושר ותזונה בשילוב NLP. עוזר לאנשים שיודעים מה צריך לעשות — אבל לא עושים.
-          </p>
-        </div>
-      </div> */}
     </SectionWrapper>
   );
 };
