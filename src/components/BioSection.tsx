@@ -62,7 +62,7 @@ const BioSection = () => {
           )}
         >
           {/* Circle frame with portrait breaking out */}
-          <div className="relative w-52 h-52 md:w-64 md:h-64 lg:w-72 lg:h-72 mb-10 md:mb-12">
+          <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 mb-10 md:mb-12">
             {/* Glow ring */}
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 via-transparent to-primary/10 blur-xl scale-110" />
             {/* Border ring */}
@@ -75,12 +75,12 @@ const BioSection = () => {
                 src="/images/matan-bio.png"
                 alt="מתן ברוך"
                 className={cn(
-                  "w-[115%] max-w-none object-cover object-top -translate-y-[12%] transition-all duration-1000 delay-200",
+                  "w-[130%] max-w-none object-cover object-top -translate-y-[18%] transition-all duration-1000 delay-200",
                   sectionVisible
                     ? "opacity-100 translate-x-0"
                     : "opacity-0 translate-y-4"
                 )}
-                style={{ clipPath: "ellipse(50% 65% at 50% 55%)" }}
+                style={{ clipPath: "ellipse(48% 62% at 50% 52%)" }}
               />
             </div>
           </div>
@@ -148,7 +148,7 @@ const BioSection = () => {
                   : "opacity-0 md:translate-x-8"
               )}
             >
-              <div className="relative w-44 h-56 md:w-48 md:h-60 rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.5)] border border-border/50">
+              <div className="relative w-52 h-64 md:w-64 md:h-80 lg:w-72 lg:h-[22rem] rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.5)] border border-border/50">
                 <img
                   src="/images/matan-childhood.jpg"
                   alt="מתן בילדותו"
@@ -191,7 +191,7 @@ const BioSection = () => {
                   : "opacity-0 md:-translate-x-8"
               )}
             >
-              <div className="relative w-44 h-56 md:w-48 md:h-60 rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.5)] border border-border/50">
+              <div className="relative w-52 h-64 md:w-64 md:h-80 lg:w-72 lg:h-[22rem] rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.5)] border border-border/50">
                 <img
                   src="/images/matan-glowup.jpg"
                   alt="מתן היום"
