@@ -131,7 +131,7 @@ const BioSection = () => {
               )}
             >
               <div className="relative w-44 h-56 md:w-48 md:h-60 rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.5)] border border-border/50">
-                <img src="/images/matan-childhood.jpg" alt="מתן בילדותו" className="w-full h-full object-cover" />
+                <img src="public/images/matan-childhood.jpg" alt="מתן בילדותו" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
               </div>
               <p className="text-muted-foreground text-sm mt-3 italic">"פעם זה היה אני."</p>
@@ -167,7 +167,7 @@ const BioSection = () => {
               )}
             >
               <div className="relative w-44 h-56 md:w-48 md:h-60 rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.5)] border border-border/50">
-                <img src="/images/matan-glowup.jpg" alt="מתן היום" className="w-full h-full object-cover" />
+                <img src="public/images/matan-glowup.jpg" alt="מתן היום" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
               </div>
               <p className="text-muted-foreground text-sm mt-3 italic">"השינוי לא קרה ביום — הוא נבנה בתהליך."</p>
