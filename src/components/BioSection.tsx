@@ -318,7 +318,7 @@ const BioSection = () => {
       <div className="container mx-auto max-w-6xl px-5 md:px-8 lg:px-16 pb-20 md:pb-28 lg:pb-36">
         <div className="text-center mt-14 md:mt-20 mb-10 md:mb-14">
           <p className="text-foreground text-lg md:text-2xl lg:text-3xl font-bold leading-snug max-w-2xl mx-auto">
-            כי בסוף זה לא רק לרדת במשקל או להתחטב —
+            כי בסוף זה לא רק לרדת במשקל או להתחטב
             <br />
             <span className="text-primary">זה להפסיק לחיות קטן בתוך הגוף של עצמך.</span>
           </p>
