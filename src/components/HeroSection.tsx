@@ -41,7 +41,7 @@ const HeroSection = () => {
           <Button variant="gold" size="xl" onClick={scrollToForm} className="text-lg px-12">
             אני רוצה להפסיק להתחיל מחדש
           </Button>
-          <p className="text-muted-foreground text-base">בדיקה קצרה. שיחה. ואז מתחילים לעבוד באמת.</p>
+          <p className="text-muted-foreground text-base">שיחת איפיון 5-10 דק • ללא התחייבות</p>
         </div>
       </div>
     </section>
