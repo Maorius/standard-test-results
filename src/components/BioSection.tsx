@@ -191,7 +191,7 @@ const BioSection = () => {
                   : "opacity-0 md:-translate-x-8"
               )}
             >
-              <div className="relative w-44 h-56 md:w-48 md:h-60 rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.5)] border border-border/50">
+              <div className="relative w-52 h-64 md:w-64 md:h-80 lg:w-72 lg:h-[22rem] rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.5)] border border-border/50">
                 <img
                   src="/images/matan-glowup.jpg"
                   alt="מתן היום"
