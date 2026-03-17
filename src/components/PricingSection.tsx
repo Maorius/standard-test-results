@@ -41,10 +41,10 @@ const PricingSection = () => {
 
       {/* Framing */}
       <div className="text-center max-w-2xl mx-auto mb-14 md:mb-16 space-y-1">
-        <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">אתה לא בוחר &lsquo;חבילה&rsquo;.</p>
-        <p className="text-foreground text-lg md:text-xl font-semibold leading-relaxed">
-          אתה בוחר איך להיכנס לתהליך — וכמה חזק להחזיק אותו.
+        <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
+          זה הרגע שבו זה או נשאר &lsquo;כמו שזה&rsquo;.
         </p>
+        <p className="text-foreground text-lg md:text-xl font-semibold leading-relaxed">או שאתה מתחיל לזוז באמת.</p>
       </div>
 
       {/* Cards */}
