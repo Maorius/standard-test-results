@@ -36,6 +36,34 @@ const modules = [
   },
 ];
 
+/** Thin horizontal arrow between cards in a row (desktop only) */
+const FlowArrow = ({ delay }: { delay: number }) => (
+  <div
+    className="hidden lg:flex items-center justify-center -mx-2 self-center"
+    style={{ animationDelay: `${delay}ms` }}
+  >
+    <div className="w-6 h-[1px] bg-primary/20" />
+    <div className="w-0 h-0 border-t-[3px] border-t-transparent border-b-[3px] border-b-transparent border-r-[5px] border-r-primary/25 rotate-180" />
+  </div>
+);
+
+/** Thin vertical connector between rows (desktop only) */
+const RowConnector = () => (
+  <div className="hidden lg:flex col-span-full justify-center -my-1">
+    <div className="flex flex-col items-center gap-0">
+      <div className="h-5 w-[1px] bg-primary/15" />
+      <div className="w-0 h-0 border-l-[3px] border-l-transparent border-r-[3px] border-r-transparent border-t-[5px] border-t-primary/20" />
+    </div>
+  </div>
+);
+
+/** Vertical flow line for mobile between stacked cards */
+const MobileFlowLine = () => (
+  <div className="flex lg:hidden justify-center -my-1">
+    <div className="h-5 w-[1px] bg-primary/15" />
+  </div>
+);
+
 const ModuleCard = ({
   m,
   index,
@@ -45,113 +73,41 @@ const ModuleCard = ({
   index: number;
   isVisible: boolean;
 }) => {
-  const delay = index * 150;
+  const delay = index * 120;
 
   return (
     <div
-      className="group relative bg-card/90 border-2 border-border/60 rounded-2xl p-5 md:p-7 hover:border-primary/50 transition-all duration-500 hover:shadow-[0_0_40px_hsl(45,100%,50%,0.12)] overflow-hidden"
+      className="group relative bg-card/80 border border-border/50 rounded-2xl p-5 md:p-7 hover:border-primary/30 transition-all duration-500 hover:shadow-[0_0_30px_hsl(45,100%,50%,0.06)]"
       style={{
         opacity: isVisible ? 1 : 0,
         transform: isVisible
           ? "translateY(0) scale(1)"
-          : "translateY(32px) scale(0.94)",
-        transition: `opacity 0.7s ease-out ${delay}ms, transform 0.7s ease-out ${delay}ms`,
+          : "translateY(24px) scale(0.97)",
+        transition: `opacity 0.6s ease-out ${delay}ms, transform 0.6s ease-out ${delay}ms`,
       }}
     >
-      {/* Large background number */}
-      <span className="absolute -top-2 left-3 text-7xl md:text-8xl font-black font-mono text-primary/[0.07] select-none leading-none group-hover:text-primary/[0.15] transition-colors duration-500 pointer-events-none">
+      {/* Large step number */}
+      <span className="absolute top-3 left-4 text-3xl md:text-4xl font-black font-mono tracking-tighter text-primary/[0.08] select-none leading-none group-hover:text-primary/[0.14] transition-colors duration-500">
         {m.num}
       </span>
 
-      {/* Step badge with accent dot */}
-      <div className="flex items-center gap-2 mb-3 relative z-10">
-        <div className="w-2.5 h-2.5 rounded-full bg-primary/60 group-hover:bg-primary group-hover:shadow-[0_0_8px_hsl(45,100%,50%,0.5)] transition-all duration-300" />
-        <span className="text-xs md:text-sm font-mono tracking-widest text-primary/50 group-hover:text-primary/80 transition-colors duration-300 font-bold">
-          STEP {m.num}
-        </span>
-      </div>
-
       {/* Accent bar */}
-      <div className="w-10 h-[3px] bg-primary/60 mb-4 group-hover:w-16 group-hover:bg-primary transition-all duration-300 rounded-full" />
+      <div className="w-8 h-[2px] bg-primary/50 mb-4 group-hover:w-12 group-hover:bg-primary/80 transition-all duration-300" />
 
-      <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2 relative z-10">
+      {/* Inline step badge */}
+      <span className="inline-block text-[10px] md:text-xs font-mono tracking-widest text-primary/40 mb-2 group-hover:text-primary/60 transition-colors duration-300">
+        STEP {m.num}
+      </span>
+
+      <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">
         {m.title}
       </h3>
-      <p className="text-muted-foreground text-base md:text-lg leading-relaxed whitespace-pre-line relative z-10">
+      <p className="text-muted-foreground text-base md:text-lg leading-relaxed whitespace-pre-line">
         {m.desc}
       </p>
-
-      {/* Bottom glow on hover */}
-      <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-t from-primary/0 group-hover:from-primary/20 transition-all duration-500 rounded-b-2xl" />
     </div>
   );
 };
-
-/** Horizontal flow arrow between cards (desktop) */
-const HorizontalArrow = ({
-  isVisible,
-  delay,
-}: {
-  isVisible: boolean;
-  delay: number;
-}) => (
-  <div
-    className="hidden lg:flex items-center justify-center self-center"
-    style={{
-      opacity: isVisible ? 1 : 0,
-      transition: `opacity 0.5s ease-out ${delay}ms`,
-    }}
-  >
-    <div className="flex items-center gap-0">
-      <div className="w-8 h-[2px] bg-gradient-to-l from-primary/50 to-primary/15 rounded-full shadow-[0_0_6px_hsl(45,100%,50%,0.15)]" />
-      <div className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-r-[8px] border-r-primary/50 rotate-180 drop-shadow-[0_0_4px_hsl(45,100%,50%,0.3)]" />
-    </div>
-  </div>
-);
-
-/** Vertical connector between rows (desktop) */
-const VerticalConnector = ({
-  isVisible,
-  delay,
-}: {
-  isVisible: boolean;
-  delay: number;
-}) => (
-  <div
-    className="hidden lg:flex col-span-full justify-center py-1"
-    style={{
-      opacity: isVisible ? 1 : 0,
-      transition: `opacity 0.6s ease-out ${delay}ms`,
-    }}
-  >
-    <div className="flex flex-col items-center gap-0">
-      <div className="h-8 w-[2px] bg-gradient-to-b from-primary/40 to-primary/20 rounded-full shadow-[0_0_6px_hsl(45,100%,50%,0.12)]" />
-      <div className="w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-t-[8px] border-t-primary/40 drop-shadow-[0_0_4px_hsl(45,100%,50%,0.25)]" />
-    </div>
-  </div>
-);
-
-/** Mobile vertical connector */
-const MobileConnector = ({
-  isVisible,
-  delay,
-}: {
-  isVisible: boolean;
-  delay: number;
-}) => (
-  <div
-    className="flex lg:hidden justify-center py-0.5"
-    style={{
-      opacity: isVisible ? 1 : 0,
-      transition: `opacity 0.5s ease-out ${delay}ms`,
-    }}
-  >
-    <div className="flex flex-col items-center gap-0">
-      <div className="h-6 w-[2px] bg-gradient-to-b from-primary/35 to-primary/15 rounded-full shadow-[0_0_4px_hsl(45,100%,50%,0.1)]" />
-      <div className="w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-t-[6px] border-t-primary/30" />
-    </div>
-  </div>
-);
 
 const DeliverablesSection = () => {
   const gridRef = useRef<HTMLDivElement>(null);
@@ -165,12 +121,13 @@ const DeliverablesSection = () => {
           observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.15 }
     );
     if (gridRef.current) observer.observe(gridRef.current);
     return () => observer.disconnect();
   }, []);
 
+  // Split modules into two rows for desktop flow layout
   const row1 = modules.slice(0, 3);
   const row2 = modules.slice(3, 6);
 
@@ -191,25 +148,25 @@ const DeliverablesSection = () => {
         לא ״מה כלול״. מה מחזיק את זה בפועל.
       </p>
 
-      {/* Grid */}
+      {/* Module Grid – Desktop: 3-col with flow arrows */}
       <div ref={gridRef} className="max-w-5xl mx-auto mb-10 md:mb-14">
-        {/* Desktop: 3-col with bold arrows */}
+        {/* Desktop layout with arrows */}
         <div className="hidden lg:grid lg:grid-cols-[1fr_auto_1fr_auto_1fr] gap-y-0 items-stretch">
           {/* Row 1 */}
           {row1.map((m, i) => (
             <>
               <ModuleCard key={m.num} m={m} index={i} isVisible={isVisible} />
-              {i < 2 && (
-                <HorizontalArrow
-                  isVisible={isVisible}
-                  delay={i * 150 + 100}
-                />
-              )}
+              {i < 2 && <FlowArrow delay={i * 120 + 60} />}
             </>
           ))}
 
           {/* Row connector */}
-          <VerticalConnector isVisible={isVisible} delay={450} />
+          <div className="col-span-full flex justify-center py-2">
+            <div className="flex flex-col items-center">
+              <div className="h-6 w-[1px] bg-primary/15" />
+              <div className="w-0 h-0 border-l-[3px] border-l-transparent border-r-[3px] border-r-transparent border-t-[5px] border-t-primary/20" />
+            </div>
+          </div>
 
           {/* Row 2 */}
           {row2.map((m, i) => (
@@ -220,26 +177,21 @@ const DeliverablesSection = () => {
                 index={i + 3}
                 isVisible={isVisible}
               />
-              {i < 2 && (
-                <HorizontalArrow
-                  isVisible={isVisible}
-                  delay={(i + 3) * 150 + 100}
-                />
-              )}
+              {i < 2 && <FlowArrow delay={(i + 3) * 120 + 60} />}
             </>
           ))}
         </div>
 
-        {/* Mobile / Tablet: stacked with vertical connectors */}
-        <div className="flex flex-col lg:hidden">
+        {/* Mobile / Tablet layout – stacked with vertical flow lines */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:hidden">
           {modules.map((m, i) => (
-            <div key={m.num}>
+            <div key={m.num} className="contents sm:block">
               <ModuleCard m={m} index={i} isVisible={isVisible} />
+              {/* Vertical connector on mobile only (single column) */}
               {i < modules.length - 1 && (
-                <MobileConnector
-                  isVisible={isVisible}
-                  delay={i * 150 + 100}
-                />
+                <div className="flex sm:hidden justify-center -my-1">
+                  <div className="h-4 w-[1px] bg-primary/15" />
+                </div>
               )}
             </div>
           ))}
