@@ -8,16 +8,21 @@ const plans = [
   {
     name: "CORE",
     duration: "3 חודשים",
-    tagline: "להיכנס לקצב ולהפסיק להיעלם.",
-    features: ["אונליין 3 חודשים", "חודש ראשון 1:1 פרונטלי", "תזונה + אימונים + שיחה שבועית + זמינות"],
+    tagline: "כניסה נכונה לתהליך.",
+    description: "לבנות בסיס.\nלהיכנס לקצב.\nלהפסיק להתחיל מחדש.",
+    features: [
+      "אונליין 3 חודשים",
+      "חודש ראשון 1:1 פרונטלי",
+      "תזונה + אימונים + שיחה שבועית + זמינות",
+    ],
     price: "1,970 ₪",
-    cta: "בדיקת התאמה למסלול CORE",
     recommended: false,
   },
   {
     name: "ELITE",
     duration: "6 חודשים",
-    tagline: "שינוי יציב שמחזיק.",
+    tagline: "להיכנס עמוק ולעשות שינוי שמחזיק.",
+    description: "יותר זמן.\nיותר החזקה.\nיותר מקום לשינוי אמיתי.",
     features: [
       "אונליין 6 חודשים",
       "חודש ראשון + חודש שלישי 1:1 פרונטלי",
@@ -25,7 +30,6 @@ const plans = [
       "תזונה + אימונים + שיחה שבועית + זמינות",
     ],
     price: "3,840 ₪",
-    cta: "בדיקת התאמה למסלול ELITE",
     recommended: true,
   },
 ];
@@ -33,17 +37,28 @@ const plans = [
 const PricingSection = () => {
   return (
     <SectionWrapper className="border-t border-border">
-      <h2 className="text-2xl md:text-4xl font-black text-center mb-12">המסלול שמתאים למטרה שלך</h2>
+      {/* Headline */}
+      <h2 className="text-3xl md:text-5xl font-black text-center mb-4">
+        שני מסלולים. אותה שיטה. עומק אחר.
+      </h2>
 
+      {/* Framing line */}
+      <p className="text-center text-muted-foreground text-base md:text-lg max-w-xl mx-auto mb-12 leading-relaxed">
+        אתה לא בוחר &lsquo;חבילה&rsquo;.
+        <br />
+        אתה בוחר איך להיכנס לתהליך — וכמה חזק להחזיק אותו.
+      </p>
+
+      {/* Cards */}
       <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
         {plans.map((plan) => (
           <div
             key={plan.name}
             className={cn(
-              "relative rounded-xl p-6 md:p-8 border transition-colors",
+              "relative rounded-xl p-6 md:p-8 border transition-all duration-300",
               plan.recommended
-                ? "border-primary bg-card shadow-[0_0_40px_hsl(45,100%,50%,0.08)]"
-                : "border-border bg-card",
+                ? "border-primary bg-card shadow-[0_0_40px_hsl(45,100%,50%,0.1)]"
+                : "border-border bg-card"
             )}
           >
             {plan.recommended && (
@@ -53,11 +68,28 @@ const PricingSection = () => {
               </div>
             )}
 
+            {/* Plan title */}
             <h3 className="text-xl font-black mb-1">
-              {plan.name} <span className="text-muted-foreground font-normal text-base">({plan.duration})</span>
+              {plan.name}{" "}
+              <span className="text-muted-foreground font-normal text-base">
+                ({plan.duration})
+              </span>
             </h3>
-            <p className="text-muted-foreground mb-6">{plan.tagline}</p>
 
+            {/* Tagline */}
+            <p className="text-primary font-semibold text-sm mb-3">
+              {plan.tagline}
+            </p>
+
+            {/* Description */}
+            <p className="text-muted-foreground text-sm leading-relaxed mb-5 whitespace-pre-line">
+              {plan.description}
+            </p>
+
+            {/* Divider */}
+            <div className="h-px bg-border mb-5" />
+
+            {/* Features */}
             <ul className="space-y-3 mb-8">
               {plan.features.map((f) => (
                 <li key={f} className="flex items-start gap-3">
@@ -67,17 +99,25 @@ const PricingSection = () => {
               ))}
             </ul>
 
-            <p className="text-3xl font-black text-primary mb-6">{plan.price}</p>
+            {/* Price */}
+            <p className="text-3xl font-black text-primary">{plan.price}</p>
           </div>
         ))}
       </div>
 
+      {/* CTA */}
       <div className="text-center mt-10">
         <Button variant="gold" size="xl" onClick={scrollToForm}>
           אני רוצה להפסיק להתחיל מחדש
         </Button>
-        <p className="text-muted-foreground text-sm mt-3">המסלול נקבע בשיחה קצרה לפי המטרה שלך.</p>
       </div>
+
+      {/* Bottom framing line */}
+      <p className="text-center text-muted-foreground text-sm mt-6 max-w-md mx-auto leading-relaxed">
+        המסלול נקבע בשיחה קצרה לפי המטרה שלך —
+        <br />
+        לא לפי מה שנראה &lsquo;יותר יקר&rsquo;.
+      </p>
     </SectionWrapper>
   );
 };
