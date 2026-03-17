@@ -77,16 +77,29 @@ const FinalCtaFormSection = () => {
 
             <div>
               <label className="block text-base md:text-lg font-semibold text-foreground mb-2">שם מלא</label>
-              <input type="text" required placeholder="השם שלך" className={inputClass + " text-base md:text-lg py-3.5"} />
+              <input
+                type="text"
+                required
+                placeholder="השם שלך"
+                className={inputClass + " text-base md:text-lg py-3.5"}
+              />
             </div>
 
             <div>
               <label className="block text-base md:text-lg font-semibold text-foreground mb-2">טלפון</label>
-              <input type="tel" required placeholder="050-0000000" className={inputClass + " text-base md:text-lg py-3.5"} dir="rtl" />
+              <input
+                type="tel"
+                required
+                placeholder="050-0000000"
+                className={inputClass + " text-base md:text-lg py-3.5"}
+                dir="rtl"
+              />
             </div>
 
             <div>
-              <label className="block text-base md:text-lg font-semibold text-foreground mb-2">מה הכי עוצר אותך כרגע?</label>
+              <label className="block text-base md:text-lg font-semibold text-foreground mb-2">
+                מה הכי עוצר אותך כרגע?
+              </label>
               <textarea rows={2} placeholder="כתוב בקצרה..." className={inputClass + " text-base md:text-lg py-3.5"} />
             </div>
 
@@ -99,7 +112,7 @@ const FinalCtaFormSection = () => {
         </>
       )}
 
-      <div className="mt-16 flex flex-col md:flex-row items-center gap-8 max-w-2xl mx-auto">
+      {/* <div className="mt-16 flex flex-col md:flex-row items-center gap-8 max-w-2xl mx-auto">
         <img
           src="/images/matan-bio.jpg"
           alt="מתן ברוך"
@@ -111,7 +124,7 @@ const FinalCtaFormSection = () => {
             מאמן כושר ותזונה בשילוב NLP. עוזר לאנשים שיודעים מה צריך לעשות — אבל לא עושים.
           </p>
         </div>
-      </div>
+      </div> */}
     </SectionWrapper>
   );
 };
