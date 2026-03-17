@@ -36,9 +36,9 @@ const FAQSection = () => {
   return (
     <SectionWrapper className="border-t border-border">
       <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-center mb-14 md:mb-16 leading-tight max-w-4xl mx-auto">
-        השאלות שבדרך כלל עוצרות אנשים
+        שאלות נפוצות
         <br />
-        <span className="text-gold-gradient">רגע לפני שהם מתחילים.</span>
+        <span className="text-gold-gradient">רגע לפני שמתחילים.</span>
       </h2>
 
       <div className="max-w-3xl mx-auto space-y-4">
@@ -53,19 +53,14 @@ const FAQSection = () => {
               <ChevronDown
                 className={cn(
                   "h-5 w-5 text-muted-foreground shrink-0 transition-transform duration-300",
-                  open === i && "rotate-180"
+                  open === i && "rotate-180",
                 )}
               />
             </div>
             <div
-              className={cn(
-                "overflow-hidden transition-all duration-300",
-                open === i ? "max-h-60 mt-4" : "max-h-0"
-              )}
+              className={cn("overflow-hidden transition-all duration-300", open === i ? "max-h-60 mt-4" : "max-h-0")}
             >
-              <p className="text-muted-foreground text-base md:text-lg leading-relaxed whitespace-pre-line">
-                {faq.a}
-              </p>
+              <p className="text-muted-foreground text-base md:text-lg leading-relaxed whitespace-pre-line">{faq.a}</p>
             </div>
           </button>
         ))}
