@@ -103,7 +103,12 @@ const FinalCtaFormSection = () => {
               <textarea rows={2} placeholder="כתוב בקצרה..." className={inputClass + " text-base md:text-lg py-3.5"} />
             </div>
 
-            <Button variant="gold" size="xl" type="submit" className="w-full mt-2">
+            <Button
+              variant="gold"
+              size="xl"
+              type="submit"
+              className="w-full mt-2 whitespace-normal break-words leading-snug text-sm sm:text-base md:text-lg min-h-[3rem] h-auto py-3 px-4"
+            >
               אני רוצה להפסיק להתחיל מחדש
             </Button>
 
