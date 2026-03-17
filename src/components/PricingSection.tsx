@@ -34,76 +34,88 @@ const PricingSection = () => {
   return (
     <SectionWrapper className="border-t border-border">
       {/* Headline */}
-      <h2 className="text-3xl md:text-5xl font-black text-center mb-4">מסלול שמתאים למטרה שלך</h2>
+      {/* Headline */}
+      <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-center mb-6">
+        שני מסלולים. אותה שיטה.{" "}
+        <span className="text-gold-gradient">עומק אחר.</span>
+      </h2>
 
-      {/* Framing line */}
-      <p className="text-center text-muted-foreground text-base md:text-lg max-w-xl mx-auto mb-12 leading-relaxed">
-        זה הרגע שבו זה או &lsquo;נשאר כמו שזה&rsquo;.
-        <br />
-        או שאתה מתחיל לזוז באמת.
-      </p>
+      {/* Framing */}
+      <div className="text-center max-w-2xl mx-auto mb-14 md:mb-16 space-y-1">
+        <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
+          אתה לא בוחר &lsquo;חבילה&rsquo;.
+        </p>
+        <p className="text-foreground text-lg md:text-xl font-semibold leading-relaxed">
+          אתה בוחר איך להיכנס לתהליך — וכמה חזק להחזיק אותו.
+        </p>
+      </div>
 
       {/* Cards */}
-      <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+      <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
         {plans.map((plan) => (
           <div
             key={plan.name}
             className={cn(
-              "relative rounded-xl p-6 md:p-8 border transition-all duration-300",
+              "relative rounded-xl p-7 md:p-10 border transition-all duration-300",
               plan.recommended
                 ? "border-primary bg-card shadow-[0_0_40px_hsl(45,100%,50%,0.1)]"
                 : "border-border bg-card",
             )}
           >
             {plan.recommended && (
-              <div className="absolute -top-3 right-4 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
-                <Star className="h-3 w-3" />
+              <div className="absolute -top-3.5 right-5 bg-primary text-primary-foreground text-sm font-bold px-4 py-1 rounded-full flex items-center gap-1.5">
+                <Star className="h-3.5 w-3.5" />
                 מומלץ
               </div>
             )}
 
             {/* Plan title */}
-            <h3 className="text-xl font-black mb-1">
-              {plan.name} <span className="text-muted-foreground font-normal text-base">({plan.duration})</span>
+            <h3 className="text-2xl md:text-3xl font-black mb-2">
+              {plan.name}{" "}
+              <span className="text-muted-foreground font-normal text-lg md:text-xl">
+                ({plan.duration})
+              </span>
             </h3>
 
             {/* Tagline */}
-            <p className="text-primary font-semibold text-sm mb-3">{plan.tagline}</p>
+            <p className="text-primary font-semibold text-base md:text-lg mb-4">{plan.tagline}</p>
 
             {/* Description */}
-            <p className="text-muted-foreground text-sm leading-relaxed mb-5 whitespace-pre-line">{plan.description}</p>
+            <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6 whitespace-pre-line">
+              {plan.description}
+            </p>
 
             {/* Divider */}
-            <div className="h-px bg-border mb-5" />
+            <div className="h-px bg-border mb-6" />
 
             {/* Features */}
-            <ul className="space-y-3 mb-8">
+            <ul className="space-y-4 mb-8">
               {plan.features.map((f) => (
                 <li key={f} className="flex items-start gap-3">
-                  <Check className="h-4 w-4 text-primary mt-1 shrink-0" />
-                  <span className="text-foreground text-sm">{f}</span>
+                  <Check className="h-5 w-5 text-primary mt-0.5 shrink-0" />
+                  <span className="text-foreground text-base md:text-lg">{f}</span>
                 </li>
               ))}
             </ul>
 
             {/* Price */}
-            <p className="text-3xl font-black text-primary">{plan.price}</p>
+            <p className="text-4xl md:text-5xl font-black text-primary">{plan.price}</p>
           </div>
         ))}
       </div>
 
       {/* CTA */}
-      <div className="text-center mt-10">
+      <div className="text-center mt-12 md:mt-14">
         <Button variant="gold" size="xl" onClick={scrollToForm}>
           אני רוצה להפסיק להתחיל מחדש
         </Button>
       </div>
 
       {/* Bottom framing line */}
-      <p className="text-center text-muted-foreground text-sm mt-6 max-w-md mx-auto leading-relaxed">
-        את המסלול בוחרים יחד
+      <p className="text-center text-muted-foreground/80 text-base md:text-lg mt-8 max-w-lg mx-auto leading-relaxed">
+        המסלול נקבע בשיחה קצרה לפי המטרה שלך —
         <br />
-        אחרי שמבינים מה באמת נכון לך.
+        לא לפי מה שנראה &lsquo;יותר יקר&rsquo;.
       </p>
     </SectionWrapper>
   );
