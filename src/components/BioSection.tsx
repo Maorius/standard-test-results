@@ -43,7 +43,7 @@ const slides = [
   {
     img: "/images/matan-glowup.jpg",
     alt: "מתן היום",
-    caption: "השינוי לא קרה ביום — הוא נבנה בתהליך.",
+    caption: "השינוי לא קרה ביום הוא נבנה בתהליך.",
     paragraphs: [
       <>
         השינוי האמיתי התחיל כשהבנתי ש
