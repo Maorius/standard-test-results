@@ -18,7 +18,7 @@ const Index = () => {
   return (
     <QuizProvider>
       <div className="min-h-screen bg-background text-foreground" dir="rtl">
-        {/* <StickyCtaBar /> */}
+        <StickyCtaBar />
         <HeroSection />
         <CuriosityHookSection />
         <StandardTestSection />
