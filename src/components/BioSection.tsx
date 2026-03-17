@@ -10,43 +10,172 @@ const trustBullets = [
   "היום מלווה גברים לבנות גוף, ביטחון ונוכחות",
 ];
 
+/* ─────────────────────────────────────────────
+   Slide data — keeps JSX lean
+───────────────────────────────────────────── */
+const slides = [
+  {
+    img: "/images/matan-childhood.jpg",
+    alt: "מתן בילדותו",
+    caption: "פעם זה היה אני.",
+    paragraphs: [
+      <>
+        <span className="text-foreground font-bold text-lg md:text-xl lg:text-2xl">אני מתן.</span>
+        <br />
+        <span className="text-foreground font-semibold">כל הילדות הייתי הילד השמן</span> — זה שנשאר הרבה פעמים לבד,
+        ולפעמים אפילו מוחרם.
+      </>,
+      <>
+        מבחוץ זה היה משקל.
+        <br />
+        מבפנים זה היה הרבה יותר מזה: בושה, חוסר ביטחון, ותחושה שאתה תקוע בתוך גרסה של עצמך שלא באמת משקפת מי שאתה יכול
+        להיות.
+      </>,
+      <>
+        באותם ימים, להשתנות הרגיש כמעט בלתי אפשרי.
+        <br />
+        אפילו לרוץ או לעלות במדרגות היה כבד.
+        <br />
+        והרעיון של ״להיכנס לכושר״ הרגיש כמו לוותר על כל מה שאני אוהב.
+      </>,
+    ],
+  },
+  {
+    img: "/images/matan-glowup.jpg",
+    alt: "מתן היום",
+    caption: "השינוי לא קרה ביום — הוא נבנה בתהליך.",
+    paragraphs: [
+      <>
+        השינוי האמיתי התחיל כשהבנתי ש
+        <span className="text-foreground font-semibold">לא צריך לחיות על קיצון כדי להשתנות.</span>
+      </>,
+      <>
+        לא צריך לסבול כדי להתקדם.
+        <br />
+        צריך דרך שאפשר להחזיק — בגוף, בהרגלים, ובראש.
+      </>,
+      <>
+        היום אני כבר לא אותו ילד.
+        <br />
+        אני חזק יותר, בטוח יותר, ואוהב את איך שאני נראה — בלי לוותר על החיים עצמם.
+      </>,
+      <>
+        והיום אני עוזר לגברים לעשות את אותו מעבר:
+        <br />
+        להרגיש טוב יותר בגוף שלהם, להפסיק לחיות במבוכה, ולבנות נוכחות שהם מרגישים ראויים לה.
+      </>,
+    ],
+  },
+];
+
+/* ─────────────────────────────────────────────
+   Helper — clamp a number between lo and hi
+───────────────────────────────────────────── */
+const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
+
+/* ─────────────────────────────────────────────
+   Reusable slide layout
+───────────────────────────────────────────── */
+const SlideContent = ({
+  slide,
+  style,
+  className,
+}: {
+  slide: (typeof slides)[0];
+  style?: React.CSSProperties;
+  className?: string;
+}) => (
+  <div
+    className={cn("w-full grid grid-cols-1 md:grid-cols-[auto_1fr] gap-8 md:gap-12 items-start", className)}
+    style={style}
+  >
+    {/* Image */}
+    <div className="flex flex-col items-center">
+      <div className="relative w-56 md:w-72 lg:w-80 rounded-xl overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.5)] border border-border/50">
+        <img src={slide.img} alt={slide.alt} className="w-full h-auto block" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent pointer-events-none" />
+      </div>
+      <p className="text-muted-foreground text-sm mt-3 italic text-center">"{slide.caption}"</p>
+    </div>
+
+    {/* Text */}
+    <div className="text-muted-foreground text-base md:text-lg lg:text-xl leading-relaxed space-y-5">
+      {slide.paragraphs.map((p, i) => (
+        <p key={i}>{p}</p>
+      ))}
+    </div>
+  </div>
+);
+
+/* ─────────────────────────────────────────────
+   Main component
+───────────────────────────────────────────── */
 const BioSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const childhoodRef = useRef<HTMLDivElement>(null);
-  const glowupRef = useRef<HTMLDivElement>(null);
+  const scrollTrackRef = useRef<HTMLDivElement>(null);
 
   const [sectionVisible, setSectionVisible] = useState(false);
-  const [childhoodVisible, setChildhoodVisible] = useState(false);
-  const [glowupVisible, setGlowupVisible] = useState(false);
+  // 0 = fully on slide 1 · 1 = fully on slide 2
+  const [slideProgress, setSlideProgress] = useState(0);
 
+  /* ── Entrance animation observer ── */
   useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-
-    const createObserver = (ref: React.RefObject<HTMLElement>, setter: (v: boolean) => void, threshold = 0.2) => {
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setter(true);
-            obs.disconnect();
-          }
-        },
-        { threshold },
-      );
-      if (ref.current) obs.observe(ref.current);
-      observers.push(obs);
-    };
-
-    createObserver(sectionRef, setSectionVisible, 0.1);
-    createObserver(childhoodRef, setChildhoodVisible, 0.3);
-    createObserver(glowupRef, setGlowupVisible, 0.3);
-
-    return () => observers.forEach((o) => o.disconnect());
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setSectionVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.05 },
+    );
+    if (sectionRef.current) obs.observe(sectionRef.current);
+    return () => obs.disconnect();
   }, []);
 
+  /* ── Scroll-progress driver ── */
+  useEffect(() => {
+    const handleScroll = () => {
+      const track = scrollTrackRef.current;
+      if (!track) return;
+      const rect = track.getBoundingClientRect();
+      const trackH = track.offsetHeight;
+      const vh = window.innerHeight;
+      const scrolled = -rect.top; // px scrolled into the track
+      const scrollable = trackH - vh; // total scrollable distance
+      setSlideProgress(clamp(scrolled / scrollable, 0, 1));
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // seed on mount
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  /* ── Derive per-slide opacity + vertical offset from progress ──
+   *
+   *  slide 1: fully visible 0 → 0.35, fades out 0.35 → 0.6
+   *  slide 2: invisible until 0.4, fades in 0.4 → 0.65, fully visible after
+   *
+   *  A small translateY gives a cinematic "lift" feel as each slide exits/enters.
+   */
+  const s1Opacity = clamp(1 - (slideProgress - 0.35) / 0.25, 0, 1);
+  const s1TranslateY = clamp((slideProgress - 0.35) / 0.25, 0, 1) * -24;
+
+  const s2Opacity = clamp((slideProgress - 0.4) / 0.25, 0, 1);
+  const s2TranslateY = clamp(1 - (slideProgress - 0.4) / 0.25, 0, 1) * 24;
+
+  const activeDot = slideProgress >= 0.5 ? 1 : 0;
+
   return (
-    <section ref={sectionRef} className="relative overflow-hidden px-5 py-20 md:px-8 md:py-28 lg:px-16 lg:py-36">
+    /*
+     * IMPORTANT: NO overflow-hidden on this <section>.
+     * position:sticky breaks the moment any ancestor carries overflow:hidden.
+     * The portrait's bottom-fade uses maskImage, not overflow clipping — safe.
+     */
+    <section ref={sectionRef} className="relative px-5 pt-20 md:pt-28 lg:pt-36">
       <div className="container mx-auto max-w-6xl">
-        {/* ===== 1. BIO TITLE – FIRST IN HIERARCHY ===== */}
+        {/* ══════════════════════════════════════════
+            1. BIO TITLE
+        ══════════════════════════════════════════ */}
         <div
           className={cn(
             "text-center mb-12 md:mb-16 transition-all duration-700",
@@ -58,33 +187,21 @@ const BioSection = () => {
           </h2>
         </div>
 
-        {/* ===== 2. PORTRAIT CIRCLE ===== */}
+        {/* ══════════════════════════════════════════
+            2. PORTRAIT CIRCLE — emerging from ring
+        ══════════════════════════════════════════ */}
         <div
           className={cn(
             "flex flex-col items-center mb-14 md:mb-20 transition-all duration-1000 delay-200",
             sectionVisible ? "opacity-100 scale-100" : "opacity-0 scale-95",
           )}
         >
-          {/*
-           * PORTRAIT LAYOUT — "emerging from the ring"
-           *
-           * The outer wrapper is intentionally TALLER than the circle so the
-           * portrait can rise above the ring boundary.  The circle dimensions
-           * are replicated only in the elements that need the circular shape
-           * (glow + frame), both anchored to the BOTTOM of the wrapper.
-           *
-           * Layer order (back → front):
-           *   z-0  – glow bloom (aligned to circle area at bottom)
-           *   z-10 – portrait image (anchored bottom-center, ascends freely)
-           *   z-20 – circle border ring + inner shadow (sits on top of image
-           *          exactly where they intersect, reinforcing the frame-front look)
-           *)
-           */}
+          {/* Outer wrapper taller than the circle so portrait can rise above it */}
           <div className="relative w-72 md:w-[22rem] lg:w-[26rem] h-[360px] md:h-[420px] lg:h-[500px] mb-10 md:mb-12">
-            {/* Glow bloom – lives behind everything, sized to the circle area */}
+            {/* z-0 – glow bloom anchored to circle area */}
             <div className="absolute bottom-0 inset-x-0 h-72 md:h-[22rem] lg:h-[26rem] rounded-full bg-gradient-to-br from-primary/20 via-transparent to-primary/10 blur-2xl scale-125 z-0 pointer-events-none" />
 
-            {/* Portrait – z-10, anchored to the bottom, free to emerge upward */}
+            {/* z-10 – portrait anchored bottom, emerges freely upward */}
             <img
               src="/images/matan-bio.png"
               alt="מתן ברוך"
@@ -101,18 +218,14 @@ const BioSection = () => {
               }}
             />
 
-            {/* Circle frame – z-20, on top of the portrait at the ring boundary.
-                Sized identically to the glow, anchored to the bottom so the ring
-                sits right where the portrait "exits" the circle. */}
+            {/* z-20 – ring frame + inner shadow, in front of portrait at intersection */}
             <div className="absolute bottom-0 inset-x-0 h-72 md:h-[22rem] lg:h-[26rem] z-20 pointer-events-none">
-              {/* Outer glow ring border */}
               <div className="absolute inset-0 rounded-full border-2 border-primary/30 shadow-[0_0_60px_hsl(45,100%,50%,0.10)]" />
-              {/* Inner shadow – anchors the portrait at the base of the circle */}
               <div className="absolute inset-0 rounded-full shadow-[inset_0_-40px_60px_rgba(0,0,0,0.55)]" />
             </div>
           </div>
 
-          {/* ===== 3. TRUST BULLETS ===== */}
+          {/* Trust bullets */}
           <div className="flex flex-col items-center gap-3 md:gap-4">
             {trustBullets.map((bullet, i) => (
               <div
@@ -131,144 +244,88 @@ const BioSection = () => {
             ))}
           </div>
         </div>
+      </div>
 
-        {/* ===== 4. BIO BODY ===== */}
-        <div className="max-w-4xl mx-auto">
-          {/* Paragraph 1 – intro */}
-          <div className="mb-8 md:mb-10 text-center md:text-right">
-            <p className="text-foreground text-lg md:text-xl lg:text-2xl leading-relaxed font-bold mb-1">אני מתן.</p>
-            <p className="text-muted-foreground text-base md:text-lg lg:text-xl leading-relaxed">
-              <span className="text-foreground font-semibold">כל הילדות הייתי הילד השמן</span> — זה שנשאר הרבה פעמים
-              לבד, ולפעמים אפילו מוחרם.
-            </p>
+      {/* ══════════════════════════════════════════
+          3. STICKY SCROLL TRACK — desktop (md+)
+          300vh = enter · dwell slide 1 · transition · dwell slide 2
+      ══════════════════════════════════════════ */}
+      <div ref={scrollTrackRef} className="hidden md:block" style={{ height: "300vh" }}>
+        <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden px-8 lg:px-16">
+          <div className="container mx-auto max-w-6xl w-full relative">
+            {/* Slide 1 — childhood */}
+            <SlideContent
+              slide={slides[0]}
+              className="absolute inset-0"
+              style={{
+                opacity: s1Opacity,
+                transform: `translateY(${s1TranslateY}px)`,
+                pointerEvents: activeDot === 0 ? "auto" : "none",
+              }}
+            />
+
+            {/* Slide 2 — glowup */}
+            <SlideContent
+              slide={slides[1]}
+              className="absolute inset-0"
+              style={{
+                opacity: s2Opacity,
+                transform: `translateY(${s2TranslateY}px)`,
+                pointerEvents: activeDot === 1 ? "auto" : "none",
+              }}
+            />
+
+            {/* Invisible spacer so the container holds natural height */}
+            <SlideContent slide={slides[0]} className="invisible" aria-hidden />
           </div>
 
-          {/* ===== Paragraph 2 + Childhood image =====
-           *
-           * Layout strategy (replaces CSS float):
-           *   mobile  → flex-col: image first, text below
-           *   desktop → CSS grid [1fr auto]: text in left column, image in right column
-           *
-           * Image uses w-full h-auto so it renders at its full natural proportions
-           * with no cropping — the rounded container clips only the corners.
-           *)
-           */}
-          <div className="mb-10 md:mb-14">
-            <div className="flex flex-col md:grid md:grid-cols-[1fr_auto] md:gap-10 md:items-start">
-              {/* Image – DOM-first so mobile shows it above the text */}
+          {/* Progress dots */}
+          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-3">
+            {slides.map((_, i) => (
               <div
-                ref={childhoodRef}
-                className={cn(
-                  "order-1 md:order-2 flex flex-col items-center mb-6 md:mb-0 transition-all duration-700",
-                  childhoodVisible ? "opacity-100 translate-x-0" : "opacity-0 md:translate-x-8",
-                )}
-              >
-                <div className="relative w-56 md:w-64 lg:w-72 rounded-xl overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.5)] border border-border/50">
-                  <img src="/images/matan-childhood.jpg" alt="מתן בילדותו" className="w-full h-auto block" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent pointer-events-none" />
-                </div>
-                <p className="text-muted-foreground text-sm mt-3 italic">"פעם זה היה אני."</p>
-              </div>
-
-              {/* Text */}
-              <div className="order-2 md:order-1 text-muted-foreground text-base md:text-lg lg:text-xl leading-relaxed space-y-5">
-                <p>
-                  מבחוץ זה היה משקל.
-                  <br />
-                  מבפנים זה היה הרבה יותר מזה: בושה, חוסר ביטחון, ותחושה שאתה תקוע בתוך גרסה של עצמך שלא באמת משקפת מי
-                  שאתה יכול להיות.
-                </p>
-                <p>
-                  באותם ימים, להשתנות הרגיש כמעט בלתי אפשרי.
-                  <br />
-                  אפילו לרוץ או לעלות במדרגות היה כבד.
-                  <br />
-                  והרעיון של ״להיכנס לכושר״ הרגיש כמו לוותר על כל מה שאני אוהב.
-                </p>
-              </div>
-            </div>
+                key={i}
+                className="h-1.5 rounded-full bg-primary transition-all duration-300 ease-out"
+                style={{
+                  width: activeDot === i ? "2rem" : "0.5rem",
+                  opacity: activeDot === i ? 1 : 0.3,
+                }}
+              />
+            ))}
           </div>
+        </div>
+      </div>
 
-          {/* ===== Paragraph 3 – Shift + Glowup image =====
-           *
-           * Layout strategy — Option A:
-           *   mobile      → flex-col: image, then all 4 paragraphs below
-           *   desktop     → grid [wider-image | first 2 paragraphs],
-           *                 then last 2 paragraphs span full width below the grid
-           *
-           * Image column is pinned to w-80 lg:w-96 so it commands real presence.
-           * Only the first 2 shorter paragraphs sit beside it; the longer
-           * personal-reflection paragraphs reflow below at full width.
-           *)
-           */}
-          <div className="mb-10 md:mb-14">
-            {/* Top row: image + first 2 paragraphs */}
-            <div className="flex flex-col md:grid md:grid-cols-[20rem_1fr] lg:grid-cols-[24rem_1fr] md:gap-10 md:items-start mb-0 md:mb-8">
-              {/* Image */}
-              <div
-                ref={glowupRef}
-                className={cn(
-                  "flex flex-col items-center mb-6 md:mb-0 transition-all duration-700",
-                  glowupVisible ? "opacity-100 translate-x-0" : "opacity-0 md:-translate-x-8",
-                )}
-              >
-                <div className="relative w-64 md:w-full rounded-xl overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.5)] border border-border/50">
-                  <img src="/images/matan-glowup.jpg" alt="מתן היום" className="w-full h-auto block" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent pointer-events-none" />
-                </div>
-                <p className="text-muted-foreground text-sm mt-3 italic">"השינוי לא קרה ביום — הוא נבנה בתהליך."</p>
-              </div>
+      {/* ══════════════════════════════════════════
+          3b. MOBILE FALLBACK — simple stacked slides
+      ══════════════════════════════════════════ */}
+      <div className="md:hidden container mx-auto max-w-6xl space-y-16 px-5 py-10">
+        {slides.map((slide, i) => (
+          <SlideContent key={i} slide={slide} />
+        ))}
+      </div>
 
-              {/* First 2 paragraphs — sit beside the image on desktop */}
-              <div className="text-muted-foreground text-base md:text-lg lg:text-xl leading-relaxed space-y-5">
-                <p>
-                  השינוי האמיתי התחיל כשהבנתי ש
-                  <span className="text-foreground font-semibold">לא צריך לחיות על קיצון כדי להשתנות.</span>
-                </p>
-                <p>
-                  לא צריך לסבול כדי להתקדם.
-                  <br />
-                  צריך דרך שאפשר להחזיק — בגוף, בהרגלים, ובראש.
-                </p>
-              </div>
-            </div>
+      {/* ══════════════════════════════════════════
+          4. CLOSING LINE + CTA
+      ══════════════════════════════════════════ */}
+      <div className="container mx-auto max-w-6xl px-5 md:px-8 lg:px-16 pb-20 md:pb-28 lg:pb-36">
+        <div className="text-center mt-14 md:mt-20 mb-10 md:mb-14">
+          <p className="text-foreground text-lg md:text-2xl lg:text-3xl font-bold leading-snug max-w-2xl mx-auto">
+            כי בסוף זה לא רק לרדת במשקל או להתחטב —
+            <br />
+            <span className="text-primary">זה להפסיק לחיות קטן בתוך הגוף של עצמך.</span>
+          </p>
+        </div>
 
-            {/* Bottom 2 paragraphs — full width, below the image+text pair */}
-            <div className="text-muted-foreground text-base md:text-lg lg:text-xl leading-relaxed space-y-5 mt-6 md:mt-0">
-              <p>
-                היום אני כבר לא אותו ילד.
-                <br />
-                אני חזק יותר, בטוח יותר, ואוהב את איך שאני נראה — בלי לוותר על החיים עצמם.
-              </p>
-              <p>
-                והיום אני עוזר לגברים לעשות את אותו מעבר:
-                <br />
-                להרגיש טוב יותר בגוף שלהם, להפסיק לחיות במבוכה, ולבנות נוכחות שהם מרגישים ראויים לה.
-              </p>
-            </div>
-          </div>
-
-          {/* ===== 5. CLOSING LINE ===== */}
-          <div className="text-center mt-14 md:mt-20 mb-10 md:mb-14">
-            <p className="text-foreground text-lg md:text-2xl lg:text-3xl font-bold leading-snug max-w-2xl mx-auto">
-              כי בסוף זה לא רק לרדת במשקל או להתחטב —
-              <br />
-              <span className="text-primary">זה להפסיק לחיות קטן בתוך הגוף של עצמך.</span>
-            </p>
-          </div>
-
-          {/* ===== CTA ===== */}
-          <div className="flex flex-col items-center gap-2">
-            <Button
-              variant="gold"
-              size="lg"
-              className="text-base md:text-lg px-8 py-4 md:px-12 md:py-5"
-              onClick={scrollToForm}
-            >
-              אני רוצה להפסיק להתחיל מחדש
-            </Button>
-            <span className="text-muted-foreground text-xs md:text-sm">שלב ראשון לתהליך אמיתי.</span>
-          </div>
+        <div className="flex flex-col items-center gap-2">
+          <Button
+            variant="gold"
+            size="lg"
+            className="text-base md:text-lg px-8 py-4 md:px-12 md:py-5"
+            onClick={scrollToForm}
+          >
+            אני רוצה להפסיק להתחיל מחדש
+          </Button>
+          <span className="text-muted-foreground text-xs md:text-sm">שלב ראשון לתהליך אמיתי.</span>
         </div>
       </div>
     </section>
