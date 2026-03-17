@@ -80,10 +80,12 @@ const SlideContent = ({
   slide,
   style,
   className,
+  imgClassName,
 }: {
   slide: (typeof slides)[0];
   style?: React.CSSProperties;
   className?: string;
+  imgClassName?: string;
 }) => (
   <div
     className={cn("w-full grid grid-cols-1 md:grid-cols-[auto_1fr] gap-8 md:gap-12 items-start", className)}
@@ -91,7 +93,12 @@ const SlideContent = ({
   >
     {/* Image */}
     <div className="flex flex-col items-center">
-      <div className="relative w-56 md:w-72 lg:w-80 rounded-xl overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.5)] border border-border/50">
+      <div
+        className={cn(
+          "relative rounded-xl overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.5)] border border-border/50",
+          imgClassName ?? "w-56 md:w-72 lg:w-80",
+        )}
+      >
         <img src={slide.img} alt={slide.alt} className="w-full h-auto block" />
         <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent pointer-events-none" />
       </div>
@@ -268,6 +275,7 @@ const BioSection = () => {
             <SlideContent
               slide={slides[1]}
               className="absolute inset-0"
+              imgClassName="w-56 md:w-[36rem] lg:w-[40rem]"
               style={{
                 opacity: s2Opacity,
                 transform: `translateY(${s2TranslateY}px)`,
@@ -300,7 +308,7 @@ const BioSection = () => {
       ══════════════════════════════════════════ */}
       <div className="md:hidden container mx-auto max-w-6xl space-y-16 px-5 py-10">
         {slides.map((slide, i) => (
-          <SlideContent key={i} slide={slide} />
+          <SlideContent key={i} slide={slide} imgClassName={i === 1 ? "w-72 sm:w-80" : undefined} />
         ))}
       </div>
 
