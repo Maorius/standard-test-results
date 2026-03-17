@@ -11,7 +11,7 @@ const PainSection = () => {
       ref={ref}
       className={cn(
         "relative overflow-hidden transition-all duration-700",
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
       )}
     >
       {/* Background image layer */}
@@ -41,7 +41,7 @@ const PainSection = () => {
               {[
                 "כל פעם שאתה אומר לעצמך",
                 "'ממחר אני חוזר לזה'",
-                "ואז שוב לא עומד בזה —",
+                "ואז שוב לא עומד בזה",
                 "",
                 "זה לא נשאר רק בגוף.",
                 "זה מחלחל פנימה.",
@@ -52,34 +52,34 @@ const PainSection = () => {
                 "",
                 "בשלב מסוים, זה כבר לא רק עוד ניסיון שלא עבד.",
                 "זה הופך להרגל מסוכן:",
-                "להבטיח לעצמך — ואז להאמין לזה קצת פחות.",
+                "להבטיח לעצמך ואז להאמין לזה קצת פחות.",
               ].map((line, i) =>
                 line === "" ? (
                   <div key={i} className="h-3 md:h-4" />
                 ) : (
-                  <p
-                    key={i}
-                    className="text-muted-foreground text-lg md:text-xl lg:text-2xl leading-relaxed"
-                  >
+                  <p key={i} className="text-muted-foreground text-lg md:text-xl lg:text-2xl leading-relaxed">
                     {line}
                   </p>
-                )
+                ),
               )}
             </div>
 
             <p className="text-primary font-black text-xl md:text-3xl lg:text-4xl leading-snug mb-10 md:mb-14 max-w-3xl mx-auto">
-              ובדיוק בגלל זה הבעיה היא לא עוד מוטיבציה —
+              ובדיוק בגלל זה הבעיה היא לא עוד מוטיבציה
               <br />
               אלא משהו שיחזיק גם כשהיא נעלמת.
             </p>
 
             <div className="flex flex-col items-center gap-2">
-              <Button variant="gold" size="lg" className="text-base md:text-lg px-8 py-4 md:px-12 md:py-5" onClick={scrollToForm}>
+              <Button
+                variant="gold"
+                size="lg"
+                className="text-base md:text-lg px-8 py-4 md:px-12 md:py-5"
+                onClick={scrollToForm}
+              >
                 אני רוצה להפסיק להתחיל מחדש
               </Button>
-              <span className="text-muted-foreground text-xs md:text-sm">
-                שלב ראשון לתהליך אמיתי.
-              </span>
+              <span className="text-muted-foreground text-xs md:text-sm">שלב ראשון לתהליך אמיתי.</span>
             </div>
           </div>
         </div>
