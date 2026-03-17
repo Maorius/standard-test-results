@@ -17,7 +17,6 @@ const Index = () => {
   return (
     <QuizProvider>
       <div className="min-h-screen bg-background text-foreground" dir="rtl">
-        
         <HeroSection />
         <CuriosityHookSection />
         <StandardTestSection />
@@ -33,9 +32,9 @@ const Index = () => {
         <FinalCtaFormSection />
 
         {/* Footer */}
-        <footer className="border-t border-border py-8 text-center">
+        {/* <footer className="border-t border-border py-8 text-center">
           <p className="text-muted-foreground text-sm">© {new Date().getFullYear()} מתן ברוך. כל הזכויות שמורות.</p>
-        </footer>
+        </footer> */}
       </div>
     </QuizProvider>
   );
