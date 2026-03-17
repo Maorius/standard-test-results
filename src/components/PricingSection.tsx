@@ -102,7 +102,7 @@ const PricingSection = () => {
       {/* CTA */}
       <div className="text-center mt-12 md:mt-14">
         <Button variant="gold" size="xl" onClick={scrollToForm}>
-          אני רוצה להפסיק להתחיל מחדש
+          אני רוצה לצאת לדרך
         </Button>
       </div>
 
