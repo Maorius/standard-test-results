@@ -59,7 +59,7 @@ const FitSection = () => {
       <p className="text-center text-foreground font-bold text-lg md:text-2xl leading-relaxed max-w-2xl mx-auto mb-10">
         לא כל אחד בנוי לתהליך כזה.
         <br />
-        אבל מי שמוכן סוף סוף לזוז — מרגיש את ההבדל מהר.
+        אבל מי שמוכן סוף סוף לזוז מרגיש את ההבדל מהר.
       </p>
 
       {/* CTA */}
