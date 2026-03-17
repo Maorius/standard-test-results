@@ -23,11 +23,7 @@ const BioSection = () => {
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
 
-    const createObserver = (
-      ref: React.RefObject<HTMLElement>,
-      setter: (v: boolean) => void,
-      threshold = 0.2
-    ) => {
+    const createObserver = (ref: React.RefObject<HTMLElement>, setter: (v: boolean) => void, threshold = 0.2) => {
       const obs = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
@@ -35,7 +31,7 @@ const BioSection = () => {
             obs.disconnect();
           }
         },
-        { threshold }
+        { threshold },
       );
       if (ref.current) obs.observe(ref.current);
       observers.push(obs);
@@ -56,9 +52,7 @@ const BioSection = () => {
           ref={portraitRef}
           className={cn(
             "flex flex-col items-center mb-14 md:mb-20 transition-all duration-1000",
-            sectionVisible
-              ? "opacity-100 scale-100"
-              : "opacity-0 scale-95"
+            sectionVisible ? "opacity-100 scale-100" : "opacity-0 scale-95",
           )}
         >
           {/* Circle frame with portrait breaking out */}
@@ -72,13 +66,11 @@ const BioSection = () => {
             {/* Portrait image – overflows circle upward */}
             <div className="absolute inset-0 rounded-full overflow-visible flex items-end justify-center">
               <img
-                src="/images/matan-bio.png"
+                src="public/images/matan-bio.png"
                 alt="מתן ברוך"
                 className={cn(
                   "w-[115%] max-w-none object-cover object-top -translate-y-[12%] transition-all duration-1000 delay-200",
-                  sectionVisible
-                    ? "opacity-100 translate-x-0"
-                    : "opacity-0 translate-y-4"
+                  sectionVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-y-4",
                 )}
                 style={{ clipPath: "ellipse(50% 65% at 50% 55%)" }}
               />
@@ -92,18 +84,14 @@ const BioSection = () => {
                 key={i}
                 className={cn(
                   "flex items-center gap-3 transition-all duration-700",
-                  sectionVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-4"
+                  sectionVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4",
                 )}
                 style={{ transitionDelay: `${600 + i * 150}ms` }}
               >
                 <div className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/15 flex items-center justify-center">
                   <Check className="w-3 h-3 text-primary" />
                 </div>
-                <span className="text-muted-foreground text-base md:text-lg font-medium">
-                  {bullet}
-                </span>
+                <span className="text-muted-foreground text-base md:text-lg font-medium">{bullet}</span>
               </div>
             ))}
           </div>
@@ -113,14 +101,11 @@ const BioSection = () => {
         <div
           className={cn(
             "text-center mb-12 md:mb-16 transition-all duration-700 delay-500",
-            sectionVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-8"
+            sectionVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
           )}
         >
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight">
-            אני לא מלמד משהו{" "}
-            <span className="text-gold-gradient">שלא חייתי בעצמי.</span>
+            אני לא מלמד משהו <span className="text-gold-gradient">שלא חייתי בעצמי.</span>
           </h2>
         </div>
 
@@ -128,11 +113,10 @@ const BioSection = () => {
         <div className="max-w-3xl mx-auto">
           {/* Paragraph 1 – intro */}
           <div className="mb-8 md:mb-10 text-center md:text-right">
-            <p className="text-foreground text-lg md:text-xl lg:text-2xl leading-relaxed font-bold mb-1">
-              אני מתן.
-            </p>
+            <p className="text-foreground text-lg md:text-xl lg:text-2xl leading-relaxed font-bold mb-1">אני מתן.</p>
             <p className="text-muted-foreground text-base md:text-lg lg:text-xl leading-relaxed">
-              <span className="text-foreground font-semibold">כל הילדות הייתי הילד השמן</span> — זה שנשאר הרבה פעמים לבד, ולפעמים אפילו מוחרם.
+              <span className="text-foreground font-semibold">כל הילדות הייתי הילד השמן</span> — זה שנשאר הרבה פעמים
+              לבד, ולפעמים אפילו מוחרם.
             </p>
           </div>
 
@@ -143,29 +127,22 @@ const BioSection = () => {
               ref={childhoodRef}
               className={cn(
                 "md:float-right md:mr-0 md:ml-8 mb-6 md:mb-4 flex flex-col items-center transition-all duration-900",
-                childhoodVisible
-                  ? "opacity-100 md:translate-x-0"
-                  : "opacity-0 md:translate-x-8"
+                childhoodVisible ? "opacity-100 md:translate-x-0" : "opacity-0 md:translate-x-8",
               )}
             >
               <div className="relative w-44 h-56 md:w-48 md:h-60 rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.5)] border border-border/50">
-                <img
-                  src="/images/matan-childhood.jpg"
-                  alt="מתן בילדותו"
-                  className="w-full h-full object-cover"
-                />
+                <img src="/images/matan-childhood.jpg" alt="מתן בילדותו" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
               </div>
-              <p className="text-muted-foreground text-sm mt-3 italic">
-                "פעם זה היה אני."
-              </p>
+              <p className="text-muted-foreground text-sm mt-3 italic">"פעם זה היה אני."</p>
             </div>
 
             <div className="text-muted-foreground text-base md:text-lg lg:text-xl leading-relaxed space-y-5">
               <p>
                 מבחוץ זה היה משקל.
                 <br />
-                מבפנים זה היה הרבה יותר מזה: בושה, חוסר ביטחון, ותחושה שאתה תקוע בתוך גרסה של עצמך שלא באמת משקפת מי שאתה יכול להיות.
+                מבפנים זה היה הרבה יותר מזה: בושה, חוסר ביטחון, ותחושה שאתה תקוע בתוך גרסה של עצמך שלא באמת משקפת מי
+                שאתה יכול להיות.
               </p>
               <p>
                 באותם ימים, להשתנות הרגיש כמעט בלתי אפשרי.
@@ -186,22 +163,14 @@ const BioSection = () => {
               ref={glowupRef}
               className={cn(
                 "md:float-left md:ml-0 md:mr-8 mb-6 md:mb-4 flex flex-col items-center transition-all duration-900",
-                glowupVisible
-                  ? "opacity-100 md:translate-x-0"
-                  : "opacity-0 md:-translate-x-8"
+                glowupVisible ? "opacity-100 md:translate-x-0" : "opacity-0 md:-translate-x-8",
               )}
             >
               <div className="relative w-44 h-56 md:w-48 md:h-60 rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.5)] border border-border/50">
-                <img
-                  src="/images/matan-glowup.jpg"
-                  alt="מתן היום"
-                  className="w-full h-full object-cover"
-                />
+                <img src="/images/matan-glowup.jpg" alt="מתן היום" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
               </div>
-              <p className="text-muted-foreground text-sm mt-3 italic">
-                "השינוי לא קרה ביום — הוא נבנה בתהליך."
-              </p>
+              <p className="text-muted-foreground text-sm mt-3 italic">"השינוי לא קרה ביום — הוא נבנה בתהליך."</p>
             </div>
 
             <div className="text-muted-foreground text-base md:text-lg lg:text-xl leading-relaxed space-y-5">
@@ -248,9 +217,7 @@ const BioSection = () => {
             >
               אני רוצה להפסיק להתחיל מחדש
             </Button>
-            <span className="text-muted-foreground text-xs md:text-sm">
-              שלב ראשון לתהליך אמיתי.
-            </span>
+            <span className="text-muted-foreground text-xs md:text-sm">שלב ראשון לתהליך אמיתי.</span>
           </div>
         </div>
       </div>
