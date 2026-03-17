@@ -1,4 +1,3 @@
-import StickyCtaBar from "@/components/StickyCtaBar";
 import HeroSection from "@/components/HeroSection";
 import CuriosityHookSection from "@/components/CuriosityHookSection";
 import StandardTestSection from "@/components/StandardTestSection";
