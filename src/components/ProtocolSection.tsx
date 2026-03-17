@@ -18,7 +18,6 @@ const ProtocolSection = () => {
         {steps.map((s) => (
           <div key={s.num} className="text-center">
             <span className="text-4xl font-black text-primary block mb-3">{s.num}</span>
-            <p className="text-foreground font-medium">{s.text}</p>
           </div>
         ))}
       </div>
