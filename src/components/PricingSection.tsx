@@ -56,7 +56,7 @@ const PricingSection = () => {
           <div
             key={plan.name}
             className={cn(
-              "relative rounded-xl p-7 md:p-10 border transition-all duration-300",
+              "relative rounded-xl p-7 md:p-10 border transition-all duration-300 flex flex-col",
               plan.recommended
                 ? "border-primary bg-card shadow-[0_0_40px_hsl(45,100%,50%,0.1)]"
                 : "border-border bg-card",
