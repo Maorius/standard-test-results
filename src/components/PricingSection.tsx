@@ -10,11 +10,7 @@ const plans = [
     duration: "3 חודשים",
     tagline: "כניסה נכונה לתהליך.",
     description: "לבנות בסיס.\nלהיכנס לקצב.\nלהפסיק להתחיל מחדש.",
-    features: [
-      "אונליין 3 חודשים",
-      "חודש ראשון 1:1 פרונטלי",
-      "תזונה + אימונים + שיחה שבועית + זמינות",
-    ],
+    features: ["אונליין 3 חודשים", "חודש ראשון 1:1 פרונטלי", "תזונה + אימונים + שיחה שבועית + זמינות"],
     price: "1,970 ₪",
     recommended: false,
   },
@@ -38,15 +34,13 @@ const PricingSection = () => {
   return (
     <SectionWrapper className="border-t border-border">
       {/* Headline */}
-      <h2 className="text-3xl md:text-5xl font-black text-center mb-4">
-        שני מסלולים. אותה שיטה. עומק אחר.
-      </h2>
+      <h2 className="text-3xl md:text-5xl font-black text-center mb-4">שני מסלולים. אותה שיטה. עומק אחר.</h2>
 
       {/* Framing line */}
       <p className="text-center text-muted-foreground text-base md:text-lg max-w-xl mx-auto mb-12 leading-relaxed">
-        אתה לא בוחר &lsquo;חבילה&rsquo;.
+        זה הרגע שבו זה או &lsquo;נשאר כמו שזה&rsquo;.
         <br />
-        אתה בוחר איך להיכנס לתהליך — וכמה חזק להחזיק אותו.
+        או שאתה מתחיל לזוז באמת.
       </p>
 
       {/* Cards */}
@@ -58,7 +52,7 @@ const PricingSection = () => {
               "relative rounded-xl p-6 md:p-8 border transition-all duration-300",
               plan.recommended
                 ? "border-primary bg-card shadow-[0_0_40px_hsl(45,100%,50%,0.1)]"
-                : "border-border bg-card"
+                : "border-border bg-card",
             )}
           >
             {plan.recommended && (
@@ -70,21 +64,14 @@ const PricingSection = () => {
 
             {/* Plan title */}
             <h3 className="text-xl font-black mb-1">
-              {plan.name}{" "}
-              <span className="text-muted-foreground font-normal text-base">
-                ({plan.duration})
-              </span>
+              {plan.name} <span className="text-muted-foreground font-normal text-base">({plan.duration})</span>
             </h3>
 
             {/* Tagline */}
-            <p className="text-primary font-semibold text-sm mb-3">
-              {plan.tagline}
-            </p>
+            <p className="text-primary font-semibold text-sm mb-3">{plan.tagline}</p>
 
             {/* Description */}
-            <p className="text-muted-foreground text-sm leading-relaxed mb-5 whitespace-pre-line">
-              {plan.description}
-            </p>
+            <p className="text-muted-foreground text-sm leading-relaxed mb-5 whitespace-pre-line">{plan.description}</p>
 
             {/* Divider */}
             <div className="h-px bg-border mb-5" />
