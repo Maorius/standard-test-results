@@ -36,51 +36,45 @@ const modules = [
   },
 ];
 
-/** Horizontal flow arrow with animated pulse */
-const FlowArrow = ({
-  active,
-  delay,
-}: {
-  active: boolean;
-  delay: number;
-}) => (
-  <div
-    className="hidden lg:flex items-center justify-center -mx-1 self-center relative"
-    style={{ animationDelay: `${delay}ms` }}
-  >
-    {/* Main line */}
+/* ─── Thick horizontal flow arrow with traveling beam ─── */
+const FlowArrow = ({ active }: { active: boolean }) => (
+  <div className="hidden lg:flex items-center justify-center -mx-2 self-center relative w-14">
+    {/* Track (always visible) */}
     <div
-      className="w-8 h-[2px] rounded-full transition-all duration-500"
+      className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[4px] rounded-full transition-all duration-300"
       style={{
         background: active
-          ? "linear-gradient(90deg, hsl(45 100% 50% / 0.8), hsl(45 100% 50% / 0.4))"
-          : "hsl(45 100% 50% / 0.15)",
+          ? "linear-gradient(270deg, hsl(45 100% 50% / 0.9), hsl(45 100% 45% / 0.5))"
+          : "hsl(0 0% 25% / 0.5)",
         boxShadow: active
-          ? "0 0 12px hsl(45 100% 50% / 0.4), 0 0 4px hsl(45 100% 50% / 0.2)"
+          ? "0 0 18px hsl(45 100% 50% / 0.5), 0 0 6px hsl(45 100% 50% / 0.3)"
           : "none",
       }}
     />
-    {/* Arrow head */}
+    {/* Arrowhead */}
     <div
-      className="w-0 h-0 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent border-r-[6px] rotate-180 transition-all duration-500"
+      className="absolute right-[-2px] top-1/2 -translate-y-1/2 w-0 h-0 border-t-[7px] border-t-transparent border-b-[7px] border-b-transparent border-l-[10px] rotate-180 transition-all duration-300"
       style={{
-        borderRightColor: active
-          ? "hsl(45 100% 50% / 0.8)"
-          : "hsl(45 100% 50% / 0.2)",
-        filter: active ? "drop-shadow(0 0 6px hsl(45 100% 50% / 0.5))" : "none",
+        borderLeftColor: active
+          ? "hsl(45 100% 50% / 0.95)"
+          : "hsl(0 0% 30% / 0.5)",
+        filter: active
+          ? "drop-shadow(0 0 8px hsl(45 100% 50% / 0.6))"
+          : "none",
       }}
     />
-    {/* Traveling pulse on active */}
+    {/* Traveling beam */}
     {active && (
       <div
-        className="absolute inset-0 flex items-center"
-        style={{ animation: "flowPulse 1s ease-out forwards" }}
+        className="absolute inset-0 overflow-hidden"
+        style={{ direction: "ltr" }}
       >
         <div
-          className="w-3 h-3 rounded-full"
+          className="absolute top-1/2 -translate-y-1/2 w-8 h-[6px] rounded-full"
           style={{
-            background: "radial-gradient(circle, hsl(45 100% 60% / 0.8), transparent)",
-            filter: "blur(2px)",
+            background: "linear-gradient(90deg, transparent, hsl(45 100% 65% / 0.95), hsl(45 100% 50% / 0.7), transparent)",
+            filter: "blur(1px)",
+            animation: "arrowBeamRTL 1.2s ease-in-out infinite",
           }}
         />
       </div>
@@ -88,34 +82,53 @@ const FlowArrow = ({
   </div>
 );
 
-/** Vertical row connector with animated state */
+/* ─── Thick vertical row connector ─── */
 const RowConnector = ({ active }: { active: boolean }) => (
-  <div className="hidden lg:flex col-span-full justify-center py-2">
+  <div className="hidden lg:flex col-span-full justify-center py-3">
     <div className="flex flex-col items-center relative">
+      {/* Track */}
       <div
-        className="h-8 w-[2px] rounded-full transition-all duration-500"
+        className="w-[4px] rounded-full transition-all duration-400"
         style={{
+          height: "2.5rem",
           background: active
-            ? "linear-gradient(180deg, hsl(45 100% 50% / 0.7), hsl(45 100% 50% / 0.3))"
-            : "hsl(45 100% 50% / 0.12)",
+            ? "linear-gradient(180deg, hsl(45 100% 50% / 0.85), hsl(45 100% 45% / 0.4))"
+            : "hsl(0 0% 25% / 0.4)",
           boxShadow: active
-            ? "0 0 10px hsl(45 100% 50% / 0.3)"
+            ? "0 0 16px hsl(45 100% 50% / 0.45), 0 0 6px hsl(45 100% 50% / 0.25)"
             : "none",
         }}
       />
+      {/* Arrowhead */}
       <div
-        className="w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-t-[6px] transition-all duration-500"
+        className="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[10px] transition-all duration-400"
         style={{
           borderTopColor: active
-            ? "hsl(45 100% 50% / 0.7)"
-            : "hsl(45 100% 50% / 0.15)",
-          filter: active ? "drop-shadow(0 0 6px hsl(45 100% 50% / 0.4))" : "none",
+            ? "hsl(45 100% 50% / 0.9)"
+            : "hsl(0 0% 30% / 0.4)",
+          filter: active
+            ? "drop-shadow(0 0 8px hsl(45 100% 50% / 0.5))"
+            : "none",
         }}
       />
+      {/* Traveling beam vertical */}
+      {active && (
+        <div className="absolute inset-0 overflow-hidden">
+          <div
+            className="absolute left-1/2 -translate-x-1/2 w-[6px] h-6 rounded-full"
+            style={{
+              background: "linear-gradient(180deg, transparent, hsl(45 100% 65% / 0.9), transparent)",
+              filter: "blur(1px)",
+              animation: "arrowBeamDown 1.2s ease-in-out infinite",
+            }}
+          />
+        </div>
+      )}
     </div>
   </div>
 );
 
+/* ─── Desktop card with animated tracing border ─── */
 const ModuleCard = ({
   m,
   index,
@@ -137,98 +150,124 @@ const ModuleCard = ({
 
   return (
     <div
-      className="group relative rounded-2xl p-5 md:p-7 transition-all duration-400 cursor-default"
+      className="group relative cursor-default"
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
       style={{
         opacity: isVisible ? 1 : 0,
         transform: isVisible
           ? isActive
-            ? "translateY(-4px) scale(1.02)"
+            ? "translateY(-6px) scale(1.03)"
             : "translateY(0) scale(1)"
           : "translateY(24px) scale(0.97)",
-        transition: `opacity 0.6s ease-out ${delay}ms, transform 0.5s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.5s ease, border-color 0.4s ease, background 0.4s ease`,
-        background: isActive
-          ? "linear-gradient(135deg, hsl(0 0% 13% / 0.95), hsl(0 0% 10% / 0.95))"
-          : isInFlow
-            ? "hsl(0 0% 12% / 0.9)"
-            : "hsl(0 0% 11% / 0.8)",
-        border: isActive
-          ? "1.5px solid hsl(45 100% 50% / 0.5)"
-          : isInFlow
-            ? "1px solid hsl(45 100% 50% / 0.2)"
-            : "1px solid hsl(0 0% 20% / 0.5)",
-        borderRadius: "1rem",
-        boxShadow: isActive
-          ? "0 0 40px hsl(45 100% 50% / 0.12), 0 8px 32px hsl(0 0% 0% / 0.3), inset 0 1px 0 hsl(45 100% 50% / 0.08)"
-          : isInFlow
-            ? "0 0 20px hsl(45 100% 50% / 0.06), 0 4px 16px hsl(0 0% 0% / 0.2)"
-            : "0 2px 8px hsl(0 0% 0% / 0.15)",
+        transition: `opacity 0.6s ease-out ${delay}ms, transform 0.5s cubic-bezier(0.34,1.56,0.64,1)`,
       }}
     >
-      {/* Large step number */}
-      <span
-        className="absolute top-3 left-4 text-3xl md:text-4xl font-black font-mono tracking-tighter select-none leading-none transition-all duration-500"
-        style={{
-          color: isActive
-            ? "hsl(45 100% 50% / 0.18)"
-            : isInFlow
-              ? "hsl(45 100% 50% / 0.12)"
-              : "hsl(45 100% 50% / 0.08)",
-        }}
-      >
-        {m.num}
-      </span>
-
-      {/* Accent bar */}
+      {/* Animated tracing border — conic gradient spinning */}
       <div
-        className="h-[2px] mb-4 rounded-full transition-all duration-400"
+        className="absolute -inset-[2px] rounded-2xl transition-opacity duration-300 overflow-hidden"
         style={{
-          width: isActive ? "3.5rem" : "2rem",
-          background: isActive
-            ? "linear-gradient(90deg, hsl(45 100% 50% / 0.9), hsl(45 100% 50% / 0.4))"
-            : isInFlow
-              ? "hsl(45 100% 50% / 0.6)"
-              : "hsl(45 100% 50% / 0.5)",
-          boxShadow: isActive ? "0 0 12px hsl(45 100% 50% / 0.3)" : "none",
-        }}
-      />
-
-      {/* Inline step badge */}
-      <span
-        className="inline-block text-[10px] md:text-xs font-mono tracking-widest mb-2 transition-colors duration-400"
-        style={{
-          color: isActive
-            ? "hsl(45 100% 50% / 0.7)"
-            : isInFlow
-              ? "hsl(45 100% 50% / 0.5)"
-              : "hsl(45 100% 50% / 0.4)",
-        }}
-      >
-        STEP {m.num}
-      </span>
-
-      <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">
-        {m.title}
-      </h3>
-      <p className="text-muted-foreground text-base md:text-lg leading-relaxed whitespace-pre-line">
-        {m.desc}
-      </p>
-
-      {/* Active indicator glow line at bottom */}
-      <div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] rounded-full transition-all duration-500"
-        style={{
-          width: isActive ? "60%" : "0%",
-          background: "linear-gradient(90deg, transparent, hsl(45 100% 50% / 0.5), transparent)",
           opacity: isActive ? 1 : 0,
         }}
-      />
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "conic-gradient(from var(--border-angle, 0deg), transparent 0%, hsl(45 100% 50% / 0.9) 15%, hsl(45 100% 60% / 1) 25%, transparent 40%, transparent 60%, hsl(45 100% 50% / 0.6) 75%, transparent 90%)",
+            animation: isActive ? "borderTrace 1.5s linear infinite" : "none",
+            filter: "blur(0.5px)",
+          }}
+        />
+        {/* Glow layer behind the tracing */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "conic-gradient(from var(--border-angle, 0deg), transparent 0%, hsl(45 100% 50% / 0.3) 15%, transparent 35%, transparent 65%, hsl(45 100% 50% / 0.2) 80%, transparent 95%)",
+            animation: isActive ? "borderTrace 1.5s linear infinite" : "none",
+            filter: "blur(6px)",
+          }}
+        />
+      </div>
+
+      {/* Inner card */}
+      <div
+        className="relative rounded-2xl p-5 md:p-7 transition-all duration-400"
+        style={{
+          background: isActive
+            ? "linear-gradient(135deg, hsl(0 0% 13% / 0.98), hsl(0 0% 9% / 0.98))"
+            : isInFlow
+              ? "hsl(0 0% 12% / 0.95)"
+              : "hsl(0 0% 11% / 0.8)",
+          border: isActive
+            ? "2px solid hsl(45 100% 50% / 0.7)"
+            : isInFlow
+              ? "1.5px solid hsl(45 100% 50% / 0.35)"
+              : "1px solid hsl(0 0% 22% / 0.6)",
+          borderRadius: "1rem",
+          boxShadow: isActive
+            ? "0 0 50px hsl(45 100% 50% / 0.2), 0 0 100px hsl(45 100% 50% / 0.08), 0 12px 40px hsl(0 0% 0% / 0.4), inset 0 1px 0 hsl(45 100% 50% / 0.1)"
+            : isInFlow
+              ? "0 0 30px hsl(45 100% 50% / 0.08), 0 6px 24px hsl(0 0% 0% / 0.25)"
+              : "0 2px 8px hsl(0 0% 0% / 0.15)",
+          transition: "background 0.4s ease, border-color 0.3s ease, box-shadow 0.5s ease",
+        }}
+      >
+        {/* Large step number */}
+        <span
+          className="absolute top-3 left-4 text-3xl md:text-4xl font-black font-mono tracking-tighter select-none leading-none transition-all duration-500"
+          style={{
+            color: isActive
+              ? "hsl(45 100% 50% / 0.22)"
+              : isInFlow
+                ? "hsl(45 100% 50% / 0.14)"
+                : "hsl(45 100% 50% / 0.08)",
+          }}
+        >
+          {m.num}
+        </span>
+
+        {/* Accent bar */}
+        <div
+          className="h-[3px] mb-4 rounded-full transition-all duration-400"
+          style={{
+            width: isActive ? "4rem" : isInFlow ? "3rem" : "2rem",
+            background: isActive
+              ? "linear-gradient(90deg, hsl(45 100% 50% / 1), hsl(45 100% 50% / 0.5))"
+              : isInFlow
+                ? "hsl(45 100% 50% / 0.65)"
+                : "hsl(45 100% 50% / 0.4)",
+            boxShadow: isActive
+              ? "0 0 16px hsl(45 100% 50% / 0.5), 0 0 4px hsl(45 100% 50% / 0.3)"
+              : "none",
+          }}
+        />
+
+        {/* Inline step badge */}
+        <span
+          className="inline-block text-[10px] md:text-xs font-mono tracking-widest mb-2 transition-colors duration-400"
+          style={{
+            color: isActive
+              ? "hsl(45 100% 50% / 0.8)"
+              : isInFlow
+                ? "hsl(45 100% 50% / 0.55)"
+                : "hsl(45 100% 50% / 0.4)",
+          }}
+        >
+          STEP {m.num}
+        </span>
+
+        <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">
+          {m.title}
+        </h3>
+        <p className="text-muted-foreground text-base md:text-lg leading-relaxed whitespace-pre-line">
+          {m.desc}
+        </p>
+      </div>
     </div>
   );
 };
 
-/** Mobile card with tap interaction */
+/* ─── Mobile card with tap ─── */
 const MobileModuleCard = ({
   m,
   index,
@@ -246,56 +285,79 @@ const MobileModuleCard = ({
 
   return (
     <div
-      className="relative rounded-2xl p-5 transition-all duration-400 cursor-default"
+      className="relative cursor-default"
       onClick={onTap}
       style={{
         opacity: isVisible ? 1 : 0,
         transform: isVisible
-          ? isTapped ? "scale(1.01)" : "translateY(0)"
+          ? isTapped ? "scale(1.02)" : "translateY(0)"
           : "translateY(20px) scale(0.97)",
-        transition: `opacity 0.5s ease-out ${delay}ms, transform 0.5s ease-out ${delay}ms, box-shadow 0.4s ease, border-color 0.4s ease`,
-        background: isTapped
-          ? "hsl(0 0% 13% / 0.95)"
-          : "hsl(0 0% 11% / 0.8)",
-        border: isTapped
-          ? "1.5px solid hsl(45 100% 50% / 0.4)"
-          : "1px solid hsl(0 0% 20% / 0.5)",
-        borderRadius: "1rem",
-        boxShadow: isTapped
-          ? "0 0 30px hsl(45 100% 50% / 0.1), 0 4px 20px hsl(0 0% 0% / 0.25)"
-          : "0 2px 8px hsl(0 0% 0% / 0.15)",
+        transition: `opacity 0.5s ease-out ${delay}ms, transform 0.5s ease-out ${delay}ms`,
       }}
     >
-      <span
-        className="absolute top-3 left-4 text-3xl font-black font-mono tracking-tighter select-none leading-none transition-colors duration-400"
-        style={{ color: isTapped ? "hsl(45 100% 50% / 0.16)" : "hsl(45 100% 50% / 0.08)" }}
+      {/* Animated tracing border for tap */}
+      <div
+        className="absolute -inset-[2px] rounded-2xl transition-opacity duration-300 overflow-hidden"
+        style={{ opacity: isTapped ? 1 : 0 }}
       >
-        {m.num}
-      </span>
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "conic-gradient(from var(--border-angle, 0deg), transparent 0%, hsl(45 100% 50% / 0.8) 15%, hsl(45 100% 60% / 0.9) 25%, transparent 40%, transparent 65%, hsl(45 100% 50% / 0.5) 80%, transparent 95%)",
+            animation: isTapped ? "borderTrace 1.5s linear infinite" : "none",
+            filter: "blur(0.5px)",
+          }}
+        />
+      </div>
 
       <div
-        className="h-[2px] mb-4 rounded-full transition-all duration-400"
+        className="relative rounded-2xl p-5 transition-all duration-400"
         style={{
-          width: isTapped ? "3rem" : "2rem",
           background: isTapped
-            ? "linear-gradient(90deg, hsl(45 100% 50% / 0.8), hsl(45 100% 50% / 0.3))"
-            : "hsl(45 100% 50% / 0.5)",
+            ? "hsl(0 0% 13% / 0.98)"
+            : "hsl(0 0% 11% / 0.8)",
+          border: isTapped
+            ? "2px solid hsl(45 100% 50% / 0.6)"
+            : "1px solid hsl(0 0% 22% / 0.5)",
+          borderRadius: "1rem",
+          boxShadow: isTapped
+            ? "0 0 40px hsl(45 100% 50% / 0.15), 0 6px 24px hsl(0 0% 0% / 0.3)"
+            : "0 2px 8px hsl(0 0% 0% / 0.15)",
         }}
-      />
-
-      <span
-        className="inline-block text-[10px] font-mono tracking-widest mb-2 transition-colors duration-300"
-        style={{ color: isTapped ? "hsl(45 100% 50% / 0.6)" : "hsl(45 100% 50% / 0.4)" }}
       >
-        STEP {m.num}
-      </span>
+        <span
+          className="absolute top-3 left-4 text-3xl font-black font-mono tracking-tighter select-none leading-none transition-colors duration-400"
+          style={{ color: isTapped ? "hsl(45 100% 50% / 0.2)" : "hsl(45 100% 50% / 0.08)" }}
+        >
+          {m.num}
+        </span>
 
-      <h3 className="text-xl font-bold text-foreground mb-2">{m.title}</h3>
-      <p className="text-muted-foreground text-base leading-relaxed whitespace-pre-line">{m.desc}</p>
+        <div
+          className="h-[3px] mb-4 rounded-full transition-all duration-400"
+          style={{
+            width: isTapped ? "3.5rem" : "2rem",
+            background: isTapped
+              ? "linear-gradient(90deg, hsl(45 100% 50% / 0.9), hsl(45 100% 50% / 0.4))"
+              : "hsl(45 100% 50% / 0.4)",
+            boxShadow: isTapped ? "0 0 12px hsl(45 100% 50% / 0.4)" : "none",
+          }}
+        />
+
+        <span
+          className="inline-block text-[10px] font-mono tracking-widest mb-2 transition-colors duration-300"
+          style={{ color: isTapped ? "hsl(45 100% 50% / 0.7)" : "hsl(45 100% 50% / 0.4)" }}
+        >
+          STEP {m.num}
+        </span>
+
+        <h3 className="text-xl font-bold text-foreground mb-2">{m.title}</h3>
+        <p className="text-muted-foreground text-base leading-relaxed whitespace-pre-line">{m.desc}</p>
+      </div>
     </div>
   );
 };
 
+/* ─── Main Section ─── */
 const DeliverablesSection = () => {
   const gridRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -310,7 +372,6 @@ const DeliverablesSection = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          // Trigger mobile auto-flow animation after cards appear
           setTimeout(() => setMobileAutoFlow(true), 800);
           observer.disconnect();
         }
@@ -321,12 +382,10 @@ const DeliverablesSection = () => {
     return () => observer.disconnect();
   }, []);
 
-  // When hovering a card, activate flow from that card to CTA
   const handleCardHover = useCallback((index: number) => {
     setHoveredIndex(index);
-    // Activate CTA glow after a cascade delay
     const remainingCards = 6 - index;
-    setTimeout(() => setCtaGlow(true), remainingCards * 150);
+    setTimeout(() => setCtaGlow(true), remainingCards * 200);
   }, []);
 
   const handleCardLeave = useCallback(() => {
@@ -334,11 +393,8 @@ const DeliverablesSection = () => {
     setCtaGlow(false);
   }, []);
 
-  // Check if a card is "in the flow" (at or after the hovered card)
   const isInFlow = (index: number) => hoveredIndex !== null && index >= hoveredIndex;
   const isActive = (index: number) => hoveredIndex === index;
-
-  // Check if an arrow/connector is active (between two cards that are both in flow)
   const isArrowActive = (afterIndex: number) =>
     hoveredIndex !== null && afterIndex >= hoveredIndex;
 
@@ -347,21 +403,32 @@ const DeliverablesSection = () => {
 
   return (
     <SectionWrapper className="py-12 md:py-20 lg:py-28">
-      {/* Keyframes for flow pulse */}
+      {/* Keyframes */}
       <style>{`
-        @keyframes flowPulse {
-          0% { transform: translateX(-100%); opacity: 0; }
-          30% { opacity: 1; }
-          100% { transform: translateX(400%); opacity: 0; }
+        @property --border-angle {
+          syntax: '<angle>';
+          initial-value: 0deg;
+          inherits: false;
+        }
+        @keyframes borderTrace {
+          0% { --border-angle: 0deg; }
+          100% { --border-angle: 360deg; }
+        }
+        @keyframes arrowBeamRTL {
+          0% { right: 100%; opacity: 0; }
+          20% { opacity: 1; }
+          80% { opacity: 1; }
+          100% { right: -30%; opacity: 0; }
+        }
+        @keyframes arrowBeamDown {
+          0% { top: -20%; opacity: 0; }
+          20% { opacity: 1; }
+          80% { opacity: 1; }
+          100% { top: 100%; opacity: 0; }
         }
         @keyframes ctaPulse {
-          0%, 100% { box-shadow: 0 0 20px hsl(45 100% 50% / 0.15), 0 0 60px hsl(45 100% 50% / 0.05); }
-          50% { box-shadow: 0 0 30px hsl(45 100% 50% / 0.25), 0 0 80px hsl(45 100% 50% / 0.1); }
-        }
-        @keyframes mobileFlowPulse {
-          0% { transform: scaleY(0); opacity: 0; transform-origin: top; }
-          50% { transform: scaleY(1); opacity: 1; }
-          100% { transform: scaleY(1); opacity: 0.3; }
+          0%, 100% { box-shadow: 0 0 30px hsl(45 100% 50% / 0.2), 0 0 80px hsl(45 100% 50% / 0.08); }
+          50% { box-shadow: 0 0 50px hsl(45 100% 50% / 0.35), 0 0 120px hsl(45 100% 50% / 0.15); }
         }
       `}</style>
 
@@ -397,10 +464,7 @@ const DeliverablesSection = () => {
                 onLeave={handleCardLeave}
               />
               {i < 2 && (
-                <FlowArrow
-                  active={isArrowActive(i)}
-                  delay={i * 120 + 60}
-                />
+                <FlowArrow active={isArrowActive(i)} />
               )}
             </div>
           ))}
@@ -421,10 +485,7 @@ const DeliverablesSection = () => {
                 onLeave={handleCardLeave}
               />
               {i < 2 && (
-                <FlowArrow
-                  active={isArrowActive(i + 3)}
-                  delay={(i + 3) * 120 + 60}
-                />
+                <FlowArrow active={isArrowActive(i + 3)} />
               )}
             </div>
           ))}
@@ -445,17 +506,28 @@ const DeliverablesSection = () => {
               {i < modules.length - 1 && (
                 <div className="flex sm:hidden justify-center -my-0.5">
                   <div
-                    className="w-[2px] rounded-full transition-all duration-700"
+                    className="rounded-full transition-all duration-700 relative"
                     style={{
-                      height: "1.25rem",
-                      background: mobileAutoFlow
-                        ? "linear-gradient(180deg, hsl(45 100% 50% / 0.35), hsl(45 100% 50% / 0.1))"
-                        : "hsl(45 100% 50% / 0.1)",
-                      boxShadow: mobileAutoFlow
-                        ? "0 0 6px hsl(45 100% 50% / 0.15)"
+                      width: "4px",
+                      height: "1.5rem",
+                      background: (mobileTapped === i || mobileAutoFlow)
+                        ? "linear-gradient(180deg, hsl(45 100% 50% / 0.6), hsl(45 100% 50% / 0.15))"
+                        : "hsl(0 0% 25% / 0.4)",
+                      boxShadow: (mobileTapped === i || mobileAutoFlow)
+                        ? "0 0 12px hsl(45 100% 50% / 0.3)"
                         : "none",
                     }}
-                  />
+                  >
+                    {/* Arrow tip */}
+                    <div
+                      className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-t-[7px] transition-all duration-500"
+                      style={{
+                        borderTopColor: (mobileTapped === i || mobileAutoFlow)
+                          ? "hsl(45 100% 50% / 0.6)"
+                          : "hsl(0 0% 30% / 0.3)",
+                      }}
+                    />
+                  </div>
                 </div>
               )}
             </div>
@@ -464,27 +536,44 @@ const DeliverablesSection = () => {
       </div>
 
       {/* Flow-to-CTA connector (desktop) */}
-      <div className="hidden lg:flex justify-center -mt-6 mb-4">
-        <div className="flex flex-col items-center">
+      <div className="hidden lg:flex justify-center -mt-4 mb-5">
+        <div className="flex flex-col items-center relative">
           <div
-            className="w-[2px] rounded-full transition-all duration-500"
+            className="w-[4px] rounded-full transition-all duration-500"
             style={{
-              height: "2rem",
+              height: "2.5rem",
               background: ctaGlow
-                ? "linear-gradient(180deg, hsl(45 100% 50% / 0.6), hsl(45 100% 50% / 0.2))"
-                : "hsl(45 100% 50% / 0.1)",
-              boxShadow: ctaGlow ? "0 0 8px hsl(45 100% 50% / 0.2)" : "none",
+                ? "linear-gradient(180deg, hsl(45 100% 50% / 0.85), hsl(45 100% 45% / 0.3))"
+                : "hsl(0 0% 25% / 0.3)",
+              boxShadow: ctaGlow
+                ? "0 0 18px hsl(45 100% 50% / 0.4), 0 0 6px hsl(45 100% 50% / 0.2)"
+                : "none",
             }}
           />
           <div
-            className="w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-t-[6px] transition-all duration-500"
+            className="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[10px] transition-all duration-500"
             style={{
               borderTopColor: ctaGlow
-                ? "hsl(45 100% 50% / 0.6)"
-                : "hsl(45 100% 50% / 0.12)",
-              filter: ctaGlow ? "drop-shadow(0 0 6px hsl(45 100% 50% / 0.3))" : "none",
+                ? "hsl(45 100% 50% / 0.9)"
+                : "hsl(0 0% 30% / 0.3)",
+              filter: ctaGlow
+                ? "drop-shadow(0 0 10px hsl(45 100% 50% / 0.5))"
+                : "none",
             }}
           />
+          {/* Traveling beam */}
+          {ctaGlow && (
+            <div className="absolute inset-0 overflow-hidden">
+              <div
+                className="absolute left-1/2 -translate-x-1/2 w-[6px] h-6 rounded-full"
+                style={{
+                  background: "linear-gradient(180deg, transparent, hsl(45 100% 65% / 0.9), transparent)",
+                  filter: "blur(1px)",
+                  animation: "arrowBeamDown 1.2s ease-in-out infinite",
+                }}
+              />
+            </div>
+          )}
         </div>
       </div>
 
@@ -503,7 +592,7 @@ const DeliverablesSection = () => {
           className="text-base md:text-lg px-8 py-4 md:px-12 md:py-5 transition-all duration-500"
           style={{
             boxShadow: ctaGlow
-              ? "0 0 30px hsl(45 100% 50% / 0.25), 0 0 60px hsl(45 100% 50% / 0.1)"
+              ? "0 0 40px hsl(45 100% 50% / 0.3), 0 0 80px hsl(45 100% 50% / 0.12)"
               : undefined,
             animation: ctaGlow ? "ctaPulse 2s ease-in-out infinite" : "none",
           }}
