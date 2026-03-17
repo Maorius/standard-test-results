@@ -101,9 +101,9 @@ const PricingSection = () => {
 
       {/* Bottom framing line */}
       <p className="text-center text-muted-foreground text-sm mt-6 max-w-md mx-auto leading-relaxed">
-        המסלול נקבע בשיחה קצרה לפי המטרה שלך —
+        את המסלול בוחרים יחד
         <br />
-        לא לפי מה שנראה &lsquo;יותר יקר&rsquo;.
+        אחרי שמבינים מה &lsquo;באמת נכון לך.&rsquo;.
       </p>
     </SectionWrapper>
   );
