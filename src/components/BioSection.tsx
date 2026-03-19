@@ -20,7 +20,7 @@ const slides = [
     caption: "פעם זה היה אני.",
     paragraphs: [
       <>
-        <span className="text-foreground font-bold text-lg md:text-xl lg:text-2xl">אני מתן.</span>
+        <span className="text-foreground font-bold text-xl md:text-2xl lg:text-3xl">אני מתן.</span>
         <br />
         <span className="text-foreground font-semibold">כל הילדות הייתי הילד השמן</span> זה שנשאר הרבה פעמים לבד,
         ולפעמים אפילו מוחרם.
@@ -74,7 +74,7 @@ const slides = [
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 
 /* ─────────────────────────────────────────────
-   Reusable slide layout
+   Reusable slide layout — cinematic scale
 ───────────────────────────────────────────── */
 const SlideContent = ({
   slide,
@@ -88,31 +88,39 @@ const SlideContent = ({
   imgClassName?: string;
 }) => (
   <div
-    className={cn("w-full grid grid-cols-1 md:grid-cols-[auto_1fr] gap-8 md:gap-12 items-start", className)}
+    className={cn(
+      "w-full grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] gap-8 md:gap-14 lg:gap-20 items-center",
+      className,
+    )}
     style={style}
   >
-    {/* Image */}
+    {/* Image — larger, more cinematic */}
     <div className="flex flex-col items-center">
       <div
         className={cn(
-          "relative rounded-xl overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.5)] border border-border/50",
-          imgClassName ?? "w-56 md:w-72 lg:w-80",
+          "relative rounded-2xl overflow-hidden shadow-[0_16px_60px_rgba(0,0,0,0.6)] border border-border/40",
+          imgClassName ?? "w-64 md:w-80 lg:w-[22rem]",
         )}
       >
         <img src={slide.img} alt={slide.alt} className="w-full h-auto block" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent pointer-events-none" />
       </div>
-      <p className="text-muted-foreground text-sm mt-3 italic text-center">"{slide.caption}"</p>
+      <p className="text-muted-foreground text-sm md:text-base mt-4 italic text-center">"{slide.caption}"</p>
     </div>
 
-    {/* Text */}
-    <div className="text-muted-foreground text-base md:text-lg lg:text-xl leading-relaxed space-y-5">
+    {/* Text — stronger narrative presence */}
+    <div className="text-muted-foreground text-lg md:text-xl lg:text-2xl leading-relaxed md:leading-[1.8] space-y-6 md:space-y-8">
       {slide.paragraphs.map((p, i) => (
         <p key={i}>{p}</p>
       ))}
     </div>
   </div>
 );
+
+/* ─────────────────────────────────────────────
+   Progress indicator labels
+───────────────────────────────────────────── */
+const stepLabels = ["ההתחלה", "השינוי"];
 
 /* ─────────────────────────────────────────────
    Main component
@@ -157,27 +165,16 @@ const BioSection = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  /* ── Derive per-slide opacity + vertical offset from progress ──
-   *
-   *  slide 1: fully visible 0 → 0.35, fades out 0.35 → 0.6
-   *  slide 2: invisible until 0.4, fades in 0.4 → 0.65, fully visible after
-   *
-   *  A small translateY gives a cinematic "lift" feel as each slide exits/enters.
-   */
+  /* ── Derive per-slide opacity + vertical offset from progress ── */
   const s1Opacity = clamp(1 - (slideProgress - 0.35) / 0.25, 0, 1);
-  const s1TranslateY = clamp((slideProgress - 0.35) / 0.25, 0, 1) * -24;
+  const s1TranslateY = clamp((slideProgress - 0.35) / 0.25, 0, 1) * -30;
 
   const s2Opacity = clamp((slideProgress - 0.4) / 0.25, 0, 1);
-  const s2TranslateY = clamp(1 - (slideProgress - 0.4) / 0.25, 0, 1) * 24;
+  const s2TranslateY = clamp(1 - (slideProgress - 0.4) / 0.25, 0, 1) * 30;
 
   const activeDot = slideProgress >= 0.5 ? 1 : 0;
 
   return (
-    /*
-     * IMPORTANT: NO overflow-hidden on this <section>.
-     * position:sticky breaks the moment any ancestor carries overflow:hidden.
-     * The portrait's bottom-fade uses maskImage, not overflow clipping — safe.
-     */
     <section ref={sectionRef} className="relative px-5 pt-20 md:pt-28 lg:pt-36">
       <div className="container mx-auto max-w-6xl">
         {/* ══════════════════════════════════════════
@@ -203,12 +200,9 @@ const BioSection = () => {
             sectionVisible ? "opacity-100 scale-100" : "opacity-0 scale-95",
           )}
         >
-          {/* Outer wrapper taller than the circle so portrait can rise above it */}
           <div className="relative w-72 md:w-[22rem] lg:w-[26rem] h-[360px] md:h-[420px] lg:h-[500px] mb-10 md:mb-12">
-            {/* z-0 – glow bloom anchored to circle area */}
             <div className="absolute bottom-0 inset-x-0 h-72 md:h-[22rem] lg:h-[26rem] rounded-full bg-gradient-to-br from-primary/20 via-transparent to-primary/10 blur-2xl scale-125 z-0 pointer-events-none" />
 
-            {/* z-10 – portrait anchored bottom, emerges freely upward */}
             <img
               src="/images/matan-bio.png"
               alt="מתן ברוך"
@@ -225,15 +219,14 @@ const BioSection = () => {
               }}
             />
 
-            {/* z-20 – ring frame + inner shadow, in front of portrait at intersection */}
             <div className="absolute bottom-0 inset-x-0 h-72 md:h-[22rem] lg:h-[26rem] z-20 pointer-events-none">
               <div className="absolute inset-0 rounded-full border-2 border-primary/30 shadow-[0_0_60px_hsl(45,100%,50%,0.10)]" />
               <div className="absolute inset-0 rounded-full shadow-[inset_0_-40px_60px_rgba(0,0,0,0.55)]" />
             </div>
           </div>
 
-          {/* Trust bullets */}
-          <div className="flex flex-col items-center gap-3 md:gap-4">
+          {/* Trust bullets — stronger presence */}
+          <div className="flex flex-col items-center gap-3 md:gap-5">
             {trustBullets.map((bullet, i) => (
               <div
                 key={i}
@@ -243,10 +236,10 @@ const BioSection = () => {
                 )}
                 style={{ transitionDelay: `${800 + i * 150}ms` }}
               >
-                <div className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/15 flex items-center justify-center">
-                  <Check className="w-3 h-3 text-primary" />
+                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/15 flex items-center justify-center">
+                  <Check className="w-3.5 h-3.5 text-primary" />
                 </div>
-                <span className="text-muted-foreground text-base md:text-lg font-medium">{bullet}</span>
+                <span className="text-muted-foreground text-base md:text-lg lg:text-xl font-medium">{bullet}</span>
               </div>
             ))}
           </div>
@@ -258,12 +251,14 @@ const BioSection = () => {
           300vh = enter · dwell slide 1 · transition · dwell slide 2
       ══════════════════════════════════════════ */}
       <div ref={scrollTrackRef} className="hidden md:block" style={{ height: "300vh" }}>
-        <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden px-8 lg:px-16">
-          <div className="container mx-auto max-w-6xl w-full relative">
+        <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden px-6 lg:px-10">
+          {/* Content area — larger max-w for cinematic scale */}
+          <div className="w-full max-w-7xl mx-auto relative">
             {/* Slide 1 — childhood */}
             <SlideContent
               slide={slides[0]}
               className="absolute inset-0"
+              imgClassName="w-64 md:w-80 lg:w-[22rem]"
               style={{
                 opacity: s1Opacity,
                 transform: `translateY(${s1TranslateY}px)`,
@@ -275,7 +270,7 @@ const BioSection = () => {
             <SlideContent
               slide={slides[1]}
               className="absolute inset-0"
-              imgClassName="w-56 md:w-[36rem] lg:w-[40rem]"
+              imgClassName="w-64 md:w-[28rem] lg:w-[32rem]"
               style={{
                 opacity: s2Opacity,
                 transform: `translateY(${s2TranslateY}px)`,
@@ -287,17 +282,32 @@ const BioSection = () => {
             <SlideContent slide={slides[0]} className="invisible" aria-hidden />
           </div>
 
-          {/* Progress dots */}
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-3">
+          {/* Progress indicator — refined with labels */}
+          <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-4">
             {slides.map((_, i) => (
-              <div
+              <button
                 key={i}
-                className="h-1.5 rounded-full bg-primary transition-all duration-300 ease-out"
-                style={{
-                  width: activeDot === i ? "2rem" : "0.5rem",
-                  opacity: activeDot === i ? 1 : 0.3,
-                }}
-              />
+                className="flex items-center gap-2 group cursor-default"
+                tabIndex={-1}
+                aria-label={stepLabels[i]}
+              >
+                <div
+                  className="h-2 rounded-full bg-primary transition-all duration-500 ease-out"
+                  style={{
+                    width: activeDot === i ? "2.5rem" : "0.625rem",
+                    opacity: activeDot === i ? 1 : 0.25,
+                  }}
+                />
+                <span
+                  className="text-xs font-medium transition-all duration-500"
+                  style={{
+                    color: activeDot === i ? "hsl(var(--primary))" : "hsl(var(--muted-foreground))",
+                    opacity: activeDot === i ? 0.9 : 0.35,
+                  }}
+                >
+                  {stepLabels[i]}
+                </span>
+              </button>
             ))}
           </div>
         </div>
