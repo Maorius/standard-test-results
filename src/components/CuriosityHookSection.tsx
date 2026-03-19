@@ -7,7 +7,7 @@ const TEXTS = [
   { text: "זה לא כי אתה עצלן.", size: "text-2xl sm:text-3xl md:text-4xl" },
   { text: "וזה לא כי אין לך משמעת.", size: "text-2xl sm:text-3xl md:text-4xl" },
   { text: "אתה פשוט לא מצליח להתמיד.", size: "text-2xl sm:text-3xl md:text-4xl" },
-  { text: "כי לבד — זה נשבר.", size: "text-2xl sm:text-3xl md:text-4xl" },
+  { text: "כי לבד... זה נשבר!", size: "text-2xl sm:text-3xl md:text-4xl" },
   { text: "וכאן רוב האנשים נופלים.", size: "text-2xl sm:text-3xl md:text-4xl" },
   {
     text: "מוטיבציה היא רגע.\nסטנדרט הוא מערכת.",
