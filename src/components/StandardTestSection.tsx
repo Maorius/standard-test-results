@@ -143,11 +143,16 @@ const StandardTestSection = () => {
                   ))}
                 </div>
 
-                <div className="flex flex-col items-center gap-3">
-                  <Button variant="gold" size="xl" className="w-full max-w-xs" onClick={scrollToForm}>
+                <div className="flex flex-col items-center gap-3 w-full">
+                  <Button
+                    variant="gold"
+                    size="xl"
+                    className="w-full sm:w-auto sm:min-w-[260px] sm:max-w-sm md:max-w-md px-6"
+                    onClick={scrollToForm}
+                  >
                     {selected.cta}
                   </Button>
-                  <span className="text-muted-foreground text-xs">שיחת איפיון 5-10 דק • ללא התחייבות</span>
+                  <span className="text-muted-foreground text-xs text-center">שיחת איפיון 5-10 דק • ללא התחייבות</span>
                 </div>
               </div>
 
