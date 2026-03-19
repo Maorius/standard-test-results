@@ -1,8 +1,8 @@
-import SectionWrapper from "@/components/SectionWrapper";
-import { Button } from "@/components/ui/button";
-import { scrollToForm } from "@/lib/landing-utils";
+import SectionWrapper from "./SectionWrapper";
+import { Button } from "./ui/button";
+import { scrollToForm } from "../lib/landing-utils";
 import { Check, Star } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "../lib/utils";
 
 const plans = [
   {

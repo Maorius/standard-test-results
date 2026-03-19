@@ -1,7 +1,7 @@
 import { useState } from "react";
-import SectionWrapper from "@/components/SectionWrapper";
+import SectionWrapper from "./SectionWrapper";
 import { ChevronDown } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "../lib/utils";
 
 const faqs = [
   {

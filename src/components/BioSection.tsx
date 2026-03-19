@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { scrollToForm } from "@/lib/landing-utils";
-import { cn } from "@/lib/utils";
+import { Button } from "./ui/button";
+import { scrollToForm } from "../lib/landing-utils";
+import { cn } from "../lib/utils";
 import { Check } from "lucide-react";
 
 const trustBullets = [

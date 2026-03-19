@@ -1,6 +1,6 @@
-import SectionWrapper from "@/components/SectionWrapper";
-import { Button } from "@/components/ui/button";
-import { scrollToForm } from "@/lib/landing-utils";
+import SectionWrapper from "./SectionWrapper";
+import { Button } from "./ui/button";
+import { scrollToForm } from "../lib/landing-utils";
 
 const steps = [
   { num: "01", text: "ממלאים בדיקת התאמה (5 דק׳)" },

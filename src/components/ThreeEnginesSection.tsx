@@ -1,6 +1,6 @@
-import SectionWrapper from "@/components/SectionWrapper";
-import { Button } from "@/components/ui/button";
-import { scrollToForm } from "@/lib/landing-utils";
+import SectionWrapper from "./SectionWrapper";
+import { Button } from "./ui/button";
+import { scrollToForm } from "../lib/landing-utils";
 import { Dumbbell, Apple, Brain } from "lucide-react";
 
 const engines = [

@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { scrollToForm } from "@/lib/landing-utils";
+import { Button } from "./ui/button";
+import { scrollToForm } from "../lib/landing-utils";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
