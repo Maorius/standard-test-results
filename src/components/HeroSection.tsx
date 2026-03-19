@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "./ui/button";
 import { scrollToForm } from "../lib/landing-utils";
 import { Check } from "lucide-react";
@@ -9,6 +10,15 @@ const bullets = [
 ];
 
 const HeroSection = () => {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
   return (
     <section className="relative min-h-[85vh] flex items-center justify-center">
       {/* Subtle gradient background */}
@@ -37,12 +47,41 @@ const HeroSection = () => {
           ))}
         </ul>
 
-        <div className="flex flex-col items-center gap-4">
-          <Button variant="gold" size="xl" onClick={scrollToForm} className="text-lg px-12">
-            אני רוצה להפסיק להתחיל מחדש
-          </Button>
-          <p className="text-muted-foreground text-base">שיחת איפיון 5-10 דק • ללא התחייבות</p>
-        </div>
+        {submitted ? (
+          <div className="max-w-md mx-auto bg-card border border-primary/30 rounded-xl p-8 text-center">
+            <h3 className="text-xl md:text-2xl font-bold text-primary mb-2">הפרטים נשלחו בהצלחה!</h3>
+            <p className="text-muted-foreground text-base">אחזור אליך בהקדם לתיאום שיחה קצרה.</p>
+          </div>
+        ) : (
+          <form
+            onSubmit={handleSubmit}
+            className="max-w-md mx-auto flex flex-col gap-3 mb-4"
+          >
+            <div className="flex flex-col sm:flex-row gap-3">
+              <input
+                type="text"
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="שם מלא"
+                className="flex-1 h-12 rounded-lg border border-border bg-secondary px-4 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              />
+              <input
+                type="tel"
+                required
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="טלפון"
+                dir="rtl"
+                className="flex-1 h-12 rounded-lg border border-border bg-secondary px-4 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              />
+            </div>
+            <Button variant="gold" size="xl" type="submit" className="text-lg px-12 w-full">
+              אני רוצה להפסיק להתחיל מחדש
+            </Button>
+            <p className="text-muted-foreground text-base">שיחת איפיון 5-10 דק • ללא התחייבות</p>
+          </form>
+        )}
       </div>
     </section>
   );
