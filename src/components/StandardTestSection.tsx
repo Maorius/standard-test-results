@@ -96,7 +96,7 @@ const StandardTestSection = () => {
                   )}
                 >
                   <div className="w-5 h-5 rounded-full border-2 border-muted-foreground/40 shrink-0 group-hover:border-primary transition-colors" />
-                  <span className="text-foreground">{opt.label}</span>
+                  <span className="text-foreground min-w-0 break-words">{opt.label}</span>
                 </button>
               ))}
             </motion.div>
@@ -147,7 +147,7 @@ const StandardTestSection = () => {
                   <Button
                     variant="gold"
                     size="xl"
-                    className="w-full sm:w-auto sm:min-w-[260px] sm:max-w-sm md:max-w-md px-6"
+                    className="w-full max-w-sm whitespace-normal h-auto py-3 px-6 leading-snug"
                     onClick={scrollToForm}
                   >
                     {selected.cta}
