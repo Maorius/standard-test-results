@@ -1,7 +1,7 @@
 import { useState } from "react";
-import SectionWrapper from "@/components/SectionWrapper";
-import { Button } from "@/components/ui/button";
-import { useQuiz } from "@/context/QuizContext";
+import SectionWrapper from "./SectionWrapper";
+import { Button } from "./ui/button";
+import { useQuiz } from "../context/QuizContext";
 
 const goalOptions = [
   { value: "weight-loss", label: "ירידה במשקל" },

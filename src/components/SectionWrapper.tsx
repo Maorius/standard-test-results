@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import { useScrollReveal } from "@/lib/landing-utils";
-import { cn } from "@/lib/utils";
+import { useScrollReveal } from "../lib/landing-utils";
+import { cn } from "../lib/utils";
 
 interface SectionWrapperProps {
   children: ReactNode;

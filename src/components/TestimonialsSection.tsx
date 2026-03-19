@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, useCallback } from "react";
-import SectionWrapper from "@/components/SectionWrapper";
-import { cn } from "@/lib/utils";
+import SectionWrapper from "./SectionWrapper";
+import { cn } from "../lib/utils";
 import { ChevronRight, ChevronLeft, Play, Image, Camera } from "lucide-react";
 
 /* ── Placeholder data ── */

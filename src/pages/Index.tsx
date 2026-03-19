@@ -1,17 +1,17 @@
-import HeroSection from "@/components/HeroSection";
-import CuriosityHookSection from "@/components/CuriosityHookSection";
-import StandardTestSection from "@/components/StandardTestSection";
-import PainSection from "@/components/PainSection";
-import BioSection from "@/components/BioSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import ThreeEnginesSection from "@/components/ThreeEnginesSection";
-import DeliverablesSection from "@/components/DeliverablesSection";
-import ProtocolSection from "@/components/ProtocolSection";
-import PricingSection from "@/components/PricingSection";
-import FitSection from "@/components/FitSection";
-import FAQSection from "@/components/FAQSection";
-import FinalCtaFormSection from "@/components/FinalCtaFormSection";
-import { QuizProvider } from "@/context/QuizContext";
+import HeroSection from "../components/HeroSection";
+import CuriosityHookSection from "../components/CuriosityHookSection";
+import StandardTestSection from "../components/StandardTestSection";
+import PainSection from "../components/PainSection";
+import BioSection from "../components/BioSection";
+import TestimonialsSection from "../components/TestimonialsSection";
+import ThreeEnginesSection from "../components/ThreeEnginesSection";
+import DeliverablesSection from "../components/DeliverablesSection";
+import ProtocolSection from "../components/ProtocolSection";
+import PricingSection from "../components/PricingSection";
+import FitSection from "../components/FitSection";
+import FAQSection from "../components/FAQSection";
+import FinalCtaFormSection from "../components/FinalCtaFormSection";
+import { QuizProvider } from "../context/QuizContext";
 
 const Index = () => {
   return (

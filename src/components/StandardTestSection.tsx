@@ -1,8 +1,8 @@
-import SectionWrapper from "@/components/SectionWrapper";
-import { Button } from "@/components/ui/button";
-import { scrollToForm } from "@/lib/landing-utils";
-import { cn } from "@/lib/utils";
-import { useQuiz, QuizResult } from "@/context/QuizContext";
+import SectionWrapper from "./SectionWrapper";
+import { Button } from "./ui/button";
+import { scrollToForm } from "../lib/landing-utils";
+import { cn } from "../lib/utils";
+import { useQuiz, QuizResult } from "../context/QuizContext";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface Option {

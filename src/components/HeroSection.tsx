@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { scrollToForm } from "@/lib/landing-utils";
+import { Button } from "./ui/button";
+import { scrollToForm } from "../lib/landing-utils";
 import { Check } from "lucide-react";
 
 const bullets = [

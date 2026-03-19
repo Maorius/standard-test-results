@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { scrollToForm } from "@/lib/landing-utils";
-import { useScrollReveal } from "@/lib/landing-utils";
-import { cn } from "@/lib/utils";
+import { Button } from "./ui/button";
+import { scrollToForm } from "../lib/landing-utils";
+import { useScrollReveal } from "../lib/landing-utils";
+import { cn } from "../lib/utils";
 
 const PainSection = () => {
   const { ref, isVisible } = useScrollReveal();
