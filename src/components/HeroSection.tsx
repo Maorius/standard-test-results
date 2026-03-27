@@ -40,7 +40,7 @@ const HeroSection = () => {
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.15] mb-6">
           הגוף שלך עדיין לא נראה
           <br />
-          <span className="text-gold-gradient">כמו הסטנדרט שאתה דורש מעצמך.</span>
+          <span className="text-gold-gradient">כמו הסטנדרט שאתה דורש מעצמך!</span>
         </h1>
 
         <p className="text-xl md:text-2xl text-muted-foreground mb-10 leading-relaxed max-w-2xl mx-auto">
@@ -108,7 +108,11 @@ const HeroSection = () => {
                 <label className="block text-base md:text-lg font-semibold text-foreground mb-2">
                   מה הכי עוצר אותך כרגע?
                 </label>
-                <textarea rows={2} placeholder="כתוב בקצרה..." className={inputClass + " text-base md:text-lg py-3.5"} />
+                <textarea
+                  rows={2}
+                  placeholder="כתוב בקצרה..."
+                  className={inputClass + " text-base md:text-lg py-3.5"}
+                />
               </div>
 
               <Button
