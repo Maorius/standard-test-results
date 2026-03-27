@@ -543,7 +543,7 @@ const DeliverablesSection = () => {
 
       {/* Closing line */}
       <p className="text-primary font-black text-xl md:text-3xl lg:text-4xl leading-snug text-center mb-8 md:mb-10 max-w-3xl mx-auto">
-        ככה מפסיקים להתחיל מחדש —
+        ככה מפסיקים להתחיל מחדש
         <br />
         ובונים משהו שבאמת מחזיק.
       </p>
