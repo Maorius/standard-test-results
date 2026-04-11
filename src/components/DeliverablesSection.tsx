@@ -31,7 +31,7 @@ const modules = [
   },
   {
     num: "06",
-    title: "זמינות אמיתית",
+    title: "זמינות עקבית",
     desc: "אתה לא נשאר לבד בין מפגש למפגש.\nיש לך עם מי לדבר גם ברגעים שבהם הכי קל ליפול.",
   },
 ];
@@ -54,10 +54,7 @@ const FlowArrow = () => (
 const RowConnector = () => (
   <div className="hidden lg:flex col-span-full justify-center py-3">
     <div className="flex flex-col items-center">
-      <div
-        className="w-[4px] rounded-full"
-        style={{ height: "2.5rem", background: "hsl(0 0% 25% / 0.4)" }}
-      />
+      <div className="w-[4px] rounded-full" style={{ height: "2.5rem", background: "hsl(0 0% 25% / 0.4)" }} />
       <div
         className="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[10px]"
         style={{ borderTopColor: "hsl(0 0% 30% / 0.4)" }}
@@ -98,12 +95,8 @@ const ModuleCard = ({
       <div
         className="relative rounded-2xl p-5 md:p-7 flex flex-col min-h-[220px]"
         style={{
-          background: isHovered
-            ? "linear-gradient(135deg, hsl(45 100% 50%), hsl(40 100% 45%))"
-            : "hsl(0 0% 11% / 0.8)",
-          border: isHovered
-            ? "1.5px solid hsl(45 100% 55%)"
-            : "1px solid hsl(0 0% 22% / 0.6)",
+          background: isHovered ? "linear-gradient(135deg, hsl(45 100% 50%), hsl(40 100% 45%))" : "hsl(0 0% 11% / 0.8)",
+          border: isHovered ? "1.5px solid hsl(45 100% 55%)" : "1px solid hsl(0 0% 22% / 0.6)",
           borderRadius: "1rem",
           boxShadow: isHovered
             ? "0 8px 40px hsl(45 100% 50% / 0.3), 0 0 60px hsl(45 100% 50% / 0.1)"
@@ -126,9 +119,7 @@ const ModuleCard = ({
         <div
           className="h-[3px] mb-4 rounded-full w-8"
           style={{
-            background: isHovered
-              ? "hsl(0 0% 5% / 0.4)"
-              : "hsl(45 100% 50% / 0.4)",
+            background: isHovered ? "hsl(0 0% 5% / 0.4)" : "hsl(45 100% 50% / 0.4)",
             transition: "background 0.4s ease",
           }}
         />
@@ -196,12 +187,8 @@ const MobileModuleCard = ({
       <div
         className="relative rounded-2xl p-5 flex flex-col min-h-[200px]"
         style={{
-          background: isTapped
-            ? "linear-gradient(135deg, hsl(45 100% 50%), hsl(40 100% 45%))"
-            : "hsl(0 0% 11% / 0.8)",
-          border: isTapped
-            ? "1.5px solid hsl(45 100% 55%)"
-            : "1px solid hsl(0 0% 22% / 0.5)",
+          background: isTapped ? "linear-gradient(135deg, hsl(45 100% 50%), hsl(40 100% 45%))" : "hsl(0 0% 11% / 0.8)",
+          border: isTapped ? "1.5px solid hsl(45 100% 55%)" : "1px solid hsl(0 0% 22% / 0.5)",
           borderRadius: "1rem",
           boxShadow: isTapped
             ? "0 8px 40px hsl(45 100% 50% / 0.3), 0 0 60px hsl(45 100% 50% / 0.1)"
